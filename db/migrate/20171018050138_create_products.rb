@@ -6,9 +6,9 @@ class CreateProducts < ActiveRecord::Migration[5.1]
       t.string :description
       t.integer :inventory
       t.string :photo_url
-      t.belongs_to :merchant
+      t.integer :merchant_id
       t.boolean :current, default: true
-      t.integer :category_id 
+      t.integer :category_id
       t.timestamps
     end
   end
