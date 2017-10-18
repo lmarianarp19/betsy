@@ -4,7 +4,7 @@ one:
   email: "blue_origin@gmail.com"
   mailing_address: "Kent all the way"
   cc_name: "Jeff Bezos"
-  cc_expiration: Date.new(2018, 10)
+  cc_expiration: 2018-10-01
   cc_number: "123456789012345"
   cc_ccv: "876"
   billing_zip: "12345"
@@ -13,7 +13,7 @@ two:
   email: MyString
   mailing_address: "chewbacca@uber.com"
   cc_name: "Chewie"
-  cc_expiration: Date.new(2019, 9)
+  cc_expiration: 2019-09-01
   cc_number: "09876543210987"
   cc_ccv: "345"
   billing_zip: "56789"
