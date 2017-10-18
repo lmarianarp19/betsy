@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email,: MyString
-  mailing_address,: MyString
-  cc_name,: MyString
-  cc_expiration,: MyString
-  cc_number,: MyString
-  cc_ccv,: MyString
-  billing_zip: MyString
+  email: "blue_origin@gmail.com"
+  mailing_address: "Kent all the way"
+  cc_name: "Jeff Bezos"
+  cc_expiration:
+  cc_number: "123456789012345"
+  cc_ccv: 876
+  billing_zip: "12345"
 
 two:
-  email,: MyString
-  mailing_address,: MyString
-  cc_name,: MyString
-  cc_expiration,: MyString
-  cc_number,: MyString
-  cc_ccv,: MyString
-  billing_zip: MyString
+  email: MyString
+  mailing_address: "chewbacca@uber.com"
+  cc_name: "Chewie"
+  cc_expiration: 
+  cc_number: "09876543210987"
+  cc_ccv: 345
+  billing_zip: "56789"
