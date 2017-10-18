@@ -8,10 +8,11 @@ Rails.application.routes.draw do
 
   resources :categories, only:[:index, :new, :create]
 
-  resources :bills, :only[:index, :new, :create, :show]
+  resources :billinginfos, only: [:index, :new, :create, :show] # Check if we need index and show
 
-  resources :orders, :only[:show, :create, :update]
+  resources :orders, only: [:show, :create, :update]
 
-  resources :reviews, :only[:new, :create, :index, :show]
+  resources :reviews, only: [:new, :create, :index, :show]
 
+  resources :sessions, only: [:login_form, :login, :logout]
 end
