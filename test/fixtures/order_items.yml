@@ -2,10 +2,5 @@
 
 one:
   quantity: 1
-  order: 
-  product: 
-
-two:
-  quantity: 1
-  order: 
-  product: 
+  order_id: first_order
+  product: first_product

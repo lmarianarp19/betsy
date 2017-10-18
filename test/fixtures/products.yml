@@ -1,15 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  price: 1
-  description: MyString
-  stock: 1
-  photo_url: MyString
+first_product:
+  name: Orange
+  price: 3
+  description: I love oranges!
+  inventory: 1
+  photo_url: http://placecage.com
+  current: true
+  category_id: one
+  merchant_id: first_merchant
 
-two:
-  name: MyString
+second_product:
+  name: Apple
   price: 1
-  description: MyString
-  stock: 1
-  photo_url: MyString
+  description: This is my apple!
+  inventory: 1
+  photo_url: http://placecage.com
+  current: true
+  category_id: first_merchant

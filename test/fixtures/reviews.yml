@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  review: MyString
+first_review:
+  review: This is the first review
   rating: 1
+  product_id: first_product
 
-two:
-  review: MyString
-  rating: 1
+# two:
+#   review: Second review for this product is here!
+#   rating: 5
+#   product_id: second_pro
