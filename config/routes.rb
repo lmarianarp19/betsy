@@ -8,10 +8,10 @@ Rails.application.routes.draw do
 
   resources :categories, only:[:index, :new, :create]
 
-  resources :bills, :only[:index, :new, :create, :show]
+  resources :bills, only:[:index, :new, :create, :show]
 
-  resources :orders, :only[:show, :create, :update]
+  resources :orders, only:[:show, :create, :update]
 
-  resources :reviews, :only[:new, :create, :index, :show]
+  resources :reviews, only:[:new, :create, :index, :show]
 
 end
