@@ -15,5 +15,32 @@
 
     <%= yield %>
 
+
+
+<%###############  FLASH MESSAGES #################### %>
+
+    <section class="flash <%= flash[:status] %> row">
+      <p class="no-margin">
+        <%= flash[:message] %>
+      </p>
+      <% if flash[:details] %>
+      <ul>
+        <% flash[:details].each do |field, problems| %>
+          <% problems.each do |problem| %>
+          <li>
+            <!-- <strong>
+              <%= field.capitalize %>:
+            </strong> -->
+            <%= problem.capitalize %>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <% end %>
+    </section>
+
+
+
+
   </body>
 </html>
