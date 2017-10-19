@@ -1,12 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-
 require 'csv'
 
 REVIEW_FILE = Rails.root.join('db', 'review.csv')
@@ -27,3 +18,22 @@ end
 
 puts "Added #{Review.count} review records"
 puts "#{review_failures.length} reviews failed to save"
+
+
+MERCHANT_FILE = Rails.root.join('db', 'merchant.csv')
+puts "Loading raw media data from #{MERCHANT_FILE}"
+
+merchant_failures = []
+CSV.foreach(MERCHANT_FILE, :headers => true) do |row|
+  merchant = Merchant.new
+  merchant.username = row['username']
+  merchant.email = row['email']
+  puts "Created merchant: #{merchant.inspect}"
+  successful = merchant.save
+  if !successful
+    merchant_failures << merchant
+  end
+end
+
+puts "Added #{Merchant.count} merchant records"
+puts "#{merchant_failures.length} merchants failed to save"
