@@ -39,27 +39,43 @@ class ProductsController < ApplicationController
 
 
   def create
-    # input_name = params[:product][:name].upcase
-    # input_category = params[:product][:category_id]
-    #
-    # existing_product = Product.find_by(name: input_name)
-    #
-    # if existing_product
-    #   # Look for all the categories that exist for this product!
-    #   all_categories_for_product = existing_product.product_categories # An array of all product_category instances
-    #
-    #   all_categories_for_product.category.name.include? input_category
-    #   # do not make a new category for this product
-    #   @product = Product.new(products_params)
-    #
-    #   @product.merchant_id = session[:merchant_id]
-    #   @product.category_id =
-    #
-    # else
-    #   @product = Product.new(products_params)
-    #
-    #   @product.
-    #
+    input_name = params[:product][:name].upcase
+
+    existing_product = Product.find_by(name: input_name)
+
+    if existing_product # If category for this DOES exist for this name
+      all_product_categories = existing_product.product_categories
+
+      all_product_categories.each do |pc|
+        if pc.category_id.name == input_name
+          @product = Product.new(products_params)
+          @product.merchant_id = session[:merchant_id]
+          @product.category_id = pc.category_id
+          redirect_to product_path(@product.id)
+        end
+      end
+
+    else # If category for this name DOES NOT exist
+      new_category = Category.create_cat(input_name)
+
+      @product = Product.new(products_params)
+      @product.merchant_id = session[:merchant_id]
+      @product.category_id = new_category.id
+
+      # Create a new productcategory if it does not exist
+      if @product.save
+        ProductCategory.create_prod_cat(@product)
+      else
+        flash[:status] = :failure
+        flash[:message] = "There was a problem when saving your product!"
+        flash[:errors] = @product.errors.messages
+        redirect_to new_product_path
+      end
+    end
+
+  end
+
+
 
 
 
@@ -78,7 +94,6 @@ class ProductsController < ApplicationController
     #   flash[:message] = "Your product was not created. Please try again!"
     #   flash[:errors] = @product.errors.messages
     # end
-  end
 
   def edit
     @product = Product.find_by(id: params[:id])

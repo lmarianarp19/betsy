@@ -52,5 +52,22 @@ describe ProductsController do
       must_respond_with :not_found
     end
   end
-  
+
+  describe "#create" do
+    it "returns success if a new product is created" do
+      valid_product_data = {
+        product: {
+          name: "chocolate",
+          price: 2,
+          description: "Who doesn't love chocolate?",
+          inventory: 1000,
+          photo_url: "http://placecage.com",
+          category_id: "gifts"
+        }
+      }
+
+      post product_path, params: valid_product_data
+    end
+  end
+
 end
