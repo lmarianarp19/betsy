@@ -15,7 +15,7 @@ def self.create_cat(input_name)
     flash[:errors] = new_product_cat.errors.messages
     redirect_to new_product_path
   end
-end
+
   # def self.find_or_create_cat(category_name)
   # existing_category = Category.find_by(name: category_name.upcase)
   #
@@ -35,5 +35,5 @@ end
   #
   #   end
   # end
-
+  
 end
