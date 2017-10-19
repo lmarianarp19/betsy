@@ -28,8 +28,32 @@ describe ReviewsController do
       post reviews_path, params: review_data
       #
       must_respond_with :redirect
-      # must_redirect_to product_path(review_data[:review][:product_id])
-      # Review.count.must_equal before_count + 1
+      must_redirect_to product_path(review_data[:review][:product_id])
+      Review.count.must_equal before_count + 1
+    end
+
+    it "sends bad_request when the review data is bogus" do
+      # Arrange
+      invalid_review_data = {
+        review: {
+          #invalid rating, rating should be between 0 and 5
+          rating: 15
+          #product_id: Product.first.id
+        }
+      }
+      # Double check the data is truly invalid
+      Review.new(invalid_review_data[:review]).wont_be :valid?
+
+      start_review_count = Review.count
+
+      # Act
+    post reviews_path, params: invalid_review_data
+
+      # Assert
+    must_respond_with :bad_request
+      # Vanilla rails doesn't provide any way to do this
+       #assert_template :new
+    Review.count.must_equal start_review_count
     end
 
   end
