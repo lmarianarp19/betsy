@@ -5,7 +5,10 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = Product.find_by(id: params[:id])
+    unless @product
+      head :not_found
+    end
   end
 
   def new
@@ -13,9 +16,13 @@ class ProductsController < ApplicationController
   end
 
   def create
+    category_id = Category.find_or_create_cat(params[:product][:category_id])
+
     @product = Product.new(products_params)
 
-    if @product.save!
+    @product.category_id = category_id
+
+    if @product.save
       flash[:status] = :success
       flash[:message] = "You created a new product: #{@product.name}"
     else
@@ -29,6 +36,7 @@ class ProductsController < ApplicationController
   end
 
   def update
+
     @product.update_attributes(products_params)
 
     if @product.save!
@@ -55,7 +63,10 @@ class ProductsController < ApplicationController
 
   private
 
-  params.require(:product).permit(:name, :price, :description, :photo_url, :num_in_stock, :current_status, :merchant_id, :category_id,)
+  def products_params
+    params.require(:product).permit(:name, :price, :inventory, :description, :photo_url, :category_id)
+  end
+
 end
 
 
