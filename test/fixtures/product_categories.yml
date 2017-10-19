@@ -11,3 +11,7 @@ product_category_two:
 product_category_three:
   product: second_product
   category: fruit_category
+
+product_category_four:
+  product: third_product
+  category: chocolate_category

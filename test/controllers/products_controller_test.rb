@@ -13,7 +13,6 @@ describe ProductsController do
     #TODO: Need to make an alternative edge case of when a product is invalid
   end
 
-  # TODO: THIS TEST IS NOT PASSING
   describe "#show" do
     it "returns success when a product is valid" do
       product.must_be :valid?
@@ -22,10 +21,9 @@ describe ProductsController do
 
       must_respond_with :success
     end
-    
-    # TODO: THIS TEST IS NOT PASSING
+
     it "returns not found when a product cannot be found" do
-      invalid_product_id = Product.last.id
+      invalid_product_id = Product.last.id + 1
 
       get product_path(invalid_product_id)
 
@@ -40,4 +38,44 @@ describe ProductsController do
       must_respond_with :success
     end
   end
+
+  describe "#edit" do
+    it "must return success if the product is found" do
+      get edit_product_path(product.id)
+
+      must_respond_with :success
+    end
+
+    it "must return not_found if the product is not found" do
+      invalid_product_id = Product.last.id + 1
+
+      get edit_product_path(invalid_product_id)
+
+      must_respond_with :not_found
+    end
+  end
+
+  describe "#create" do
+    it "returns success for a different merchant of the same product_category exists" do
+      before_count = Product.count
+      session[]
+
+      valid_product_data = {
+        product: {
+          name: "CHOCOLATE",
+          price: 2,
+          description: "Who doesn't love chocolate?",
+          inventory: 1000,
+          photo_url: "http://placecage.com",
+        }
+      }
+
+      post products_path, params: valid_product_data
+
+      Product.count.must_equal before_count + 1
+
+      must_respond_with :redirect
+    end
+  end
+
 end

@@ -31,5 +31,7 @@ class OrdersController < ApplicationController
 
 private
 
-  params.require(:order).permit(:order_status, :billing_info)
+  def orders_params
+    params.require(:order).permit(:order_status, :billing_info)
+  end
 end
