@@ -4,8 +4,20 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-merchant_john:
-  username: John Smith
-  email: fakeemail@gmail.com
+first_merchant:
+  username: $LABEL
+  email: $LABEL@gmail.com
+  uid: false
+  provider: false
+
+second_merchant:
+  username: $LABEL
+  email: $LABEL@gmail.com
+  uid: false
+  provider: false
+
+third_merchant:
+  username: $LABEL
+  email: $LABEL@gmail.com
   uid: false
   provider: false
