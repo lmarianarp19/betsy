@@ -15,29 +15,6 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
-# product_name = params[:product][:name]
-#
-# product = Product.find_by(name: product_name)
-#
-# if product # if the product exists, look for all the categories associated with it
-#   product_categories = product.product_categories # This needs to be an array
-#   product_categories.each do |prod_cat|
-#     if prod_cat.category.name == product_name
-#       Product.new
-# # category_id =
-
-#product_categories.category.name
-
-# TODO: I SKIPPED THE INTERMEDIATE PRODUCTS CATEGORIES TABLE
-
-# 1. Category name is inputted into the create form
-# 2. Look for the product name in all products
-# 3. Get all product_categories associated with the product
-# 4. If category.name is equal to category name that was inputted from the user, do not allow it be created_at
-# 5. Else, create a new product in the category
-
-
-
   def create
     input_name = params[:product][:name]
 
@@ -47,10 +24,18 @@ class ProductsController < ApplicationController
       all_product_categories = existing_product.product_categories
 
       all_product_categories.each do |pc|
-        if pc.category_id.name == input_name
+        if pc.product.name == input_name
           @product = Product.new(products_params)
           @product.merchant_id = session[:merchant_id]
-          redirect_to product_path(@product.id)
+
+          if @product.save!
+            redirect_to product_path(@product.id)
+          else
+            flash[:status] = :failure
+            flash[:message] = "There was a problem when saving your product!"
+            flash[:errors] = @product.errors.messages
+            render :new, status: :bad_request
+          end
         end
       end
 
@@ -95,7 +80,7 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find_by(id: params[:id])
-    
+
     unless @product
       head :not_found
     end

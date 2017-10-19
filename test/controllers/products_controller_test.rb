@@ -56,9 +56,9 @@ describe ProductsController do
   end
 
   describe "#create" do
-    it "returns success if a new product is created with an existing category" do
+    it "returns success for a different merchant of the same product_category exists" do
       before_count = Product.count
-      session[:merchant_id] = 13371337
+      session[]
 
       valid_product_data = {
         product: {
@@ -70,11 +70,11 @@ describe ProductsController do
         }
       }
 
-      post product_path, params: valid_product_data
+      post products_path, params: valid_product_data
 
-      Product.count.must_equal before_count
+      Product.count.must_equal before_count + 1
+
       must_respond_with :redirect
-
     end
   end
 

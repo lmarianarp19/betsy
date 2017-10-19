@@ -8,11 +8,10 @@ class SessionsController < ApplicationController
   end
 
   def login
-    auth_hash = request.env['omniauth.auth']
+    # auth_hash = request.env['omniauth.auth']
+    #
+    # if auth_hash[:uid]
 
-    if auth_hash[:uid]
-      redirect_to root_path
-    end
       # if merchant.nil?
       #   merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
       #
