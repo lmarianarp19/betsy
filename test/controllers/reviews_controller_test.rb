@@ -28,6 +28,7 @@ describe ReviewsController do
       post reviews_path, params: review_data
       #
       must_respond_with :redirect
+      must_redirect_to product_path(review_data[:review][:product_id])
       # must_redirect_to product_path(review_data[:review][:product_id])
       # Review.count.must_equal before_count + 1
     end
