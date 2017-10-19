@@ -9,3 +9,6 @@ fruit_category:
 
 jedi_category:
   name: $LABEL
+
+chocolate_category:
+  name: $LABEL
