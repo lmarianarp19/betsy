@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   resources :categories, only:[:index, :new, :create]
 
-  resources :billinginfos, only: [:index, :new, :create, :show] # Check if we need index and show
+  resources :payments, only: [:index, :new, :create, :show] # Check if we need index and show
 
   resources :orders, only: [:show, :create, :update]
 

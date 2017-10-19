@@ -1,7 +1,12 @@
 class OrdersController < ApplicationController
 
   def show
-    @order = Order.find(params[:id])
+    @order = Order.find_by(id: params[:id])
+    # render_404 unless @order
+    unless @order
+      head :not_found
+    end
+
   end
 
   # def new
@@ -10,7 +15,7 @@ class OrdersController < ApplicationController
 
   def create
     # Need to get the params id billings info page
-    @order = Order.new(status: "paid", billing_id: params[:id])
+    @order = Order.new(status: "paid", payment_id: params[:id])
   end
 
   def update
