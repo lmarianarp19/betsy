@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-first_product:
-  name: Orange
+orange:
+  name: orange
   price: 3
   description: I love oranges!
   inventory: 1
@@ -10,8 +10,8 @@ first_product:
   category_id: one
   merchant_id: first_merchant
 
-second_product:
-  name: Apple
+apple:
+  name: apple
   price: 1
   description: This is my apple!
   inventory: 1

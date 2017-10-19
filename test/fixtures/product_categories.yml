@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  product: one
-  category: one
+product_category_orange:
+  product: orange
+  category: fruit_category
 
-two:
-  product: two
-  category: two
+# product_category_apple:
+#   product: apple
+#   category: apple_category

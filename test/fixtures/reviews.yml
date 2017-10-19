@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 first_review:
-  review: This is the first review
+  review: This is the first review for an orange
   rating: 1
-  product_id: first_product
+  product_id: orange
 
 # two:
 #   review: Second review for this product is here!
