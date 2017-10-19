@@ -1,5 +1,4 @@
 class Category < ApplicationRecord
-<<<<<<< HEAD
 
   def self.find_or_create_cat(category_name)
   existing_category = Category.find_by(name: category_name.upcase)
