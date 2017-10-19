@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171018060321) do
+ActiveRecord::Schema.define(version: 20171018200528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,27 @@ ActiveRecord::Schema.define(version: 20171018060321) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "payments", force: :cascade do |t|
+    t.string "email"
+    t.string "mailing_address"
+    t.string "cc_name"
+    t.date "cc_expiration"
+    t.string "cc_number"
+    t.string "cc_ccv"
+    t.string "billing_zip"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_categories", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_product_categories_on_category_id"
+    t.index ["product_id"], name: "index_product_categories_on_product_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.integer "price"
@@ -53,10 +74,11 @@ ActiveRecord::Schema.define(version: 20171018060321) do
     t.integer "inventory"
     t.string "photo_url"
     t.boolean "current", default: true
-    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "merchant_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["merchant_id"], name: "index_products_on_merchant_id"
   end
 
@@ -69,5 +91,8 @@ ActiveRecord::Schema.define(version: 20171018060321) do
     t.index ["product_id"], name: "index_reviews_on_product_id"
   end
 
+  add_foreign_key "product_categories", "categories"
+  add_foreign_key "product_categories", "products"
+  add_foreign_key "products", "categories"
   add_foreign_key "products", "merchants"
 end

@@ -5,7 +5,19 @@
 # below each fixture, per the syntax in the comments below
 #
 first_merchant:
-  username: This is fake data
-  email: fakeemail@gmail.com
-  uid: 13371337
-  provider: github
+  username: $LABEL
+  email: $LABEL@gmail.com
+  uid: false
+  provider: false
+
+second_merchant:
+  username: $LABEL
+  email: $LABEL@gmail.com
+  uid: false
+  provider: false
+
+third_merchant:
+  username: $LABEL
+  email: $LABEL@gmail.com
+  uid: false
+  provider: false
