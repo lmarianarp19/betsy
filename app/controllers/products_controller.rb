@@ -15,29 +15,79 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
+# product_name = params[:product][:name]
+#
+# product = Product.find_by(name: product_name)
+#
+# if product # if the product exists, look for all the categories associated with it
+#   product_categories = product.product_categories # This needs to be an array
+#   product_categories.each do |prod_cat|
+#     if prod_cat.category.name == product_name
+#       Product.new
+# # category_id =
+
+#product_categories.category.name
+
+# TODO: I SKIPPED THE INTERMEDIATE PRODUCTS CATEGORIES TABLE
+
+# 1. Category name is inputted into the create form
+# 2. Look for the product name in all products
+# 3. Get all product_categories associated with the product
+# 4. If category.name is equal to category name that was inputted from the user, do not allow it be created_at
+# 5. Else, create a new product in the category
+
+
+
   def create
-    category_id = Category.find_or_create_cat(params[:product][:category_id])
+    # input_name = params[:product][:name].upcase
+    # input_category = params[:product][:category_id]
+    #
+    # existing_product = Product.find_by(name: input_name)
+    #
+    # if existing_product
+    #   # Look for all the categories that exist for this product!
+    #   all_categories_for_product = existing_product.product_categories # An array of all product_category instances
+    #
+    #   all_categories_for_product.category.name.include? input_category
+    #   # do not make a new category for this product
+    #   @product = Product.new(products_params)
+    #
+    #   @product.merchant_id = session[:merchant_id]
+    #   @product.category_id =
+    #
+    # else
+    #   @product = Product.new(products_params)
+    #
+    #   @product.
+    #
 
-    @product = Product.new(products_params)
 
-    @product.category_id = category_id
 
-    if @product.save
-      flash[:status] = :success
-      flash[:message] = "You created a new product: #{@product.name}"
-    else
-      flash[:status] = :failure
-      flash[:message] = "Your product was not created. Please try again!"
-      flash[:errors] = @product.errors.messages
-    end
+
+    # Category.find_or_create_cat(params[:product][:category_id])
+    #
+    # @product = Product.new(products_params)
+    #
+    # @product.category_id = category_id
+    #
+    # if @product.save
+    #   flash[:status] = :success
+    #   flash[:message] = "You created a new product: #{@product.name}"
+    # else
+    #   flash[:status] = :failure
+    #   flash[:message] = "Your product was not created. Please try again!"
+    #   flash[:errors] = @product.errors.messages
+    # end
   end
 
   def edit
     @product = Product.find_by(id: params[:id])
+    unless @product
+      head :not_found
+    end
   end
 
   def update
-
     @product.update_attributes(products_params)
 
     if @product.save!

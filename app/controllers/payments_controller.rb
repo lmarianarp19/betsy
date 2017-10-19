@@ -1,13 +1,13 @@
-class BillingInfosController < ApplicationController
+class PaymentsController < ApplicationController
 
   def new # Show the form for billing info
-    @billing_info = BillingInfo.new
+    @billing_info = Payment.new
   end
 
   #TODO: Afters submitting, also needs to update order status and save order to the db
 
   def create
-    @billing_info = BillingInfo.new(billing_params)
+    @billing_info = Payment.new(billing_params)
 
     if @billing_info.save!
 
