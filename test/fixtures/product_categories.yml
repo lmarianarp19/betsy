@@ -9,5 +9,5 @@ product_category_two:
   category: fruit_category
 
 product_category_three:
-  product: one
-  category: one
+  product: second_product
+  category: fruit_category

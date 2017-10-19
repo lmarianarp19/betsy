@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+payment_one:
   email: "blue_origin@gmail.com"
   mailing_address: "Kent all the way"
   cc_name: "Jeff Bezos"
@@ -9,7 +9,7 @@ one:
   cc_ccv: "876"
   billing_zip: "12345"
 
-two:
+payment_two:
   email: MyString
   mailing_address: "chewbacca@uber.com"
   cc_name: "Chewie"
@@ -17,3 +17,4 @@ two:
   cc_number: "09876543210987"
   cc_ccv: "345"
   billing_zip: "56789"
+  

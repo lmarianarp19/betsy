@@ -1,6 +1,16 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
+order_item_one:
   quantity: 1
-  order_id: first_order
+  order: first_order
   product: first_product
+
+order_item_two:
+  quantity: 1
+  order: first_order
+  product: second_product
+
+order_item_three:
+  quantity: 1
+  order: second_order
+  product: second_product
