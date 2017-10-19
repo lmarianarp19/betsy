@@ -6,22 +6,31 @@ Rails.application.routes.draw do
 
   resources :merchants, only: [:show]
 
+  #TODO: POSSIBLE NESTED ROUTES
+
+  # merchant/:id/products
+
   resources :products
 
   resources :categories, only:[:index, :new, :create]
 
-  resources :billinginfos, only: [:index, :new, :create, :show] # Check if we need index and show
+  # TODO: # Check if we need index and show
+  resources :payments, only: [:index, :new, :create, :show]
 
   resources :orders, only: [:show, :create, :update]
 
   resources :reviews, only: [:new, :create, :index, :show]
 
-  resources :sessions, only: [:login_form, :login, :logout]
+  resources :sessions, only: [:login, :logout]
+
+  resources :orderitems, only: [:create, :update, :destroy]
 
   get '/auth/github', as: 'github'
   get '/auth/github/callback', to: 'sessions#login', as: "auth_callback"
 
   get '/logout', to: 'sessions#logout', as: 'logout'
+
+
 
   # get "/users", to: "users#index", as: "users"
   # get "/users/new", to: "users#new", as: "new_user"

@@ -3,10 +3,6 @@ class SessionsController < ApplicationController
   #TODO: REFACTOR FLASHES INTO THE APPLICATIONS CONTROLLER
   #TODO: CHECK AUTH HASH IN INTERACTIVE SHELL
 
-
-  def login_form
-  end
-
   def login
     auth_hash = request.env['omniauth.auth']
 
