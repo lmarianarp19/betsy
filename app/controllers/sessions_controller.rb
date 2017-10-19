@@ -16,10 +16,11 @@ class SessionsController < ApplicationController
       if merchant.nil?
         merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
 
-        if merchant.save!
+        if merchant.save
           session[:merchant_id] = merchant.id
           flash[:status] = :success
           flash[:message] = "Successfully logged in as #{merchant.name}"
+          redirect_to rooth_path
         else
           flash[:status] = :failure
           flash[:message] = "Could not log in! Please try again."
@@ -33,6 +34,11 @@ class SessionsController < ApplicationController
         flash[:errors] = merchant.errors.messages
       end
       redirect_to login_path
+    else
+      session[:merchant_id] = merchant.id
+      flash[:status] = :success
+      flash[:message] = "Welcome back #{merchant.name}"
+      redirect_to root_path
     end
   end
 
