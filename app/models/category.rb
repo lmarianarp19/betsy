@@ -1,5 +1,8 @@
 class Category < ApplicationRecord
 
+  has_many :product_categories
+  has_many :products, through: :product_categories
+
   def self.find_or_create_cat(category_name)
   existing_category = Category.find_by(name: category_name.upcase)
 
@@ -19,8 +22,5 @@ class Category < ApplicationRecord
 
     end
   end
-=======
-  has_many :product_categories
-  has_many :products, through: :product_categories
->>>>>>> master
+
 end
