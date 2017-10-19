@@ -15,4 +15,8 @@ Rails.application.routes.draw do
   resources :reviews, only: [:new, :create, :index, :show]
 
   resources :sessions, only: [:login_form, :login, :logout]
+
+  get '/auth/github', as: 'github'
+  get '/auth/github/callback', to: 'sessions#login', as: "auth_callback"
+
 end
