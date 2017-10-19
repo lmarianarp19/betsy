@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'home#root'
+  # root 'main#root'
+  get '/', to: 'main#index', as: 'root'
+
 
   resources :merchants, only: [:show]
 
@@ -18,5 +20,13 @@ Rails.application.routes.draw do
 
   get '/auth/github', as: 'github'
   get '/auth/github/callback', to: 'sessions#login', as: "auth_callback"
+
+  # get "/users", to: "users#index", as: "users"
+  # get "/users/new", to: "users#new", as: "new_user"
+  # post "/users", to: "users#create"
+  # get "/users/:id", to: "users#show", as: "user"
+  # get "/users/:id/edit", to: "users#edit", as: "edit_user"
+  # patch "/users/:id", to: "users#update"
+  # delete "/users/:id", to: "users#destroy"
 
 end
