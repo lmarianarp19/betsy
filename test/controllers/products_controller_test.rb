@@ -13,6 +13,7 @@ describe ProductsController do
     #TODO: Need to make an alternative edge case of when a product is invalid
   end
 
+  # TODO: THIS TEST IS NOT PASSING
   describe "#show" do
     it "returns success when a product is valid" do
       product.must_be :valid?
@@ -21,7 +22,8 @@ describe ProductsController do
 
       must_respond_with :success
     end
-
+    
+    # TODO: THIS TEST IS NOT PASSING
     it "returns not found when a product cannot be found" do
       invalid_product_id = Product.last.id
 

@@ -7,5 +7,5 @@
 first_merchant:
   username: This is fake data
   email: fakeemail@gmail.com
-  uid: false
-  provider: false
+  uid: 13371337
+  provider: github

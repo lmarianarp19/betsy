@@ -7,7 +7,7 @@ first_product:
   inventory: 1
   photo_url: http://placecage.com
   current: true
-  category_id: fruit_category
+  category_id: fruit_category.id
   merchant_id: first_merchant
 
 second_product:
