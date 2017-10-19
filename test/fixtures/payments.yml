@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 payment_one:
-  email: "blue_origin@gmail.com"
-  mailing_address: "Kent all the way"
-  cc_name: "Jeff Bezos"
+  email: blue_origin@gmail.com
+  mailing_address: Kent all the way
+  cc_name: Jeff Bezos
   cc_expiration: 2018-10-01
   cc_number: 123456789012345
   cc_ccv: 876
@@ -11,9 +11,9 @@ payment_one:
 
 payment_two:
   email: MyString
-  mailing_address: "chewbacca@uber.com"
-  cc_name: "Chewie"
+  mailing_address: chewbacca@uber.com
+  cc_name: Chewie
   cc_expiration: 2019-09-01
-  cc_number: "09876543210987"
-  cc_ccv: "345"
-  billing_zip: "56789"
+  cc_number: 09876543210987
+  cc_ccv: 345
+  billing_zip: 56789

@@ -5,7 +5,7 @@
 # below each fixture, per the syntax in the comments below
 #
 first_order:
-  status: "pending"
+  status: pending
 
 second_order:
-  status: "pending"
+  status: pending
