@@ -47,26 +47,34 @@ describe ProductsController do
     end
 
     it "must return not_found if the product is not found" do
-      get edit_product_path(product.id)
+      invalid_product_id = Product.last.id + 1
+
+      get edit_product_path(invalid_product_id)
 
       must_respond_with :not_found
     end
   end
 
   describe "#create" do
-    it "returns success if a new product is created" do
+    it "returns success if a new product is created with an existing category" do
+      before_count = Product.count
+      session[:merchant_id] = 13371337
+
       valid_product_data = {
         product: {
-          name: "chocolate",
+          name: "CHOCOLATE",
           price: 2,
           description: "Who doesn't love chocolate?",
           inventory: 1000,
           photo_url: "http://placecage.com",
-          category_id: "gifts"
         }
       }
 
       post product_path, params: valid_product_data
+
+      Product.count.must_equal before_count
+      must_respond_with :redirect
+
     end
   end
 

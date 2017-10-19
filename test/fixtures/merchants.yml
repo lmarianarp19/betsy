@@ -7,17 +7,17 @@
 first_merchant:
   username: $LABEL
   email: $LABEL@gmail.com
-  uid: false
-  provider: false
+  uid: 13371337
+  provider: github
 
-second_merchant:
-  username: $LABEL
-  email: $LABEL@gmail.com
-  uid: false
-  provider: false
-
-third_merchant:
-  username: $LABEL
-  email: $LABEL@gmail.com
-  uid: false
-  provider: false
+# second_merchant:
+#   username: $LABEL
+#   email: $LABEL@gmail.com
+#   uid: false
+#   provider: false
+#
+# third_merchant:
+#   username: $LABEL
+#   email: $LABEL@gmail.com
+#   uid: false
+#   provider: false

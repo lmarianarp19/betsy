@@ -19,7 +19,7 @@ second_product:
   merchant: first_merchant
 
 third_product:
-  name: $LABEL
+  name: CHOCOLATE
   price: 5
   description: $LABEL
   inventory: 3

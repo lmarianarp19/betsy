@@ -39,7 +39,7 @@ class ProductsController < ApplicationController
 
 
   def create
-    input_name = params[:product][:name].upcase
+    input_name = params[:product][:name]
 
     existing_product = Product.find_by(name: input_name)
 
@@ -50,17 +50,15 @@ class ProductsController < ApplicationController
         if pc.category_id.name == input_name
           @product = Product.new(products_params)
           @product.merchant_id = session[:merchant_id]
-          @product.category_id = pc.category_id
           redirect_to product_path(@product.id)
         end
       end
 
     else # If category for this name DOES NOT exist
-      new_category = Category.create_cat(input_name)
+      Category.create_cat(input_name)
 
       @product = Product.new(products_params)
-      @product.merchant_id = session[:merchant_id]
-      @product.category_id = new_category.id
+      @product.merchant_id = session[:merchant_uid]
 
       # Create a new productcategory if it does not exist
       if @product.save
@@ -97,6 +95,7 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find_by(id: params[:id])
+    
     unless @product
       head :not_found
     end
