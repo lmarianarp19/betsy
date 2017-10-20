@@ -19,3 +19,6 @@
 .byebug_history
 
 .env
+
+/coverage.data
+/coverage/

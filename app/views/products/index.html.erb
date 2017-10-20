@@ -1,0 +1,10 @@
+<h2>Index of all products</h2>
+
+<% all_products = Product.all %>
+<% all_products.each do |product| %>
+  <div class="product">
+    <p><%= "Product: #{product.name}" %></p>
+    <p><%= "Price: #{product.price}" %></p>
+    <p><%= "Stock: #{product.inventory}" %></p>
+  </div>
+<% end %>
