@@ -6,6 +6,7 @@ class ProductsController < ApplicationController
   end
 
   def show
+    # TODO: this doesn't work if there are no products! Very similar to spotlight error neeed to fix
     @product = Product.find_by(id: params[:id])
     unless @product
       head :not_found
