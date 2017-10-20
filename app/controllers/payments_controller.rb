@@ -1,21 +1,24 @@
 class PaymentsController < ApplicationController
 
   def new # Show the form for billing info
-    @billing_info = Payment.new
+    @payment = Payment.new
   end
 
   #TODO: Afters submitting, also needs to update order status and save order to the db
 
   def create
-    @billing_info = Payment.new(billing_params)
+    @payment = Payment.new(payment_params)
 
-    if @billing_info.save!
+    if @payment.save
 
       #TODO: Cannot save the order id as a session until the order is created!
-
-      @current_order_id.billing_id = @billing_info.id
-
-      redirect_to order_path(@billing_info.order.id)
+      order =  Order.find_by(id: params[:order_id])
+      order.status = "paid"
+      @payment.order_id = order.id
+      flash[:status] = :success
+      flash[:message] = "success payment"
+      redirect_to root_path
+      #redirect_to order_path(@billing_info.order.id)
     else
       flash[:status] = :failure
       flash[:message] = "Whoops! Something was wrong when placing your order!"
@@ -26,16 +29,8 @@ class PaymentsController < ApplicationController
 
   private
 
-  def billing_params
-    params.require(:billinginfo).permit(:email, :address, :creditcard, :expiration, :cvv, :zipcode)
+  def payment_params
+    params.require(:payment).permit(:email, :mailing_address, :cc_name, :cc_expiration, :cc_number, :cc_ccv, :billing_zip, :order_id)
   end
 
 end
-
-# Email Address
-# Mailing Address
-# Name on credit card
-# Credit card number
-# Credit cart expiration
-# Credit Card CVV (security code)
-# Billing zip code

@@ -1,5 +1,9 @@
 {
   "result": {
+<<<<<<< HEAD
     "covered_percent": 65.98
+=======
+    "covered_percent": 23.02
+>>>>>>> ma_controller_tests
   }
 }
