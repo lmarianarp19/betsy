@@ -1,21 +1,28 @@
 <main>
-  <section>
+
+
+  <div class="text-center">
+
     <header>
       <h1><%= "#{@product.name}" %></h1>
     </header>
-    <div>
-      <img src="https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwjngdqk9_3WAhVBE5QKHe6jABgQjRwIBw&url=https%3A%2F%2Fkittenrescue.org%2F&psig=AOvVaw1p2oaK2bOkR7lJeCbq_3RM&ust=1508545288065459"/>
+    <div class="show-product">
+      <img src=<%= "#{@product.photo_url}"%> />
     </div>
     <section>
-      <p>Price: <%= "$#{@product.price}" %></p>
+      <p>Price: <%= "$#{@product.price/100.round(2)}" %></p>
 
       <% if @product.description %>
-        <p><%= "Description: #{@product.description}" %></p>
+        <p class='description '><%= "#{@product.description}" %></p>
       <%end %>
 
-      <%= link_to "Add to Cart!" %>
-      <p> <%= "#{@product.inventory} in stock!" %></p>
+    <div class=>
+      <%= button_to "Add to Cart!" %>
+      <p class="inventory"> <%= "#{@product.inventory} in stock!" %></p>
       <%= link_to "Write a Review!!", new_product_review_path(@product.id), class: "button" %>
-    </section>
+    </div>
+
   </section>
+  </section>
+    </div>
 </main>
