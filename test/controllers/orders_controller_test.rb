@@ -26,75 +26,15 @@ describe OrdersController do
         }
         start_order_count = Order.count
         Order.create(order_data[:order]).must_be :valid?
-        #post orders_path, params: order_data
+        post orders_path, params: order_data
       end
     end
+
+  describe  "update" do
+    it "can change status" do
+      order = Order.first
+
+    end
+
+  end
   end #first describe
-
-  #       # Test data should result in a valid book, otherwise
-  #       # the test is broken
-  #       Book.new(book_data[:book]).must_be :valid?
-  #
-  #       start_book_count = Book.count
-  #
-  #       # Act
-  #       post books_path, params: book_data
-  #
-  #       # Assert
-  #       must_respond_with :redirect
-  #       must_redirect_to books_path
-  #
-  #       Book.count.must_equal start_book_count + 1
-  #     end
-  #
-  # end
-
-
-# describe "create" do
-  #   it "adds the book to the DB and redirects when the book data is valid" do
-  #     # Arrange
-  #     book_data = {
-  #       book: {
-  #         title: "Test book",
-  #         author_id: Author.first.id
-  #       }
-  #     }
-  #     # Test data should result in a valid book, otherwise
-  #     # the test is broken
-  #     Book.new(book_data[:book]).must_be :valid?
-  #
-  #     start_book_count = Book.count
-  #
-  #     # Act
-  #     post books_path, params: book_data
-  #
-  #     # Assert
-  #     must_respond_with :redirect
-  #     must_redirect_to books_path
-  #
-  #     Book.count.must_equal start_book_count + 1
-  #   end
-  #
-  #   it "sends bad_request when the book data is bogus" do
-  #     # Arrange
-  #     invalid_book_data = {
-  #       book: {
-  #         # NO TITLE!!!
-  #         author_id: Author.first.id
-  #       }
-  #     }
-  #     # Double check the data is truly invalid
-  #     Book.new(invalid_book_data[:book]).wont_be :valid?
-  #
-  #     start_book_count = Book.count
-  #
-  #     # Act
-  #     post books_path, params: invalid_book_data
-  #
-  #     # Assert
-  #     must_respond_with :bad_request
-  #     # Vanilla rails doesn't provide any way to do this
-  #     # assert_template :new
-  #     Book.count.must_equal start_book_count
-  #   end
-  # end

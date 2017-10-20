@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20171020052430) do
     t.string "status", default: "pending", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "payment_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -57,6 +56,7 @@ ActiveRecord::Schema.define(version: 20171020052430) do
     t.string "billing_zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "order_id"
   end
 
   create_table "product_categories", force: :cascade do |t|
