@@ -11,12 +11,17 @@
     <%= csrf_meta_tags %>
   </head>
 
+  <header>
+    <nav>
+      <%= link_to "Login", github_path %>
+      <%= link_to "Logout", logout_path %>
+      <%# TODO: Need to write an application method to get the session of the user %>
+      <%# TODO: What is the path for the cart? A nested route? order/:id/products?  %>
+      <%= link_to "Cart", root_path %>
+    </nav>
+  </header>
+
   <body>
-
-    <%= yield %>
-
-
-
 <%###############  FLASH MESSAGES #################### %>
 
     <section class="flash <%= flash[:status] %> row">
@@ -39,8 +44,12 @@
       <% end %>
     </section>
 
+    <%= yield %>
 
-
-
+    <footer>
+      <p>
+        COPYRIGHT 2017
+      </p>
+    </footer>
   </body>
 </html>

@@ -11,7 +11,8 @@ describe OrderItemsController do
         order_item: {
           quantity: 2,
           product: product_id,
-          order: order_id
+          order_id: order_id
+          #TODO: This needs to the the current order that was created when the first item was created
         }
       }
 
