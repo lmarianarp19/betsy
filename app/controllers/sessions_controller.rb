@@ -8,43 +8,40 @@ class SessionsController < ApplicationController
   end
 
   def login
-    # auth_hash = request.env['omniauth.auth']
-    #
-    # if auth_hash[:uid]
+    auth_hash = request.env['omniauth.auth']
 
-      # if merchant.nil?
-      #   merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
-      #
-      #   if merchant.save
-      #     session[:merchant_id] = merchant.id
-      #     flash[:status] = :success
-      #     flash[:message] = "Successfully logged in as #{merchant.name}"
-      #     redirect_to rooth_path
-      #   else
-      #     flash[:status] = :failure
-      #     flash[:message] = "Could not log in! Please try again."
-      #     flash[:errors] = merchant.errors.messages
-      #   end
+    if auth_hash['uid']
+      merchant = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
+      if merchant.nil?
+        merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
+        save_and_flash(merchant)
+      else
+        flash[:status] = :success
+        flash[:message] = "Welcome back, #{merchant.username}"
+      end
+      session[:merchant_id] = merchant.id
+      #will log in the user
+    else
+      flash[:status] = :failure
+      flash[:message] = "Could not create user from OAuth processes"
+    end
 
-      # else
-      #   session[:merchant_id] = merchant.id
-      #   flash[:status] = :failure
-      #   flash[:message] = "Could not log in! Please try again."
-      #   flash[:errors] = merchant.errors.messages
-      # end
-      # redirect_to login_path
-    # else
-    #   session[:merchant_id] = merchant.id
-    #   flash[:status] = :success
-    #   flash[:message] = "Welcome back #{merchant.name}"
-    #   redirect_to root_path
-    # end
+    redirect_to root_path
   end
 
 
+
+  # session[:merchant_id] = merchant.id
+  # flash[:status] = :failure
+  # flash[:message] = "Could not log in! Please try again."
+  # flash[:errors] = merchant.errors.messages
+  # session[:merchant_id] = merchant.id
+  # flash[:status] = :success
+  # flash[:message] = "Welcome back #{merchant.name}"
+
   def logout
     session[:merchant_id] = nil
-    flash[:status] = :failure
+    flash[:status] = :success
     flash[:message] = "Successfully logged out!"
 
     redirect_to root_path
