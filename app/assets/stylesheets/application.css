@@ -19,9 +19,34 @@
 
 body{
   font-family: 'Pathway Gothic One', sans-serif;
-  
+
 }
 h1 a {
   color: black;
   font-family: 'Pathway Gothic One', sans-serif;
+}
+
+/* *****************************************************
+NAV
+****************************************************** */
+
+
+/* *****************************************************
+HERO
+****************************************************** */
+
+
+.hero {
+  background-image: url('http://moheban-ahlebeit.com/images/Dual-Monitor-Wallpaper/Dual-Monitor-Wallpaper-18.jpg');
+  background-size: cover;
+  /*height: 400px;*/
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .hero-section-text {
+    color: $white;
+    text-shadow: 1px 1px 2px $black;
+  }
 }

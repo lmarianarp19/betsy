@@ -12,18 +12,58 @@
 </head>
 
 <body>
+
+ <!-- DESKTOP NAVIGATION -->
+  <div class="menu-centered">
+    <!-- <div class="top-bar "> -->
+      <ul class="menu">
+        <li><%= link_to "Miscellaneous", class: "button" %></li>
+        <li><%= link_to "Clothes", class: "button" %></li>
+        <li><%= link_to "Accessories", class: "button" %></li>
+        <li><%= link_to "Jedi", class: "button" %></li>
+        <li><%= link_to "Sith", class: "button" %></li>
+        <li><%= link_to "Pets", class: "button" %></li>
+      </ul>
+    <!-- </div> -->
+  </div>
+
+
+  <!-- HERO SECTION -->
+
+
+  <section class="hero">
+    <div class="hero-section-text">
+      <h1>STARMART</h1>
+      <h5>subtitle about anything you like</h5>
+    </div>
+
+
+  </section>
+
+
+  <!-- MAIN CONTENT -->
+
+  <section class="main">
+
+  </section>
+
+  <!-- FOOTER SECTION -->
+  <footer>
+
+  </footer>
+
 <header>
   <h1 class="text-center"><%= link_to "StarMart", root_path %></h1>
-<nav class="login">
-  <div class="float-right">
-    <% if session[:merchant_id] %>
-    <%= link_to "Merchant #{session[:merchant_username]}", merchant_path(session[:merchant_id]), class: "button" %>
-    <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
-    <% else %>
-    <%= link_to "Log In", "/auth/github", class: "button float-right" %>
-    <% end %>
-    <%= link_to "Cart",  class: "button float-left" %>
-  </div>
+  <nav class="login">
+    <div class="float-right">
+      <% if session[:merchant_id] %>
+      <%= link_to "Merchant #{session[:merchant_username]}", merchant_path(session[:merchant_id]), class: "button" %>
+      <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
+      <% else %>
+      <%= link_to "Log In", "/auth/github", class: "button float-right" %>
+      <% end %>
+      <%= link_to "Cart",  class: "button float-left" %>
+    </div>
   </nav>
   <section class="banner">
     <%= link_to "All Products", products_path, class: "button" %>
@@ -40,7 +80,7 @@
   <%###############  FLASH MESSAGES #################### %>
   ## NOTE ### Need to decide how to show our flash messages
 
-  <section class="row status <%= flash[:status] %>">
+  <!-- <section class="row status <%= flash[:status] %>">
     <%if  flash[:status] == :failure %>
     <ul>
       <h3><%= "A problem occurred: #{flash[:message]}" %></h3>
@@ -50,10 +90,10 @@
       <h3><%= flash[:messages] %></h3>
     </ul>
     <% end %>
-  </section>
+  </section> -->
 
 
-    <section class="flash <%= flash[:status] %> row">
+    <!-- <section class="flash <%= flash[:status] %> row">
       <p class="no-margin">
         <%= flash[:message] %>
       </p>
@@ -62,26 +102,26 @@
         <% flash[:details].each do |field, problems| %>
           <% problems.each do |problem| %>
           <li>
-            <!-- <strong>
+            <strong>
               <%= field.capitalize %>:
-            </strong> -->
+            </strong>
             <%= problem.capitalize %>
           </li>
           <% end %>
         <% end %>
       </ul>
       <% end %>
-    </section>
+    </section> -->
 
 
 
-  <main class="row">
-    <%= yield %>
-  </main>
-    <footer>
-      <p>
-        COPYRIGHT 2017
-      </p>
-    </footer>
+    <!-- <main class="row">
+      <%= yield %>
+    </main> -->
+  <footer>
+    <p>
+      COPYRIGHT 2017
+    </p>
+  </footer>
 </body>
 </html>
