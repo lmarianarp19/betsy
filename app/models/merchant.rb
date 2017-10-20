@@ -3,7 +3,7 @@ class Merchant < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
   # relationships
-  has_many :products
+  has_many :products, dependent: :destroy
 
   # def self.from_auth_hash(provider, auth_hash)
   #   merchant = Merchant.new

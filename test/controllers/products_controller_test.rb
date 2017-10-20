@@ -10,7 +10,15 @@ describe ProductsController do
       must_respond_with :success
     end
 
-    #TODO: Need to make an alternative edge case of when a product is invalid
+    #TODO: NOT PASSING -
+    it "returns success when there are no products" do
+      Product.destroy_all
+
+      get products_path
+
+      must_respond_with :success
+    end
+
   end
 
   describe "#show" do
@@ -68,7 +76,7 @@ describe ProductsController do
 
       valid_product_data = {
         product: {
-          name: "CHOCOLATE",
+          name: "chocolate",
           price: 2,
           description: "Who doesn't love chocolate?",
           inventory: 1000,
