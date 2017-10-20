@@ -6,7 +6,7 @@
 
   <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
-  <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -123,7 +123,7 @@
         COPYRIGHT 2017
         <%# TODO: THIS IS A TEST LINK! %>
         <% @category = Category.first %>
-        <%= link_to "This Categories Products!", products_categories(@category) %>
+        <%= link_to "This Categories Products!", products_categories_path(@category) %>
       </p>
     </footer>
 </body>
