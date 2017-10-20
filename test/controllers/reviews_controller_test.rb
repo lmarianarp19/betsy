@@ -29,10 +29,10 @@ describe ReviewsController do
       #
       must_respond_with :redirect
       must_redirect_to product_path(review_data[:review][:product_id])
-<<<<<<< HEAD
+
       # must_redirect_to product_path(review_data[:review][:product_id])
       # Review.count.must_equal before_count + 1
-=======
+
       Review.count.must_equal before_count + 1
     end
 
@@ -58,7 +58,6 @@ describe ReviewsController do
       # Vanilla rails doesn't provide any way to do this
        #assert_template :new
     Review.count.must_equal start_review_count
->>>>>>> e20ac59a7370b100bec2948958f71411d6b626d6
     end
 
   end
