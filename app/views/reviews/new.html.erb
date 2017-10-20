@@ -1,7 +1,7 @@
 <h2>Write a review!</h2>
 
 <section>
-  <%= form_for @review do |f| %>
+  <%= form_for :review, :url => {:action => "create", :id => @review} do |f| %>
     <%= f.label :review %>
     <%= f.text_field :review %>
 
