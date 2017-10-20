@@ -27,6 +27,6 @@ class ApplicationController < ActionController::Base
     if session[:merchant_id]
       @login_merchant = Merchant.find_by(id: session[:merchant_id])
     end
-  end 
+  end
 
 end
