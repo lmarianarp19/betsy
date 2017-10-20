@@ -115,13 +115,16 @@
 
 
 
-    <!-- <main class="row">
-      <%= yield %>
-    </main> -->
-  <footer>
-    <p>
-      COPYRIGHT 2017
-    </p>
-  </footer>
+  <main class="row">
+    <%= yield %>
+  </main>
+    <footer>
+      <p>
+        COPYRIGHT 2017
+        <%# TODO: THIS IS A TEST LINK! %>
+        <% @category = Category.first %>
+        <%= link_to "This Categories Products!", products_categories(@category) %>
+      </p>
+    </footer>
 </body>
 </html>
