@@ -18,4 +18,6 @@ class MerchantsController < ApplicationController
   # TODO: May not need these if a merchant will be created in the model method.
   # TODO: See Sessions Controller
 
+
+
 end

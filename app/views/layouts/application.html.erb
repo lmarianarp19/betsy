@@ -1,19 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+  <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
 
-  <body>
+<body>
 
+  <div class="float-right">
+    <% if session[:merchant_id] %>
+    <%= link_to "Merchant #{session[:merchant_username]}", merchant_path(session[:merchant_id]), class: "button" %>
+    <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
+    <% else %>
+    <%= link_to "Log In", "/auth/github", class: "button float-right" %>
+    <% end %>
+  </div>
+
+  <section class="row status <%= flash[:status] %>">
+    <%if  flash[:status] == :failure %>
+    <ul>
+      <h3><%= "A problem occurred: #{flash[:message]}" %></h3>
+    </ul>
+    <% else %>
+    <ul>
+      <h3><%= flash[:messages] %></h3>
+    </ul>
+    <% end %>
+  </section>
+
+  <main class="row">
     <%= yield %>
+  </main>
 
-  </body>
+</body>
 </html>

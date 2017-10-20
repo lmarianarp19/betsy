@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   get '/auth/github', as: 'github'
   get '/auth/:provider/callback', to: 'sessions#login'
+  post '/logout', to: 'sessions#logout', as: 'logout'
+
 
   # get "/users", to: "users#index", as: "users"
   # get "/users/new", to: "users#new", as: "new_user"
