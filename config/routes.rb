@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :products
 
   resources :categories, only:[:index, :new, :create]
-
+  
   # TODO: # Check if we need index and show
   resources :payments, only: [:index, :new, :create, :show]
 
@@ -26,7 +26,9 @@ Rails.application.routes.draw do
   resources :orderitems, only: [:create, :update, :destroy]
 
   get '/auth/github', as: 'github'
-  get '/auth/github/callback', to: 'sessions#login', as: "auth_callback"
+  get '/auth/:provider/callback', to: 'sessions#login'
+  post '/logout', to: 'sessions#logout', as: 'logout'
+
 
   get '/logout', to: 'sessions#logout', as: 'logout'
 

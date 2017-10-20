@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
+  <title><%= content_for?(:title) ? yield(:title) : "Untitled" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-  </head>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
 
-  <header>
-    <nav>
-      <%= link_to "Login", github_path %>
-      <%= link_to "Logout", logout_path %>
-      <%# TODO: Need to write an application method to get the session of the user %>
-      <%# TODO: What is the path for the cart? A nested route? order/:id/products?  %>
-      <%= link_to "Cart", root_path %>
-    </nav>
-  </header>
+<body>
+<header>
+<nav>
+  <div class="float-right">
+    <% if session[:merchant_id] %>
+    <%= link_to "Merchant #{session[:merchant_username]}", merchant_path(session[:merchant_id]), class: "button" %>
+    <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
+    <% else %>
+    <%= link_to "Log In", "/auth/github", class: "button float-right" %>
+    <% end %>
+    <%= link_to "Cart", root_path %>
+  </div>
+  </nav>
+</header>
 
-  <body>
-<%###############  FLASH MESSAGES #################### %>
-
+  <%###############  FLASH MESSAGES #################### %>
+  ## NOTE ### Need to decide how to show our flash messages 
+  
+  <section class="row status <%= flash[:status] %>">
+    <%if  flash[:status] == :failure %>
+    <ul>
+      <h3><%= "A problem occurred: #{flash[:message]}" %></h3>
+    </ul>
+    <% else %>
+    <ul>
+      <h3><%= flash[:messages] %></h3>
+    </ul>
+    <% end %>
+  </section>
+  
+  
     <section class="flash <%= flash[:status] %> row">
       <p class="no-margin">
         <%= flash[:message] %>
@@ -43,13 +61,16 @@
       </ul>
       <% end %>
     </section>
+  
+  
 
+  <main class="row">
     <%= yield %>
-
+  </main>
     <footer>
       <p>
         COPYRIGHT 2017
       </p>
     </footer>
-  </body>
+</body>
 </html>

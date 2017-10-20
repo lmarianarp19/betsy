@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
   def create # REFACTOR FLASH MESSAGES IF NEEDED
     @review = Review.new(reviews_params)
 
-    if @review.save!
+    if @review.save
       flash[:status] = :success
       flash[:message] = "Thank you for reviewing this product!"
       redirect_to product_path(@review.product_id) # Product View Page
