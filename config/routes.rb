@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get 'categories/:id/products', to: 'products#index', as: 'products_categories'
 
+  get 'categories/:id/products/:id', to: 'products#show', as:'products_category'
+
   # TODO: # Check if we need index and show
   resources :payments, only: [:index, :new, :create, :show]
 
