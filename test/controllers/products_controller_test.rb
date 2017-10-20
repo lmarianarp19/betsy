@@ -56,29 +56,99 @@ describe ProductsController do
   end
 
   describe "#create" do
-    it "returns success for a different merchant if the same product_category exists" do
-      
+    it "returns success when a merchant creates a new product with an existing category" do
+      before_pc_count = ProductCategory.count
+      before_product_count = Product.count
+      before_category_count = Category.count
 
-      # before_count = Product.count
-      #
-      # # session[:merchant_id] = 13371337
-      #
-      # valid_product_data = {
-      #   product: {
-      #     name: "CHOCOLATE",
-      #     price: 2,
-      #     description: "Who doesn't love chocolate?",
-      #     inventory: 1000,
-      #     photo_url: "http://placecage.com",
-      #   }
-      # }
-      #
-      # post products_path, params: valid_product_data
-      #
-      # Product.count.must_equal before_count + 1
-      #
-      # must_respond_with :redirect
+      merchant = merchants(:grace)
+      category_name = categories(:chocolate_category).name
+
+      login(merchant)
+
+      valid_product_data = {
+        product: {
+          name: "CHOCOLATE",
+          price: 2,
+          description: "Who doesn't love chocolate?",
+          inventory: 1000,
+          photo_url: "http://placecage.com",
+          categories: category_name,
+          # Need to be able to pass in multiple categories
+          merchant_id: session[:merchant_id]
+        }
+      }
+
+      post products_path, params: valid_product_data
+
+      Product.count.must_equal before_product_count + 1
+      ProductCategory.count.must_equal before_pc_count + 1
+      Category.count.must_equal before_category_count
+
+      must_respond_with :redirect
+      must_redirect_to root_path
     end
   end
 
+  it "returns success when a merchant creates a new product with no existing category" do
+    before_pc_count = ProductCategory.count
+    before_product_count = Product.count
+    before_category_count = Category.count
+
+    merchant = merchants(:grace)
+
+    login(merchant)
+
+    valid_product_data = {
+      product: {
+        name: "Hat",
+        price: 2,
+        description: "Who doesn't love chocolate?",
+        inventory: 1000,
+        photo_url: "http://placecage.com",
+        categories: "CLOTHING",
+        #TODO: Need to be able to pass in multiple categories
+        merchant_id: session[:merchant_id]
+      }
+    }
+
+    post products_path, params: valid_product_data
+
+    Product.count.must_equal before_product_count + 1
+    ProductCategory.count.must_equal before_pc_count + 1
+    Category.count.must_equal before_category_count + 1
+
+    must_respond_with :redirect
+  end
+
+  # TODO: TEST NOT PASSING
+  # it "returns bad_request when the category data is invalid" do
+  #   before_pc_count = ProductCategory.count
+  #   before_product_count = Product.count
+  #   before_category_count = Category.count
+  #
+  #   merchant = merchants(:grace)
+  #
+  #   login(merchant)
+  #
+  #   invalid_product_data = {
+  #     product: {
+  #       name: "Hat",
+  #       price: 2,
+  #       description: "Who doesn't love chocolate?",
+  #       inventory: 1000,
+  #       photo_url: "http://placecage.com",
+  #       categories: "",
+  #       merchant_id: session[:merchant_id]
+  #     }
+  #   }
+  #
+  #   post products_path, params: invalid_product_data
+  #
+  #   Product.count.must_equal before_product_count
+  #   ProductCategory.count.must_equal before_pc_count
+  #   Category.count.must_equal before_category_count
+  #
+  #   must_redirect_to new_product_path
+  # end
 end

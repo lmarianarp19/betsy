@@ -4,8 +4,9 @@ class SessionsController < ApplicationController
   #TODO: CHECK AUTH HASH IN INTERACTIVE SHELL
 
   def login
+    auth_hash = request.env['omniauth.auth']
+
     if auth_hash['uid']
-      auth_hash = request.env['omniauth.auth']
       merchant = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
       if merchant.nil?
         merchant = Merchant.from_auth_hash(params[:provider], auth_hash)

@@ -16,71 +16,27 @@ class ProductsController < ApplicationController
   end
 
   def create
-    
+
+    category = Category.find_by(name: params[:product][:categories])
+
+    if category # If category exists
+      @product = Product.new(products_params)
+      # For all existing product categories, add a new category for this product
+      @product.categories << category
+
+      # @product.category_id = category.id
+      @product.merchant_id = session[:merchant_id]
+      save_and_flash(@product)
+      redirect_to root_path
+    else # If category does not exist and is valid
+      category = Category.create_cat(params[:product][:categories])
+      @product = Product.new(products_params)
+      @product.merchant_id = session[:merchant_id]
+      @product.categories << category
+      save_and_flash(@product)
+      redirect_to product_path(@product)
+    end
   end
-    # input_name = params[:product][:name]
-    #
-    # existing_product = Product.find_by(name: input_name)
-    #
-    # if existing_product # If category for this DOES exist for this name
-    #   all_product_categories = existing_product.product_categories
-    #
-    #   all_product_categories.each do |pc|
-    #     if pc.product.name == input_name
-    #       @product = Product.new(products_params)
-    #     ############### TODO: Must do SESSIONS HERE
-    #       @product.merchant_id = 13371337
-    #
-    #       if @product.save!
-    #         redirect_to product_path(@product.id)
-    #       else
-    #         flash[:status] = :failure
-    #         flash[:message] = "There was a problem when saving your product!"
-    #         flash[:errors] = @product.errors.messages
-    #         render :new, status: :bad_request
-    #       end
-    #     end
-    #   end
-    #
-    # else # If category for this name DOES NOT exist
-    #   Category.create_cat(input_name)
-    #
-    #   @product = Product.new(products_params)
-    #   ############### TODO: Must do SESSIONS HERE
-    #   @product.merchant_id = session[:merchant_id]
-    #
-    #   # Create a new productcategory if it does not exist
-    #   if @product.save
-    #     ProductCategory.create_prod_cat(@product)
-    #   else
-    #     flash[:status] = :failure
-    #     flash[:message] = "There was a problem when saving your product!"
-    #     flash[:errors] = @product.errors.messages
-    #     redirect_to new_product_path
-    #   end
-    # end
-
-
-
-
-
-
-
-
-    # Category.find_or_create_cat(params[:product][:category_id])
-    #
-    # @product = Product.new(products_params)
-    #
-    # @product.category_id = category_id
-    #
-    # if @product.save
-    #   flash[:status] = :success
-    #   flash[:message] = "You created a new product: #{@product.name}"
-    # else
-    #   flash[:status] = :failure
-    #   flash[:message] = "Your product was not created. Please try again!"
-    #   flash[:errors] = @product.errors.messages
-    # end
 
   def edit
     @product = Product.find_by(id: params[:id])
@@ -118,15 +74,7 @@ class ProductsController < ApplicationController
   private
 
   def products_params
-    params.require(:product).permit(:name, :price, :inventory, :description, :photo_url, :category_id)
+    params.require(:product).permit(:name, :price, :inventory, :description, :photo_url)
   end
 
 end
-
-
-  # Create a new product providing:
-  # name
-  # description
-  # price
-  # photo URL
-  # stock
