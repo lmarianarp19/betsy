@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all
+    @category = Category.find_by(id: params[:id])
+    @products = @category.products
   end
 
   def show
@@ -16,7 +17,6 @@ class ProductsController < ApplicationController
   end
 
   def create
-
     category = Category.find_by(name: params[:product][:categories])
 
     if category # If category exists

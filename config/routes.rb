@@ -12,9 +12,11 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index, :new, :create]
   end
 
-  resources :categories, only:[:index, :new, :create]
+  resources :categories, only:[:index, :show, :new, :create]
   #TODO: POSSIBLE NESTED ROUTES
   #category/:id/products
+
+  get 'categories/:id/products', to: 'products#index', as: 'products_categories'
 
   # TODO: # Check if we need index and show
   resources :payments, only: [:index, :new, :create, :show]
