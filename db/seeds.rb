@@ -46,7 +46,7 @@ puts "Loading raw media data from #{CATEGORY_FILE}"
 category_failures = []
 CSV.foreach(CATEGORY_FILE, :headers => true) do |row|
   category = Category.new
-  category.name = row['username']
+  category.name = row['name']
   puts "Created category: #{category.inspect}"
   successful = category.save
   if !successful
