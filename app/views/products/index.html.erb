@@ -1,9 +1,17 @@
-<h2>Index of all products</h2>
+<h2 class="align-center"><%= @category.name %></h2>
 
-<% @products.each do |product| %>
-  <div class="product">
-    <p><%= "Product: #{product.name}" %></p>
-    <p><%= "Price: #{product.price}" %></p>
-    <p><%= "Stock: #{product.inventory}" %></p>
+<div class="row">
+
+  <% @products.each do |product| %>
+
+  <div class="small-4 columns align-center">
+    <%= product.name %>
+    <%= link_to image_tag(product.photo_url), product_path(product.id), class: "thumbnail align-center", alt: product.name %>
+    <p>
+      $ <%= product.price %>
+    </p>
   </div>
-<% end %>
+
+  <% end %>
+
+</div>
