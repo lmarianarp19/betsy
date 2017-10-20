@@ -15,7 +15,7 @@ CSV.foreach(REVIEW_FILE, :headers => true) do |row|
     review_failures << review
   end
 end
-binding.pry
+
 puts "Added #{Review.count} review records"
 puts "#{review_failures.length} reviews failed to save"
 
