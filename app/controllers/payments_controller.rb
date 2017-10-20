@@ -14,7 +14,7 @@ class PaymentsController < ApplicationController
       #TODO: Cannot save the order id as a session until the order is created!
       order =  Order.find_by(id: params[:order_id])
       order.status = "paid"
-      @current_order_id.billing_id = @billing_info.id
+      @payment.order_id = order.id
       flash[:status] = :success
       flash[:message] = "success payment"
       redirect_to root_path
@@ -30,7 +30,7 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:billinginfo).permit(:email, :mailing_address, :cc_name, :cc_expiration, :cc_number, :cc_ccv, :billing_zip, :order_id)
+    params.require(:payment).permit(:email, :mailing_address, :cc_name, :cc_expiration, :cc_number, :cc_ccv, :billing_zip, :order_id)
   end
 
 end
