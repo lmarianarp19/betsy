@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+
 .show-product img {
   height: 200px;
   width: 200px;
@@ -23,3 +24,15 @@
 .inventory {
   font-size: 1.3em;
 }
+
+// img {
+//   display: inline-block;
+//   border: 2px black solid;
+// }
+
+.align-center {
+  text-align: center;
+}
+
+// <%= link_to product.name, product_path(product.id) %>
+// <img class="thumbnail" src="<%= product.photo_url %>" alt="<%= product.name %>">
