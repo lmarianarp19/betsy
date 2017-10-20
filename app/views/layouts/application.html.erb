@@ -13,6 +13,7 @@
 
 <body>
 <header>
+  <h1><%= link_to "StarMart", root_path %></h1>
 <nav>
   <div class="float-right">
     <% if session[:merchant_id] %>
@@ -27,8 +28,8 @@
 </header>
 
   <%###############  FLASH MESSAGES #################### %>
-  ## NOTE ### Need to decide how to show our flash messages 
-  
+  ## NOTE ### Need to decide how to show our flash messages
+
   <section class="row status <%= flash[:status] %>">
     <%if  flash[:status] == :failure %>
     <ul>
@@ -40,8 +41,8 @@
     </ul>
     <% end %>
   </section>
-  
-  
+
+
     <section class="flash <%= flash[:status] %> row">
       <p class="no-margin">
         <%= flash[:message] %>
@@ -61,8 +62,8 @@
       </ul>
       <% end %>
     </section>
-  
-  
+
+
 
   <main class="row">
     <%= yield %>
