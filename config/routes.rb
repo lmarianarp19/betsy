@@ -10,16 +10,20 @@ Rails.application.routes.draw do
 
   # merchant/:id/products
 
-  resources :products
+  resources :products do
+    resources :reviews, only: [:new, :create, :index, :show]
+  end
 
   resources :categories, only:[:index, :new, :create]
 
   # TODO: # Check if we need index and show
   resources :payments, only: [:index, :new, :create, :show]
 
-  resources :orders, only: [:show, :create, :update]
+  resources :orders, only: [:show, :create, :update] do
+    # get '/cart', to: 'cart#index'
+  end
 
-  resources :reviews, only: [:new, :create, :index, :show]
+  # resources :reviews, only: [:new, :create, :index, :show]
 
   resources :sessions, only: [:login, :logout]
 
