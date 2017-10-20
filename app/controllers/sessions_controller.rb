@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
         flash[:message] = "Welcome back, #{merchant.username}"
       end
       session[:merchant_id] = merchant.id
+      session[:merchant_username] = merchant.username
       #will log in the user
     else
       flash[:status] = :failure
