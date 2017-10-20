@@ -104,3 +104,39 @@ end
 
 puts "Added #{ProductCategory.count} product_category records"
 puts "#{product_category_failures.length} product_category failed to save"
+
+# ORDER ITEMS #
+
+order_failures = []
+10.times do
+  order = Order.new
+  successful = order.save
+  if !successful
+    order_failures << order_item
+  end
+  puts "Created order: #{order.inspect}"
+end
+puts "Added #{Order.count} order item records"
+puts "#{order_failures.length} orders failed to save"
+
+# ORDER ITEMS #
+
+ORDER_ITEMS_FILE = Rails.root.join('db','seed_data','order_items.csv')
+puts "Loading raw media data from #{ORDER_ITEMS_FILE}"
+
+order_items_failures = []
+CSV.foreach(ORDER_ITEMS_FILE, :headers => true) do |row|
+  order_item = OrderItem.new
+  order_item.product_id = row['product_id']
+  order_item.order_id = row['order_id']
+  order_item.quantity = row['quantity']
+
+  puts "Created order item: #{order_item.inspect}"
+  successful = order_item.save
+  if !successful
+    order_items_failures << order_item
+  end
+end
+
+puts "Added #{OrderItem.count} order item records"
+puts "#{order_items_failures.length} order items failed to save"
