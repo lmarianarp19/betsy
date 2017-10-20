@@ -2,6 +2,8 @@ class OrderItemsController < ApplicationController
 
   def create
     @order_item = OrderItem.new(order_items_params)
+    @order_item.order #insert session[:order_id]
+
     #TODO: Raise some kind of error here if it didnt save
   end
 
