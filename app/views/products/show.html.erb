@@ -15,7 +15,7 @@
 
       <%= link_to "Add to Cart!" %>
       <p> <%= "#{@product.inventory} in stock!" %></p>
-      <%# link_to "Write a Review!!", new_product_review_path, class: "button" %>
+      <%= link_to "Write a Review!!", new_product_review_path(@product.id), class: "button" %>
     </section>
   </section>
 </main>

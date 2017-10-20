@@ -1,1 +1,13 @@
-This is my view page for a new review!
+<h2>Write a review!</h2>
+
+<section>
+  <%= form_for :review do |f| %>
+    <%= f.label :review %>
+    <%= f.text_field :review %>
+
+    <%= f.label :rating %>
+    <%= f.select :rating, options_for_select(1.. 5) %>
+
+    <%= f.submit class: "button" %>
+  <% end %>
+</section>
