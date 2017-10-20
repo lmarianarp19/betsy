@@ -58,7 +58,8 @@ describe ProductsController do
   describe "#create" do
     it "returns success for a different merchant of the same product_category exists" do
       before_count = Product.count
-      session[]
+
+      # session[:merchant_id] = 13371337
 
       valid_product_data = {
         product: {

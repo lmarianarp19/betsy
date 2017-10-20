@@ -12,7 +12,8 @@
 </head>
 
 <body>
-
+<header>
+<nav>
   <div class="float-right">
     <% if session[:merchant_id] %>
     <%= link_to "Merchant #{session[:merchant_username]}", merchant_path(session[:merchant_id]), class: "button" %>
@@ -20,8 +21,14 @@
     <% else %>
     <%= link_to "Log In", "/auth/github", class: "button float-right" %>
     <% end %>
+    <%= link_to "Cart", root_path %>
   </div>
+  </nav>
+</header>
 
+  <%###############  FLASH MESSAGES #################### %>
+  ## NOTE ### Need to decide how to show our flash messages 
+  
   <section class="row status <%= flash[:status] %>">
     <%if  flash[:status] == :failure %>
     <ul>
@@ -33,10 +40,37 @@
     </ul>
     <% end %>
   </section>
+  
+  
+    <section class="flash <%= flash[:status] %> row">
+      <p class="no-margin">
+        <%= flash[:message] %>
+      </p>
+      <% if flash[:details] %>
+      <ul>
+        <% flash[:details].each do |field, problems| %>
+          <% problems.each do |problem| %>
+          <li>
+            <!-- <strong>
+              <%= field.capitalize %>:
+            </strong> -->
+            <%= problem.capitalize %>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <% end %>
+    </section>
+  
+  
 
   <main class="row">
     <%= yield %>
   </main>
-
+    <footer>
+      <p>
+        COPYRIGHT 2017
+      </p>
+    </footer>
 </body>
 </html>

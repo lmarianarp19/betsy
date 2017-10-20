@@ -16,6 +16,8 @@ class Category < ApplicationRecord
       redirect_to new_product_path
     end
   end
+  
+  end
 
   # def self.find_or_create_cat(category_name)
   # existing_category = Category.find_by(name: category_name.upcase)
@@ -37,5 +39,3 @@ class Category < ApplicationRecord
   #   end
   # end
 
-# >>>>>>> bd8bde861fe5bd889181b2fdac9abe4ea21b869d
-end

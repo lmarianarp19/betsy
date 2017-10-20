@@ -26,7 +26,8 @@ class ProductsController < ApplicationController
       all_product_categories.each do |pc|
         if pc.product.name == input_name
           @product = Product.new(products_params)
-          @product.merchant_id = session[:merchant_id]
+        ############### TODO: Must do SESSIONS HERE
+          @product.merchant_id = 13371337
 
           if @product.save!
             redirect_to product_path(@product.id)
@@ -43,7 +44,8 @@ class ProductsController < ApplicationController
       Category.create_cat(input_name)
 
       @product = Product.new(products_params)
-      @product.merchant_id = session[:merchant_uid]
+      ############### TODO: Must do SESSIONS HERE
+      @product.merchant_id = session[:merchant_id]
 
       # Create a new productcategory if it does not exist
       if @product.save
