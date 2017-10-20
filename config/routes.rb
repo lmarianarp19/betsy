@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # merchant/:id/products
 
   resources :products do
-    resources :reviews, only: [:new, :create, :index, :show]
+    resources :reviews, only: [:index, :new, :create]
   end
 
   resources :categories, only:[:index, :new, :create]
