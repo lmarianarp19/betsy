@@ -3,13 +3,14 @@ Rails.application.routes.draw do
   # root 'main#root'
   get '/', to: 'main#index', as: 'root'
 
-
   resources :merchants, only: [:show]
 
   #TODO: POSSIBLE NESTED ROUTES
   # merchant/:id/products to show all merchant products?
 
-  resources :products
+  resources :products do
+    resources :reviews, only: [:index, :new, :create]
+  end
 
   resources :categories, only:[:index, :new, :create]
   #TODO: POSSIBLE NESTED ROUTES
@@ -18,10 +19,14 @@ Rails.application.routes.draw do
   # TODO: # Check if we need index and show
   resources :payments, only: [:index, :new, :create, :show]
 
-  resources :orders, only: [:show, :create, :update]
+  resources :orders, only: [:show, :create, :update] do
+    # get '/cart', to: 'cart#index'
+  end
 
   resources :reviews, only: [:new, :create, :index, :show]
   # TODO: #product/:id/reviews
+
+  # resources :reviews, only: [:new, :create, :index, :show]
 
   resources :sessions, only: [:login, :logout]
 

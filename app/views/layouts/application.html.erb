@@ -13,8 +13,8 @@
 
 <body>
 <header>
-  <h1><%= link_to "StarMart", root_path %></h1>
-<nav>
+  <h1 class="text-center"><%= link_to "StarMart", root_path %></h1>
+<nav class="login">
   <div class="float-right">
     <% if session[:merchant_id] %>
     <%= link_to "Merchant #{session[:merchant_username]}", merchant_path(session[:merchant_id]), class: "button" %>
@@ -22,9 +22,19 @@
     <% else %>
     <%= link_to "Log In", "/auth/github", class: "button float-right" %>
     <% end %>
-    <%= link_to "Cart", root_path %>
+    <%= link_to "Cart",  class: "button float-left" %>
   </div>
   </nav>
+  <section class="banner">
+    <%= link_to "All Products", products_path, class: "button" %>
+    <%= link_to "Sidekicks", class: "button" %>
+    <%= link_to "Equipment", class: "button" %>
+    <%= link_to "Gear", class: "button" %>
+    <%= link_to "Miscellaneous", class: "button" %>
+
+
+  </section>
+
 </header>
 
   <%###############  FLASH MESSAGES #################### %>
