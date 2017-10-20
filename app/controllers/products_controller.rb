@@ -5,7 +5,10 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @product = Product.find(params[:id])
+    @product = Product.find_by(id: params[:id])
+    unless @product
+      head :not_found
+    end
   end
 
   def new
@@ -13,19 +16,74 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(products_params)
+    input_name = params[:product][:name]
 
-    if @product.save!
-      flash[:status] = :success
-      flash[:message] = "You created a new product: #{@product.name}"
-    else
-      flash[:status] = :failure
-      flash[:message] = "Your product was not created. Please try again!"
-      flash[:errors] = @product.errors.messages
+    existing_product = Product.find_by(name: input_name)
+
+    if existing_product # If category for this DOES exist for this name
+      all_product_categories = existing_product.product_categories
+
+      all_product_categories.each do |pc|
+        if pc.product.name == input_name
+          @product = Product.new(products_params)
+          @product.merchant_id = session[:merchant_id]
+
+          if @product.save!
+            redirect_to product_path(@product.id)
+          else
+            flash[:status] = :failure
+            flash[:message] = "There was a problem when saving your product!"
+            flash[:errors] = @product.errors.messages
+            render :new, status: :bad_request
+          end
+        end
+      end
+
+    else # If category for this name DOES NOT exist
+      Category.create_cat(input_name)
+
+      @product = Product.new(products_params)
+      @product.merchant_id = session[:merchant_uid]
+
+      # Create a new productcategory if it does not exist
+      if @product.save
+        ProductCategory.create_prod_cat(@product)
+      else
+        flash[:status] = :failure
+        flash[:message] = "There was a problem when saving your product!"
+        flash[:errors] = @product.errors.messages
+        redirect_to new_product_path
+      end
     end
+
   end
 
+
+
+
+
+
+    # Category.find_or_create_cat(params[:product][:category_id])
+    #
+    # @product = Product.new(products_params)
+    #
+    # @product.category_id = category_id
+    #
+    # if @product.save
+    #   flash[:status] = :success
+    #   flash[:message] = "You created a new product: #{@product.name}"
+    # else
+    #   flash[:status] = :failure
+    #   flash[:message] = "Your product was not created. Please try again!"
+    #   flash[:errors] = @product.errors.messages
+    # end
+
   def edit
+    @product = Product.find_by(id: params[:id])
+
+    unless @product
+      head :not_found
+    end
   end
 
   def update
@@ -55,7 +113,10 @@ class ProductsController < ApplicationController
 
   private
 
-  params.require(:product).permit(:name, :price, :description, :photo_url, :num_in_stock, :current_status, :merchant_id, :category_id,)
+  def products_params
+    params.require(:product).permit(:name, :price, :inventory, :description, :photo_url, :category_id)
+  end
+
 end
 
 
