@@ -13,12 +13,8 @@ Rails.application.routes.draw do
   end
 
   resources :categories, only:[:index, :show, :new, :create]
-  #TODO: POSSIBLE NESTED ROUTES
-  #category/:id/products
 
   get 'categories/:id/products', to: 'products#index', as: 'products_categories'
-
-  get 'categories/:id/products/:id', to: 'products#show', as:'products_category'
 
   # TODO: # Check if we need index and show
   resources :payments, only: [:index, :new, :create, :show]

@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   # TODO: Method to sign in for order_id in the @current_order_id = session[:current_order_id]??
   # @current_order_id.order_items --> Checks number of order_items in the cart
 
+  before_action :find_merchant
+
   protected
   def save_and_flash(model)
     result = model.save
