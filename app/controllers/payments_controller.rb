@@ -4,8 +4,6 @@ class PaymentsController < ApplicationController
     @payment = Payment.new
   end
 
-  #TODO: Afters submitting, also needs to update order status and save order to the db
-
   def create
     @payment = Payment.new(payment_params)
 
@@ -13,13 +11,15 @@ class PaymentsController < ApplicationController
 
       #TODO: Cannot save the order id as a session until the order is created!
       order =  Order.find_by(id: params[:order_id])
+
+      binding.pry
       order.status = "paid"
+      order.save
       @payment.order_id = order.id
       flash[:status] = :success
       flash[:message] = "success payment"
-      redirect_to root_path
-      #TODO Page with the order 
-      #redirect_to order_path(@billing_info.order.id)
+      redirect_to order_path(@payment.order_id)
+      #TODO redirect to page with the order
     else
       flash[:status] = :failure
       flash[:message] = "Whoops! Something was wrong when placing your order!"

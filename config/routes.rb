@@ -22,9 +22,10 @@ Rails.application.routes.draw do
 
   # TODO: # Check if we need index and show
   resources :payments, only: [:index, :new, :create, :show]
+#, only: [:show, :create, :update]
 
-  resources :orders, only: [:show, :create, :update] do
-    # get '/cart', to: 'cart#index'
+  resources :orders do
+    resources :payment, only: [:new, :create, :index]
   end
 
   resources :reviews, only: [:new, :create, :index, :show]
