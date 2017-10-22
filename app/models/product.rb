@@ -8,6 +8,9 @@ class Product < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0}
+  # TODO: Ask instructors if we need to state this validation b/c the relationship dictates that we need a merchant
+  validates :merchant, presence: true
+
 
   def average_rating
     if self.reviews.count > 0
