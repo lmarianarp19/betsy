@@ -34,39 +34,40 @@ class ProductsController < ApplicationController
   end
 
   def create
-    if @login_merchant
-      input_cat_name = params[:product][:categories]
+    @product = Product.new(products_params)
+    # if @login_merchant
+      # input_cat_name = params[:product][:categories]
 
-      @category = Category.find_by(name: input_cat_name)
+      # @category = Category.find_by(name: input_cat_name)
 
-      if @category # If category exists make a new product
-        @product = Product.new(products_params)
-        @product.categories << @category
-        # @product.category_id = category.id
-        @product.merchant_id = @login_merchant.id
-        save_and_flash(@product)
-
-        redirect_to root_path
-      else
-        # If category does not exist and is valid
-        @category = Category.create_cat(input_cat_name)
-        # if save_and_flash(@category)
-        @product = Product.new(products_params)
-        @product.merchant_id = @login_merchant.id
-        @product.categories << @category
-        save_and_flash(@product)
-
-        redirect_to product_path(@product)
-        # else
-        #   render :new, status: :bad_request
-        # end
-      end
-    else
-      # TODO: Make flash messages for unauthorized!!! When use is not logged in
-      flash[:status] = :failure
-      flash[:message] = "You must be authorized to do that"
-      redirect_to root_path
-    end
+      # if @category # If category exists make a new product
+      #   @product = Product.new(products_params)
+      #   @product.categories << @category
+      #   # @product.category_id = category.id
+      #   @product.merchant_id = @login_merchant.id
+      #   save_and_flash(@product)
+      #
+      #   redirect_to root_path
+      # else
+      #   # If category does not exist and is valid
+      #   @category = Category.create_cat(input_cat_name)
+      #   # if save_and_flash(@category)
+      #   @product = Product.new(products_params)
+      #   @product.merchant_id = @login_merchant.id
+      #   @product.categories << @category
+      #   save_and_flash(@product)
+      #
+      #   redirect_to product_path(@product)
+      #   # else
+      #   #   render :new, status: :bad_request
+      #   # end
+      # end
+    # else
+    #   # TODO: Make flash messages for unauthorized!!! When use is not logged in
+    #   flash[:status] = :failure
+    #   flash[:message] = "You must be authorized to do that"
+    #   redirect_to root_path
+    # end
   end
 
   def edit
@@ -144,7 +145,7 @@ class ProductsController < ApplicationController
   private
 
   def products_params
-    params.require(:product).permit(:name, :price, :inventory,  :description, :photo_url)
+    params.permit(:name, :price, :inventory,  :description, :photo_url)
   end
 
 end

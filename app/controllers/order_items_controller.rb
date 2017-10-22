@@ -1,6 +1,11 @@
 class OrderItemsController < ApplicationController
 
+  def new
+    @order_item = OrderItem.new
+  end
+
   def create
+    @order_item = OrderItem.new
     @order = current_order
     @item = @order.order_items.new(order_items_params)
     @order.save
@@ -21,21 +26,28 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-    @order_item = @current_order_id.order_items.find(params[:id])
+    @order = current_order
+    @item = @order.order_items.find(params[:id])
+    @item.destroy
+    @order.save
 
-    if @order_item.destroy
-      flash[:success] = :success
-      flash[:message] = "Your cart has been updated!"
-      redirect_to order_parth(@current_order_id) # Product View Pag
-    else
-      # Raise some other kind of error
-    end
+    redirect_to cart_path
+
+    # @order_item = @current_order_id.order_items.find(params[:id])
+    #
+    # if @order_item.destroy
+    #   flash[:success] = :success
+    #   flash[:message] = "Your cart has been updated!"
+    #   redirect_to order_parth(@current_order_id) # Product View Pag
+    # else
+    #   # Raise some other kind of error
+    # end
 
   end
 
 private
 
   def order_items_params
-    params.require(:order_item).permit(:product_id, :quantity, :order_id)
+    params.require(:order_item).permit(:product_id, :quantity)
   end
 end

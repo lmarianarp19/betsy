@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  #add resource not resources because a customer will only have one shopping cart and doesn't create an index route 
+  #add resource not resources because a customer will only have one shopping cart and doesn't create an index route
   resource :cart, only: [:show]
 
   resources :categories, only:[:index, :show, :new, :create]
@@ -22,15 +22,13 @@ Rails.application.routes.draw do
   # TODO: # Check if we need index and show
   resources :payments, only: [:index, :new, :create, :show]
 
-  resources :orders, only: [:show, :create, :update] do
-    # get '/cart', to: 'cart#index'
-  end
+  resources :orders, only: [:show, :create, :update]
 
   # TODO: #product/:id/reviews
-
   resources :sessions, only: [:login, :logout]
 
-  resources :orderitems, only: [:create, :update, :destroy]
+  resources :orderitems, only: [:new, :update, :destroy]
+  post 'order_items', to: 'order_items#create', as: 'order_items'
 
   get '/auth/github', as: 'github'
   get '/auth/:provider/callback', to: 'sessions#login', as: "auth_callback"
