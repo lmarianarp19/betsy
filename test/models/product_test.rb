@@ -56,10 +56,10 @@ describe Product do
       end
       it "requires the name to be unique" do
         name = "NameMcNameFace"
-        product1 = Product.new(merchant: first_merchant, price: 1000, name: name)
+        product1 = Product.new(merchant: first_merchant, price: 1000, name: name, inventory: 10)
         product1.save!
 
-        product2 = Product.new(merchant: first_merchant, price: 1000, name: name)
+        product2 = Product.new(merchant: first_merchant, price: 1000, name: name, inventory: 10)
         product2.valid?.must_equal false
         product2.errors.messages.must_include :name
       end
@@ -71,18 +71,18 @@ describe Product do
         product.errors.messages.must_include :price
       end
 
-      it "#price returns false is the price is not  number" do
-        product1 = Product.new(merchant: first_merchant, price: "one", name: "name")
+      it "#price returns false if the price is not a number" do
+        product1 = Product.new(merchant: first_merchant, price: "one", name: "name", inventory: 10)
         product1.valid?.must_equal false
 
-        product2 = Product.new(merchant: first_merchant, price: [1], name: "name")
+        product2 = Product.new(merchant: first_merchant, price: [1], name: "name", inventory: 10)
         product2.valid?.must_equal false
 
-        product3 = Product.new(merchant: first_merchant, price: Date.today, name: "name")
+        product3 = Product.new(merchant: first_merchant, price: Date.today, name: "name", inventory: 10)
         product3.valid?.must_equal false
       end
       it "#price returns false if the price is less than 1" do
-        product1 = Product.new(merchant: first_merchant, price: 0, name: "name")
+        product1 = Product.new(merchant: first_merchant, price: 0, name: "name", inventory: 10)
         product1.valid?.must_equal false
       end
 
@@ -94,6 +94,22 @@ describe Product do
         product.errors.messages.must_include :merchant
       end
     end
-
+    describe "inventory" do
+      it "requires an inventory" do
+        product = Product.new
+        product.valid?.must_equal false
+        product.errors.messages.must_include :inventory
+      end
+      it "returns false if the inventory is not a number" do
+        product = Product.new(merchant: first_merchant, price: 1000, name: "name", inventory: "one")
+        product.valid?.must_equal false
+        product.errors.messages.must_include :inventory
+      end
+      it "returns false if the inventory is less than 0" do
+        product = Product.new(merchant: first_merchant, price: 1000, name: "name", inventory: -1)
+        product.valid?.must_equal false
+        product.errors.messages.must_include :inventory
+      end
+    end
   end
 end
