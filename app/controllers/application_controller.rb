@@ -10,6 +10,8 @@ class ApplicationController < ActionController::Base
 
 # Need to to make method available to controllers and views
   helper_method :current_order
+# formats a number into a currency string
+  helper_method :number_to_currency
 
 # helper method to see if there is a session that is holding the order_id, if not, it will create it
   def current_order
