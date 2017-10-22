@@ -8,4 +8,16 @@ class Product < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0}
-end
+
+  def average_rating
+    if self.reviews.count > 0
+      total = 0.0
+      self.reviews.each do |r|
+        total += r.rating
+      end
+       total /= self.reviews.count
+       return total
+    end
+
+  end#def
+end#class
