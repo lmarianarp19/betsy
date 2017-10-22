@@ -1,13 +1,10 @@
 require "test_helper"
 
 describe Order do
-  # products
-  let(:first_product) {products :first_product}
-  let(:second_product) {products :second_product}
-  let(:third_product) {products :third_product}
   # orders
   let(:first_order) {orders :first_order}
-  let(:second_order) {orders :second_order}
+  # payments
+  let(:payment_one) {payments :payment_one}
 
   describe "relations" do
     it "has a list of products" do
@@ -22,23 +19,38 @@ describe Order do
       first_order.must_respond_to :order_items
       first_order.order_items.count.must_be :>, 1
       first_order.order_items.each do |oi|
-        oi.must_be_kind_of OrderItem 
+        oi.must_be_kind_of OrderItem
       end
     end
-  #   it "has a single payment" do
-  #
-  #   end
-  #
-  #   it "cannot have more than one payment" do
-  #
-  #   end
+
+    it "has a payment" do
+      first_order.must_respond_to :payment
+      first_order.payment = payment_one
+      first_order.payment.must_be_kind_of Payment
+    end
+    # TODO: Ask instructors how to test this?
+    # it "cannot have more than one payment" do
+    #
+    # end
   end
-  #
-  # describe "validations" do
-  #   it "require a status" do
-  #
-  #   end
-  #
+
+  describe "validations" do
+    it "#Status attribute defualts to 'pending'" do
+      order = Order.new
+      order.status.must_equal "pending"
+    end
+
+    it "requires a status" do
+      order = Order.new
+      order.status = ''
+      order.valid?.must_equal false
+      order.errors.messages.must_include :status
+    end
+
+
+
+
+
   #   # TODO: ask if we need to test default value? AKA do we need to test that status defaults to "pending?"
-  # end
+  end
 end
