@@ -7,7 +7,7 @@
 first_merchant:
   username: $LABEL
   email: $LABEL@gmail.com
-  uid: 13371337
+  uid: 987654
   provider: github
 
 second_merchant:

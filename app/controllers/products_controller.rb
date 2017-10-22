@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
   def show
     @product = Product.find_by(id: params[:id])
     unless @product
-      # TODO: render a 404 page if not found
+      # TODO: render a 404 page if not found????
       head :not_found
     end
   end
@@ -47,16 +47,12 @@ class ProductsController < ApplicationController
       else
         # If category does not exist and is valid
         @category = Category.create_cat(input_cat_name)
-        # if save_and_flash(@category)
         @product = Product.new(products_params)
         @product.merchant_id = @login_merchant.id
         @product.categories << @category
         save_and_flash(@product)
 
         redirect_to product_path(@product)
-        # else
-        #   render :new, status: :bad_request
-        # end
       end
     else
       # TODO: Make flash messages for unauthorized!!! When use is not logged in
@@ -110,22 +106,8 @@ class ProductsController < ApplicationController
     end
   end
 
-
-    #   if save and flash(@product)
-    #     redirect_to product_path(@product)
-    #   else
-    #     redirect_to root_path
-    #   end
-    # else
-    #   flash[:status] = :failure
-    #   flash[:message] = "You must be authorized to do that"
-    #   redirect_to root_path
-    # end
-
-
   def destroy # RETIRE
     if @login_merchant
-      binding.pry
       @product = Product.find_by(id: params[:id])
       @product.current = false # Make status of the product false
       save_and_flash(@product)
@@ -133,8 +115,7 @@ class ProductsController < ApplicationController
     else
       flash[:status] = :failure
       flash[:result_text] = "You must be the product owner to delete this work!"
-      flash[:messages] = @product.errors.messages
-      redirect_to product_path(@product)
+      redirect_to root_path
     end
   end
 
