@@ -18,6 +18,7 @@ class PaymentsController < ApplicationController
       flash[:status] = :success
       flash[:message] = "success payment"
       redirect_to root_path
+      #TODO Page with the order 
       #redirect_to order_path(@billing_info.order.id)
     else
       flash[:status] = :failure
