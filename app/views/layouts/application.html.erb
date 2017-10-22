@@ -13,7 +13,7 @@
 
 <body>
 
- <!-- DESKTOP NAVIGATION -->
+  <!-- DESKTOP NAVIGATION -->
   <div class="menu-centered">
     <ul class="menu">
       <li><%= link_to "Clothes", products_categories_path(id: 4), class: "button" %></li>
@@ -43,7 +43,7 @@
   <!-- LOGIN NAVIGATION -->
   <div class="menu-centered">
     <!-- <div class="top-bar "> -->
-      <ul class="menu">
+    <ul class="menu">
       <% if session[:merchant_id] %>
       <%= link_to "Merchant #{session[:merchant_username]}", merchant_path(session[:merchant_id]), class: "button" %>
       <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
@@ -61,57 +61,35 @@
 
 
   <%###############  FLASH MESSAGES #################### %>
-  ## NOTE ### Need to decide how to show our flash messages
 
-  <!-- <section class="row status <%= flash[:status] %>">
+  <section class="row status <%= flash[:status] %>">
     <%if  flash[:status] == :failure %>
-    <ul>
-      <h3><%= "A problem occurred: #{flash[:message]}" %></h3>
-    </ul>
-    <% else %>
-    <ul>
-      <h3><%= flash[:messages] %></h3>
-    </ul>
-    <% end %>
-  </section> -->
-
-
-    <!-- <section class="flash <%= flash[:status] %> row">
-      <p class="no-margin">
-        <%= flash[:message] %>
-      </p>
-      <% if flash[:details] %>
-      <ul>
-        <% flash[:details].each do |field, problems| %>
-          <% problems.each do |problem| %>
-          <li>
-            <strong>
-              <%= field.capitalize %>:
-            </strong>
-            <%= problem.capitalize %>
-          </li>
-          <% end %>
-        <% end %>
-      </ul>
-      <% end %>
-    </section> -->
+      <%= "A problem occurred: #{flash[:message]}" %>
+  <% else %>
+      <%= flash[:message] %>
+  <% end %>
+</section>
 
 
 
-  <main class="row">
-    <%= yield %>
-  </main>
 
-  <!-- FOOTER SECTION -->
 
-    <footer>
-      <p>
-        COPYRIGHT 2017
-        <%# TODO: THIS IS A TEST LINK! %>
-        <%# @category = Category.first %>
-        <%# link_to "This Categories Products!", products_categories(@category) %>
 
-      </p>
-    </footer>
+
+<main class="row">
+  <%= yield %>
+</main>
+
+<!-- FOOTER SECTION -->
+
+<footer>
+  <p>
+    COPYRIGHT 2017
+    <%# TODO: THIS IS A TEST LINK! %>
+    <%# @category = Category.first %>
+    <%# link_to "This Categories Products!", products_categories(@category) %>
+
+  </p>
+</footer>
 </body>
 </html>

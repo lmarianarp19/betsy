@@ -21,7 +21,20 @@
       <p class="inventory"> <%= "#{@product.inventory} in stock!" %></p>
       <%= link_to "Write a Review!!", new_product_review_path(@product.id), class: "button" %>
     </div>
+  </section>
 
+  <section>
+    <% if @product.reviews.count > 0 %>
+    <h3> Reviews </h3>
+    <%= "Average Rating = #{@product.average_rating}" %>
+      <% @product.reviews.each do |review| %>
+      <div>
+        <%= review.review %> </div>
+      <div>  <%= review.rating %>
+      </div><hr>
+
+      <%end%>
+    <%end%>
   </section>
   </section>
     </div>
