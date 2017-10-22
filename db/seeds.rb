@@ -140,3 +140,32 @@ end
 
 puts "Added #{OrderItem.count} order item records"
 puts "#{order_items_failures.length} order items failed to save"
+
+# Payments #
+
+PAYMENT_FILE = Rails.root.join('db','seed_data','payment.csv')
+puts "Loading raw payment data from #{PAYMENT_FILE}"
+
+d1 = Date.new(2017,5,8)
+
+payment_failures = []
+CSV.foreach(PAYMENT_FILE, :headers => true) do |row|
+  payment = Payment.new
+  payment.email = row['email']
+  payment.mailing_address = row['mailing_address']
+  payment.cc_name = row['cc_name']
+  payment.cc_expiration = d1
+  payment.cc_number = row['cc_number']
+  payment.cc_ccv = row['cc_ccv']
+  payment.billing_zip = row['billing_zip']
+  payment.order_id = row['order_id']
+
+  puts "Created payment: #{payment.inspect}"
+  successful = payment.save
+  if !successful
+    payment_failures << payment
+  end
+end
+
+puts "Added #{Payment.count} order item records"
+puts "#{payment_failures.length} payments failed to save"
