@@ -45,4 +45,8 @@ class ActiveSupport::TestCase
     OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(merchant))
     get auth_callback_path(:github)
   end
+
+  def logout
+    post logout_path
+  end
 end

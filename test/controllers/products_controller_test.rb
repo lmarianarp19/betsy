@@ -9,7 +9,7 @@ describe ProductsController do
 
   describe "#index" do
     it "returns success when showing all products with a category" do
-      get products_categories_path(category.id)
+      get products_categories_path(category)
 
       must_respond_with :success
     end
@@ -17,7 +17,7 @@ describe ProductsController do
     it "returns success when there are no products" do
       Product.destroy_all
 
-      get products_categories_path(category.id)
+      get products_categories_path(category)
 
       must_respond_with :success
     end
@@ -25,7 +25,7 @@ describe ProductsController do
     it "returns as success when a merchant is logged in" do
       login(merchant)
 
-      get products_categories_path(category.id)
+      get products_categories_path(category)
 
       must_respond_with :success
     end
@@ -138,6 +138,7 @@ describe ProductsController do
     Category.count.must_equal before_category_count + 1
 
     must_respond_with :redirect
+    must_redirect_to product_path(Product.last)
     flash[:status].must_equal :success
   end
 
@@ -166,6 +167,7 @@ describe ProductsController do
     Category.count.must_equal before_category_count
 
     must_respond_with :redirect
+    must_redirect_to root_path
     session[:merchant_id].must_be_nil
     flash[:status].must_equal :failure
   end
@@ -232,13 +234,33 @@ describe ProductsController do
 
   describe "#update" do
     it "must return success if the product is found and updated" do
-      before_count = Product.count
+      # book = Book.first
+      #     book_data = {
+      #       book: {
+      #         title: "changed title",
+      #         author_id: book.author_id
+      #       }
+      #     }
+      #     book.update_attributes(book_data[:book])
+      #     book.must_be :valid?, "Test is invalid because the provided data will produce an invalid book"
+      #
+      #     patch book_path(book), params: book_data
+      #
+      #     must_respond_with :redirect
+      #     must_redirect_to book_path(book)
+      #
+      #     # Check that the change went through
+      #     book.reload
+      #     book.title.must_equal book_data[:book][:title]
+
+
+      # TODO: Figure out a way to use existing yml data and pass a changed attribute as a hash
 
       login(merchant)
 
       category_name = categories(:chocolate_category).name
 
-      # TODO: Figure out a way to use existing yml data and pass a changed attribute as a hash
+
       valid_product_data = {
         product: {
           name: "chocolate",
@@ -253,16 +275,23 @@ describe ProductsController do
         }
       }
 
+      product.update_attributes(valid_product_data[:product])
+      product.must_be :valid?
+
       patch product_path(product), params: valid_product_data
+
+      product.reload
+      product.description.must_equal product_data[:product][:description]
 
       must_respond_with :redirect
       must_redirect_to product_path(product)
 
-
       Product.count.must_equal before_count
+
     end
 
-    it "must return success and create a new category if the product is updated to a new category" do
+    it "must return success and created a new category if the product is updated with a new category" do
+      # TODO: Figure out a way to use existing yml data and pass a changed attribute as a hash
       before_count = Category.count
 
       login(merchant)
@@ -311,17 +340,24 @@ describe ProductsController do
     end
   end
 
-  # TODO: DOES NOT PASS
   describe "#destroy" do
     it "returns redirect to root_path if the product status was retired to false" do
       login(merchant)
-      @product = Product.last
-      delete product_path(@product)
+      # NOTE: Shallow copy vs Deep copy. Product.last in this case is a shallow copy not a deep copy. the first product call is the local version which makes a copy of the Active Record in the DB. After you save it, you need to call it again to make another local copy of the updated changes
+      product = Product.last
+      delete product_path(product)
+      #binding.pry
+      product = Product.last
+      product.current.must_equal false
+      must_respond_with :redirect
+      must_redirect_to root_path
+    end
 
-      @product.current.must_equal false
+    it "returns a flash message if the merchant is not logged in" do
+      delete product_path(product)
+      flash[:status].must_equal :failure
       must_respond_with :redirect
       must_redirect_to root_path
     end
   end
-
 end
