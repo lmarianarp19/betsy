@@ -9,16 +9,12 @@ Rails.application.routes.draw do
   # merchant/:id/products to show all merchant products?
 
   resources :products do
-    resources :reviews, only: [:index, :new, :create]
+    resources :reviews, only: [:new, :create]
   end
 
   resources :categories, only:[:index, :show, :new, :create]
-  #TODO: POSSIBLE NESTED ROUTES
-  #category/:id/products
 
   get 'categories/:id/products', to: 'products#index', as: 'products_categories'
-
-  get 'categories/:id/products/:id', to: 'products#show', as:'products_category'
 
   # TODO: # Check if we need index and show
   resources :payments, only: [:index, :new, :create, :show]
@@ -28,10 +24,7 @@ Rails.application.routes.draw do
     resources :payment, only: [:new, :create, :index]
   end
 
-  resources :reviews, only: [:new, :create, :index, :show]
   # TODO: #product/:id/reviews
-
-  # resources :reviews, only: [:new, :create, :index, :show]
 
   resources :sessions, only: [:login, :logout]
 
