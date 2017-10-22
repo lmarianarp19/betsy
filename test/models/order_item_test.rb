@@ -68,9 +68,6 @@ describe OrderItem do
     it "returns false if quanity is less than 1" do
       oi = OrderItem.new(order: first_order, product: third_product, quantity: 0)
       oi.valid?.must_equal false
-
-      oi2 = OrderItem.new(order: first_order, product: third_product, quantity: -1.0)
-      oi2.valid?.must_equal false
     end
 
     it "requires a product" do

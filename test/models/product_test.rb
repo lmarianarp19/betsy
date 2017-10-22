@@ -3,6 +3,7 @@ require "test_helper"
 describe Product do
   # products
   let(:first_product) {products :first_product}
+  let(:first_merchant) {merchants :first_merchant}
 
   describe "relations" do
     it "has a merchant" do
@@ -54,28 +55,43 @@ describe Product do
         product.errors.messages.must_include :name
       end
       it "requires the name to be unique" do
-        product1 = Product.new()
+        name = "NameMcNameFace"
+        product1 = Product.new(merchant: first_merchant, price: 1000, name: name)
         product1.save!
 
-        product2 = Product.new()
+        product2 = Product.new(merchant: first_merchant, price: 1000, name: name)
         product2.valid?.must_equal false
         product2.errors.messages.must_include :name
       end
     end
     describe "price" do
-      # it "requires a price" do
-      #
-      # end
-      # it "#price returns false is the price is not  number" do
-      #
-      # end
-      # it "#price returns false if the price is less than 1" do
-      #
-      # end
+      it "requires a price" do
+        product = Product.new
+        product.valid?.must_equal false
+        product.errors.messages.must_include :price
+      end
+
+      it "#price returns false is the price is not  number" do
+        product1 = Product.new(merchant: first_merchant, price: "one", name: "name")
+        product1.valid?.must_equal false
+
+        product2 = Product.new(merchant: first_merchant, price: [1], name: "name")
+        product2.valid?.must_equal false
+
+        product3 = Product.new(merchant: first_merchant, price: Date.today, name: "name")
+        product3.valid?.must_equal false
+      end
+      it "#price returns false if the price is less than 1" do
+        product1 = Product.new(merchant: first_merchant, price: 0, name: "name")
+        product1.valid?.must_equal false
+      end
+
     end
     describe "merchant" do
       it "requires a merchant" do
-
+        product = Product.new
+        product.valid?.must_equal false
+        product.errors.messages.must_include :merchant
       end
     end
 
