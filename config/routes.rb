@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   # merchant/:id/products to show all merchant products?
 
   resources :products do
-    resources :reviews, only: [:index, :new, :create]
+    resources :reviews, only: [:new, :create]
   end
 
   resources :categories, only:[:index, :show, :new, :create]
@@ -27,10 +27,7 @@ Rails.application.routes.draw do
     # get '/cart', to: 'cart#index'
   end
 
-  resources :reviews, only: [:new, :create, :index, :show]
   # TODO: #product/:id/reviews
-
-  # resources :reviews, only: [:new, :create, :index, :show]
 
   resources :sessions, only: [:login, :logout]
 
