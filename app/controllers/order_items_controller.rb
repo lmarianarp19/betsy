@@ -1,10 +1,16 @@
 class OrderItemsController < ApplicationController
 
   def create
-    @order_item = OrderItem.new(order_items_params)
-    @order_item.order #insert session[:order_id]
-    #TODO: Raise some kind of error here if it didnt save
+    @order = current_order
+    @item = @order.order_items.new(order_items_params)
+    @order.save
+    session[:order_id] = @order.id
+    redirect_to products_path
   end
+    # @order_item = OrderItem.new(order_items_params)
+    # @order_item.order #insert session[:order_id]
+    # #TODO: Raise some kind of error here if it didnt save
+  # end
 
   def update
     # @order = @current_order_id

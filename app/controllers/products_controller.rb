@@ -4,12 +4,15 @@ class ProductsController < ApplicationController
 
   def index
     # TODO: Should this be separated out ito its own method?
-    @category = Category.find_by(id: params[:id])
-    if @category
-      @products = @category.products
-    else
-      head :not_found
-    end
+    @products = Product.all
+    @order_item = current_order.order_items.new
+
+    # @category = Category.find_by(id: params[:id])
+    # if @category
+    #   @products = @category.products
+    # else
+    #   head :not_found
+    # end
   end
 
   def show

@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
+  resource :cart, only: [:show]
+  
   resources :categories, only:[:index, :show, :new, :create]
 
   get 'categories/:id/products', to: 'products#index', as: 'products_categories'
