@@ -44,6 +44,8 @@ class ApplicationController < ActionController::Base
     return result
   end
 
+
+
   private
   def find_merchant
     if session[:merchant_id]

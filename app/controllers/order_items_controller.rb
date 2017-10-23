@@ -5,7 +5,6 @@ class OrderItemsController < ApplicationController
   end
 
   def create
-    @order_item = OrderItem.new
     @order = current_order
     @item = @order.order_items.new(order_items_params)
     @order.save
@@ -54,9 +53,12 @@ class OrderItemsController < ApplicationController
 
   end
 
+
 private
 
   def order_items_params
     params.require(:order_item).permit(:product_id, :quantity)
   end
+
+
 end
