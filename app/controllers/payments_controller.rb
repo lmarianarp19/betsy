@@ -14,6 +14,7 @@ class PaymentsController < ApplicationController
       order =  Order.find_by(id: params[:order_id])
 
       #binding.pry
+
       order.status = "paid"
       order.save
       #@payment.order_id = order.id

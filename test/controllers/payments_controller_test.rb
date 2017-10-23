@@ -3,9 +3,14 @@ require "test_helper"
 describe PaymentsController do
   describe "new" do
     it "returns success when making a new payment" do
-      skip
-      #call session with order_id 
-      get new_order_payment_path
+      #call session with order_id
+      #@order_item = OrderItem.new
+      # @order = current_order
+      # #@item = @order.order_items.new(order_items_params)
+      # @order.save
+      # session[:order_id] = @order.id
+      #redirect_to products_path
+      get new_order_payment_path(:order_id)
       must_respond_with :success
     end
   end #describe new
