@@ -8,6 +8,26 @@ class ApplicationController < ActionController::Base
 
   before_action :find_merchant
 
+  helper :all
+
+# Need to to make method available to controllers and views
+  helper_method :current_order
+# formats a number into a currency string
+  # helper_method :number_to_currency
+
+# helper method to see if there is a session that is holding the order_id, if not, it will create it
+  def current_order
+    if session[:order_id]
+      Order.find(session[:order_id])
+    else
+      Order.new
+    end
+  end
+
+  # def currency
+  #   self.number_to_currency
+  # end
+
   protected
   def save_and_flash(model)
     result = model.save

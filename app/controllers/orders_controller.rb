@@ -42,20 +42,20 @@ class OrdersController < ApplicationController
   end
 
 
-    def destroy # CANCEL
-      if @order.destroy
-        flash[:status] = :success
-        flash[:message] = "Your order was canceled! May the force be with you!"
-      else
-        flash[:status] = :failure
-        flash[:message] = "Whoops! Your order could not be canceled!"
-        flash[:errors] = @order.errors.messages
-      end
-    end
-
-    private
-
-    def orders_params
-      params.require(:order).permit(:order_status, :payment_id)
+  def destroy # CANCEL
+    if @order.destroy
+      flash[:status] = :success
+      flash[:message] = "Your order was canceled! May the force be with you!"
+    else
+      flash[:status] = :failure
+      flash[:message] = "Whoops! Your order could not be canceled!"
+      flash[:errors] = @order.errors.messages
     end
   end
+
+  private
+
+  def orders_params
+    params.require(:order).permit(:order_status, :payment_id)
+  end
+end
