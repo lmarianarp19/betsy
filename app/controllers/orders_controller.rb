@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
 
   def index
     @merchant = Merchant.find_by(id: params[:merchant_id])
-    @orders = @merchant.orders
+    @orders = @merchant.orders.distinct
   end
 
   def show

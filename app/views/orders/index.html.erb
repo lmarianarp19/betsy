@@ -3,14 +3,22 @@
 <table>
   <thead>
     <tr>
-      <th>Username</th>
-      <th width="100">Votes</th>
-      <th width="200">Joined</th>
+      <th>Order_ID</th>
+      <th>Order Placed</th>
+      <th>Order Status</th>
+      <th>Merchant Order Total</th>
+      <th>Shipping Info</th>
     </tr>
   </thead>
+  <tbody>
+    <%= @orders.each do |order| %>
+      <tr>
+        <td><%= order.id %></td>
+        <td><%= order.payment.created_at %></td>
+        <td>subtotal here</td>
+        <td><%= order.status %></td>
+        <td>link to payments show here</td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
-
-
-
-<%= @orders.each do |order| %>
-<% end %>
