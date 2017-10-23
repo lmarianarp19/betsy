@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   resources :merchants, only: [:show]
 
+  get '/merchants/:merchant_id/orders', to: 'orders#index', as: 'merchant_orders'
+
   #TODO: POSSIBLE NESTED ROUTES
   # merchant/:id/products to show all merchant products?
 
@@ -21,9 +23,17 @@ Rails.application.routes.draw do
   get 'categories/:id/products', to: 'products#index', as: 'products_categories'
 
   # TODO: # Check if we need index and show
-  resources :payments, only: [:index, :new, :create, :show]
+  resources :payments, only: [:index, :show]
+#, only: [:show, :create, :update]
+
 
   resources :orders, only: [:show, :create, :update]
+
+  resources :orders do
+#    resources :payments, only: [:new, :create, :index]
+    resources :payments, only: [:index, :new, :create]
+  end
+
 
   # TODO: #product/:id/reviews
   resources :sessions, only: [:login, :logout]
