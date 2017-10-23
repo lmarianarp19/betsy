@@ -18,6 +18,15 @@ class OrderItemsController < ApplicationController
   # end
 
   def update
+    @order_item = OrderItem.find_by(id: params[:id])
+    @order_item.update_attributes(order_items_params)
+    if @order_item.save
+      redirect_to cart_path
+    else
+      flash[:status] = :failure
+      flash[:message] = "Unable to change quantity"
+    end
+
     # @order = @current_order_id
     # @order_item = @order.order_items.find(params[:id])
     # @order_id.update_attributes(order_items_params)
