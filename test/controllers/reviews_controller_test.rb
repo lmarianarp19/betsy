@@ -9,8 +9,6 @@ describe ReviewsController do
     end
   end
 
-  #TODO: Think of a false case for new
-
   describe "create" do
     it "returns success when saving a review" do
       before_count = Review.count

@@ -1,5 +1,5 @@
 <section>
-  <%= form_for :payment, :url => {:action => "create", :id => @payment} do |f| %>
+  <%= form_for :payment, :url => {:action => "create", :id => @order} do |f| %>
     <%= f.label :email %>
     <%= f.email_field :email %>
 

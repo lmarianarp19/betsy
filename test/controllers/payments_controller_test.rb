@@ -3,7 +3,9 @@ require "test_helper"
 describe PaymentsController do
   describe "new" do
     it "returns success when making a new payment" do
-      get new_payment_path
+      skip
+      #call session with order_id 
+      get new_order_payment_path
       must_respond_with :success
     end
   end #describe new
@@ -25,10 +27,11 @@ describe PaymentsController do
         }
       }
 
-      Payment.new(payment_data[:payment]).must_be :valid?
-
-      post payments_path, params: payment_data
-      #must_respond_with :redirect
+      payment = Payment.new(payment_data[:payment])
+      payment.must_be :valid?
+      #binding.pry
+      post order_payments_path(payment.order_id), params: payment_data
+      must_respond_with :redirect
       #  must_redirect_to product_path(review_data[:review][:product_id])
 
       # must_redirect_to product_path(review_data[:review][:product_id])

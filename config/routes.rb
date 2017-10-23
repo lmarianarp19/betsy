@@ -17,11 +17,12 @@ Rails.application.routes.draw do
   get 'categories/:id/products', to: 'products#index', as: 'products_categories'
 
   # TODO: # Check if we need index and show
-  resources :payments, only: [:index, :new, :create, :show]
+  resources :payments, only: [:index, :show]
 #, only: [:show, :create, :update]
 
   resources :orders do
-    resources :payment, only: [:new, :create, :index]
+#    resources :payments, only: [:new, :create, :index]
+    resources :payments, only: [:index, :new, :create]
   end
 
   # TODO: #product/:id/reviews

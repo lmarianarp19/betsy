@@ -6,20 +6,22 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = Payment.new(payment_params)
+    @payment.order_id = params[:order_id]
 
     if @payment.save
 
       #TODO: Cannot save the order id as a session until the order is created!
       order =  Order.find_by(id: params[:order_id])
 
-      binding.pry
+      #binding.pry
       order.status = "paid"
       order.save
-      @payment.order_id = order.id
+      #@payment.order_id = order.id
       flash[:status] = :success
       flash[:message] = "success payment"
-      redirect_to order_path(@payment.order_id)
-      #TODO redirect to page with the order
+      redirect_to root_path
+      #redirect_to order_path(@payment.order_id)
+      #TODO redirect to page with the order view
     else
       flash[:status] = :failure
       flash[:message] = "Whoops! Something was wrong when placing your order!"
@@ -31,7 +33,7 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(:email, :mailing_address, :cc_name, :cc_expiration, :cc_number, :cc_ccv, :billing_zip, :order_id)
+    params.require(:payment).permit(:email, :mailing_address, :cc_name, :cc_expiration, :cc_number, :cc_ccv, :billing_zip)
   end
 
 end
