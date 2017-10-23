@@ -50,7 +50,7 @@
       <% else %>
       <%= link_to "Log In", "/auth/github", class: "button float-right" %>
       <% end %>
-      <%= link_to "Cart",  class: "button float-left" %>
+      <%= link_to "Cart", order_path(@current_order), class: "button float-left" %>
     </ul>
   </div>
   <!-- MAIN CONTENT -->

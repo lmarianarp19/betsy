@@ -27,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :sessions, only: [:login, :logout]
 
-  resources :orderitems, only: [:create, :update, :destroy]
+  resources :order_items, only: [:create, :update, :destroy]
 
   get '/auth/github', as: 'github'
   get '/auth/:provider/callback', to: 'sessions#login', as: "auth_callback"

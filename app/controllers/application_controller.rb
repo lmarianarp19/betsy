@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
 
   before_action :find_merchant
 
+  before_action :current_buyer
+
   protected
   def save_and_flash(model)
     result = model.save
@@ -25,9 +27,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
   def find_merchant
     if session[:merchant_id]
       @login_merchant = Merchant.find_by(id: session[:merchant_id])
+    end
+  end
+
+  def current_buyer
+    if session[:order_id]
+      @current_order = Order.find_by(id: session[:order_id])
     end
   end
 

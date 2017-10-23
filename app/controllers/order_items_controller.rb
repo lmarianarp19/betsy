@@ -1,10 +1,58 @@
 class OrderItemsController < ApplicationController
 
   def create
-    @order_item = OrderItem.new(order_items_params)
-    @order_item.order #insert session[:order_id]
-    #TODO: Raise some kind of error here if it didnt save
+    if @current_order.nil?
+      order = Order.create_new_order # Create a new order
+      session[:order_id] = order.id
+      @order_item = OrderItem.new(order_items_params)
+      @order_item.order_id = order.id
+      save_and_flash(@order_item)
+      order.order_items << @order_item
+      save_and_flash(order)
+      flash[:status] = :success
+      flash[:message] = "Added #{@order_item.product.name} to the cart!"
+      redirect_to order_path(order)
+    elsif @current_order
+      @order_item = OrderItem.new(order_items_params)
+      @order_item.order_id = @current_order
+      save_and_flash(@order_item)
+      @current_order.order_items << @order_item
+      save_and_flash(@current_order)
+      flash[:status] = :success
+      flash[:message] = "Added #{@order_item.product.name} to the cart!"
+      redirect_to order_path(order)
+    else
+      flash[:status] = :failure
+      flash[:message] = "Could not add item to cart!"
+    end
   end
+
+
+
+
+
+  # if @current_order.nil? #TODO: Merchant needs to be able to buy things
+  #   order = Order.create_new_order # Create a new order
+  #   session[:order_id] = order.id
+  #
+  #   # TODO: HOW THE EFF DO WE PASS IN THE PRODUCT ID??
+  #   @order_item = OrderItem.new(quantity: 1, order_id: session[:order_id], product_id: params[:product][:id])
+  #
+  #   save_and_flash(@order_item)
+  #   order.order_items << @order_item
+  # elsif @current_order # If there is already an order going
+  #
+  #   @order_item = OrderItem.new(quantity: 1, order_id: session[:order_id], product_id: params[:product][:id])
+  #
+  #   save_and_flash(@order_item)
+  #   @current_order.order_items << @order_item
+  #   save_and_flash(@current_order)
+  # else
+  #   flash[:status] = :failure
+  #   flash[:message] = "Could not add item to cart!"
+  # end
+  # redirect_to product_path(params[:product][:id])
+
 
   def update
     # @order = @current_order_id
@@ -27,9 +75,9 @@ class OrderItemsController < ApplicationController
 
   end
 
-private
+  private
 
   def order_items_params
-    params.require(:order_item).permit(:product_id, :quantity, :order_id)
+    params.require(:order_item).permit(:product_id, :quantity)
   end
 end
