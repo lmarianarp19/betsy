@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
   before_action :current_buyer
 
   protected
+  
   def save_and_flash(model)
     result = model.save
     #binding.pry

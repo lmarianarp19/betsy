@@ -5,8 +5,6 @@ describe OrderItemsController do
   # TODO: REFACTOR PRODUCT DATA
   describe "create" do
     it "must add a new Order item" do
-      before_count = Order.count
-      before_item_count = OrderItem.count
       
     end
 

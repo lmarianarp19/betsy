@@ -1,8 +1,8 @@
 class OrderItemsController < ApplicationController
 
   def create
-    if @current_order.nil?
-      order = Order.create_new_order # Create a new order
+    if @current_order.nil? # Create a new order
+      order = Order.create_new_order
       session[:order_id] = order.id
       @order_item = OrderItem.new(order_items_params)
       @order_item.order_id = order.id
