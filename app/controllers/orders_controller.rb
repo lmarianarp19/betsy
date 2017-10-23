@@ -1,9 +1,10 @@
 class OrdersController < ApplicationController
 
   def index
-
+    @merchant = Merchant.find_by(id: params[:merchant_id])
+    @orders = @merchant.orders
   end
-  
+
   def show
     @order = Order.find_by(id: params[:id])
     # render_404 unless @order
