@@ -10,12 +10,13 @@ Rails.application.routes.draw do
 
   resources :products do
     resources :reviews, only: [:new, :create]
+    resources :categories, only:[:index, :show, :new, :create]
+
   end
 
   #add resource not resources because a customer will only have one shopping cart and doesn't create an index route
   resource :cart, only: [:show]
 
-  resources :categories, only:[:index, :show, :new, :create]
 
   get 'categories/:id/products', to: 'products#index', as: 'products_categories'
 
