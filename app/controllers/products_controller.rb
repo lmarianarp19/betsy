@@ -2,12 +2,12 @@ class ProductsController < ApplicationController
 
   skip_before_action :find_merchant, only: [:index, :show]
 
+###### TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING SEE APPLICATION.HTML.ERB%>
+
   def index
-    # TODO: In case we want an all product functionality
-    # @products = Product.all
-    @order_item = current_order.order_items.new
     @category = Category.find_by(id: params[:id])
     if @category
+      @order_item = current_order.order_items.new
       @products = @category.products
     else
       head :not_found

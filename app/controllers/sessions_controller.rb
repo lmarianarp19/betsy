@@ -5,9 +5,8 @@ class SessionsController < ApplicationController
 
   def login
     auth_hash = request.env['omniauth.auth']
-    if auth_hash['uid']
-      binding.pry
 
+    if auth_hash['uid']
       merchant = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
       if merchant.nil? # If merchant was not previously logged in
         merchant = Merchant.from_auth_hash(params[:provider], auth_hash)
@@ -22,7 +21,7 @@ class SessionsController < ApplicationController
       #will log in the user
     else
       flash[:status] = :failure
-      flash[:message] = "Could not create user from OAuth processes"
+      flash[:message] = "Failed to create a new user"
       #TODO: Not sure if the root_path is the correct reroute if an oath uid is not provided
     end
 
