@@ -1,4 +1,7 @@
-<h2>show each merchants products</h2>
+<h2><%= @merchant.username%>'s Products</h2>
+<% if @access %>
+  <%= link_to "Add Product", new_product_path, class: "button"%>
+<% end %>
 <table width="90%" align="center">
   <thead>
     <tr>
