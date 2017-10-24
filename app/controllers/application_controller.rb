@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   # helper_method :number_to_currency
 
 # helper method to see if there is a session that is holding the order_id, if not, it will create it
+
   def current_order
     if session[:order_id]
       Order.find(session[:order_id])

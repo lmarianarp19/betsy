@@ -23,7 +23,8 @@
         <td><%= product.order_items[0].quantity * product.price %></td>
         <% if product.order_items[0].shipped == false %>
           <td>
-            <%= link_to "Mark as Shipped" %>
+            <%= link_to "Ship", order_path(order.id), method: :patch %>
+            <%# link_to "Mark as Shipped" %>
           </td>
         <% else %>
           <td>
