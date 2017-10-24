@@ -151,6 +151,7 @@ d1 = Date.new(2017,5,8)
 payment_failures = []
 CSV.foreach(PAYMENT_FILE, :headers => true) do |row|
   payment = Payment.new
+  payment.name = row['name']
   payment.email = row['email']
   payment.mailing_address = row['mailing_address']
   payment.cc_name = row['cc_name']

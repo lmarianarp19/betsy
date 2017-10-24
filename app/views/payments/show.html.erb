@@ -1,19 +1,18 @@
 <h2>Shipping Information </h2>
 <hr />
-<h3>Bianca</h3>
 
-<table class="hover">
+<table align="center" class="hover">
   <tbody>
-    <tr>
-      <!-- <th class="table-order" rowspan="100%">User Info</th> -->
-    <tr>
-      <th>EMAIL</td>
-      <th>MAILING ADDRESS</th>
-      <th>LAST FOUR OF CREDIT CARD</th>
-      <th>CREDIT CARD EXPIRATION</th>
+    <tr class="row large-up-1">
+      <th>Name</td>
+      <th>Email</td>
+      <th>Mailing Address</th>
+      <th>Last four of Credit Card</th>
+      <th>Credit Card Expiration</th>
     </tr>
     <% @payment.each do |detail| %>
-      <tr class="subtable">
+      <tr class="row large-up-1">
+        <td><%= detail.name %></td>
         <td><%= detail.email %></td>
         <td><%= detail.mailing_address %></td>
         <td><%= detail.cc_number.split(//).last(4).join %></td>
@@ -22,7 +21,3 @@
       <% end %>
   </tbody>
 </table>
-
-
-
-Name

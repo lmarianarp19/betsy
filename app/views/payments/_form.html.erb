@@ -1,5 +1,8 @@
 <section>
   <%= form_for :payment, :url => {:action => "create", :id => @order} do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+
     <%= f.label :email %>
     <%= f.email_field :email %>
 
@@ -12,7 +15,7 @@
     <%= f.label :cc_expiration, "Expiration Date" %>
     <%= f.date_select :cc_expiration, start_year: Date.today.year, use_month_numbers: true, discard_day: true %>
 
-    <%= f.label :cc_number, "Creadit Card Number" %>
+    <%= f.label :cc_number, "Credit Card Number" %>
     <%= f.number_field :cc_number %>
 
     <%= f.label :cc_ccv, "Credit Card CCV" %>
