@@ -1,9 +1,15 @@
 class ReviewsController < ApplicationController
 
-  def new
-    @review = Review.new
+  def new # Show the form for billing info
+    product =  Product.find_by(id: params[:product_id])
+    if product
+      @review = Review.new
+      @review.product_id = params[:product_id]
+    else
+      # render new, status: not_found
+      head :not_found
+    end
   end
-
   def create # REFACTOR FLASH MESSAGES IF NEEDED
     @review = Review.new(reviews_params)
     @review.product_id = params[:product_id]
