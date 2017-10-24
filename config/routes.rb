@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#login', as: "auth_callback"
   post '/logout', to: 'sessions#logout', as: 'logout'
 
+  patch '/order_items/:id/ship', to: 'order_items#ship', as:'ship_order_item' 
 
   # get "/users", to: "users#index", as: "users"
   # get "/users/new", to: "users#new", as: "new_user"

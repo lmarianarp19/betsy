@@ -16,15 +16,15 @@
       <th>TOTAL</th>
       <th>SHIPPED</th>
     </tr>
-      <% order.products.each do |product| %>
+      <% order.order_items.each do |order_item| %>
+        <% product = order_item.product %>
       <tr class="subtable">
         <td><%= link_to product.name, product_path(product)%></td>
-        <td><%= product.order_items[0].quantity %></td>
-        <td><%= number_to_currency(product.order_items[0].quantity * product.price) %></td>
-        <% if product.order_items[0].shipped == false %>
+        <td><%= order_item.quantity %></td>
+        <td><%= number_to_currency(order_item.quantity * product.price) %></td>
+        <% if order_item.shipped == false %>
           <td>
-            <%= link_to "Ship", order_path(order.id), method: :patch %>
-            <%# link_to "Mark as Shipped" %>
+            <%= link_to "Mark as Shipped", ship_order_item_path(order_item), method: :patch %>
           </td>
         <% else %>
           <td>

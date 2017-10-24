@@ -53,6 +53,11 @@ class OrderItemsController < ApplicationController
 
   end
 
+  def ship
+    @order_item = OrderItem.find_by(id: params[:id])
+    #@order_item.update_attributes(order_items_params)
+
+  end
 
 private
 
