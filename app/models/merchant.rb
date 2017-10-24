@@ -19,6 +19,8 @@ class Merchant < ApplicationRecord
   # validates :uid, presence: true
   # validates :provider, presence: true
 
+  #TODO: merchant is not getting the username
+
   def self.from_auth_hash(provider, auth_hash)
     merchant = new
     merchant.provider = provider
