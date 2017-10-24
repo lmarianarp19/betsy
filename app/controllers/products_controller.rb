@@ -4,10 +4,10 @@ class ProductsController < ApplicationController
 
 ###### TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING SEE APPLICATION.HTML.ERB%>
 
-  def index
+  def index # For route - category/:id/products
     @category = Category.find_by(id: params[:id])
     if @category
-      @order_item = current_order.order_items.new
+      @order_item = OrderItem.new # Need a new order_item for the order_item form
       @products = @category.products
     else
       head :not_found
