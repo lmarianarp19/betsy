@@ -4,4 +4,10 @@ class Order < ApplicationRecord
   has_one :payment
 
   validates :status, presence: true
+
+  #TODO test calculate total
+
+  def calculate_total
+    self.order_items.collect { |item| item.product.price * item.quantity}.sum 
+  end
 end

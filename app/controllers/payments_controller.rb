@@ -1,7 +1,14 @@
 class PaymentsController < ApplicationController
 
   def new # Show the form for billing info
-    @payment = Payment.new
+    order =  Order.find_by(id: params[:order_id])
+    if order
+      @payment = Payment.new
+      @payment.order_id = params[:order_id]
+    else
+      # render new, status: not_found
+      head :not_found
+    end
   end
 
   def create
@@ -14,6 +21,7 @@ class PaymentsController < ApplicationController
       order =  Order.find_by(id: params[:order_id])
 
       #binding.pry
+
       order.status = "paid"
       order.save
       #@payment.order_id = order.id
@@ -26,6 +34,7 @@ class PaymentsController < ApplicationController
       flash[:status] = :failure
       flash[:message] = "Whoops! Something was wrong when placing your order!"
       render :new, status: :bad_request
+      #TODO to put specific messages for errors i.e. Invalid Credit Card number...
     end
   end
 
