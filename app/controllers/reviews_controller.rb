@@ -10,6 +10,7 @@ class ReviewsController < ApplicationController
       head :not_found
     end
   end
+  
   def create # REFACTOR FLASH MESSAGES IF NEEDED
     @review = Review.new(reviews_params)
     @review.product_id = params[:product_id]

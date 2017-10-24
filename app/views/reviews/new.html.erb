@@ -1,15 +1,29 @@
-<h2>Write a review!</h2>
+<main class="row align-center">
 
-<section>
-  <%= form_for :review, :url => {:action => "create", :id => @product} do |f| %>
+  <%# TODO: NEED TO RESTYLE TEMPLATE WILL NEED TO THE BE THE SAME FOR ALL PAGES %>
+
+  <section>
+
+    <header class="review-header">
+      <div>
+        <h2>Write a review!</h2>
+      </div>
+    </header>
+
+    <div class="small-12 large-4 large-centered columns border">
+      <%= form_for :review, :url => {:action => "create", :id => @product} do |f| %>
+
+        <%= f.label :review %>
+        <%= f.text_field :review, class: "more-height" %>
+
+        <%= f.label :rating %>
+        <%= f.select :rating, options_for_select(1.. 5) %>
+
+        <%= f.submit class: "button" %>
+      <% end %>
+    </div>
+
+  </section>
 
 
-    <%= f.label :review %>
-    <%= f.text_field :review %>
-
-    <%= f.label :rating %>
-    <%= f.select :rating, options_for_select(1.. 5) %>
-
-    <%= f.submit class: "button" %>
-  <% end %>
-</section>
+</main>
