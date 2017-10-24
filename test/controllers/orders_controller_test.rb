@@ -1,6 +1,10 @@
 require "test_helper"
 
 describe OrdersController do
+  describe "index" do
+    
+  end
+
   describe "show" do
     it "succeeds for an order that exists" do
         order_id = Order.first.id
