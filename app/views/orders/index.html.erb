@@ -1,37 +1,35 @@
 <h1>Show <%= @merchant.username %> orders</h1>
 
 <% @orders.each do |order| %>
-<table>
-  <thead>
-    <tr>
-      <th>Order_ID</th>
-      <th>Order Placed</th>
-      <th>Order Status</th>
-      <th>Merchant Order Total</th>
-      <th>Shipping Info</th>
-    </tr>
-  </thead>
+<table class="unstriped hover">
   <tbody>
     <tr>
-      <td><%= order.id %></td>
-      <td><%= order.payment.created_at %></td>
-      <td>subtotal here</td>
-      <td><%= order.status %></td>
-      <td>link to payments show here</td>
+      <th class="table-order" rowspan="100%">Order ID: <%= order.id %></th>
+      <th>Order Placed: <%= order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
+      <th>Order Status: <%= order.status %></th>
+      <th>Order Total: $INSERT MONEY</th>
+      <th><%= link_to "Shipping Info" %></th>
     </tr>
     <tr>
-      <th colspan="2">products</td>
-      <th>quantity</th>
-      <th>subtotal</th>
-      <th>shipped</th>
+      <th>PRODUCTS</td>
+      <th>QUANTITY</th>
+      <th>TOTAL</th>
+      <th>SHIPPED</th>
     </tr>
-
       <% order.products.each do |product| %>
-      <tr>
-        <td colspan="2"><%= product.name %></td>
+      <tr class="subtable">
+        <td><%= product.name %></td>
         <td><%= product.order_items[0].quantity %></td>
         <td><%= product.order_items[0].quantity * product.price %></td>
-        <td><%= product.order_items[0].shipped %></td>
+        <% if product.order_items[0].shipped == false %>
+          <td>
+            <%= link_to "Mark as Shipped" %>
+          </td>
+        <% else %>
+          <td>
+            Item Sent!
+          </td>
+        <% end %>
       </tr>
       <% end %>
 
