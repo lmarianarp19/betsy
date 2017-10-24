@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
   protected
   def save_and_flash(model)
     result = model.save
-    #binding.pry
     if result
       flash[:status] = :success
       flash[:message] = "Successfully saved #{model.class} #{model.id}"
