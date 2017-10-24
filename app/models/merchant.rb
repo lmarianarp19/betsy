@@ -4,6 +4,8 @@ class Merchant < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   # relationships
   has_many :products, dependent: :destroy
+  has_many :order_items, through: :products
+  has_many :orders, through: :order_items
 
   # def self.from_auth_hash(provider, auth_hash)
   #   merchant = Merchant.new
