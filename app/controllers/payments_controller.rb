@@ -15,17 +15,22 @@ class PaymentsController < ApplicationController
     @payment = Payment.new(payment_params)
     @payment.order_id = params[:order_id]
 
-    if @payment.save
 
-      #TODO: Cannot save the order id as a session until the order is created!
+    if @payment.save
       order =  Order.find_by(id: params[:order_id])
 
-      #binding.pry
+      order.products.each do |item|
+        order.order_items.each do |order_item|
+          item.inventory -= order_item.quantity
+          item.save
+        end
+      end
 
       order.status = "paid"
       order.save
-      #@payment.order_id = order.id
-      session[:order_id]= nil 
+
+      session[:order_id]= nil
+
       flash[:status] = :success
       flash[:message] = "success payment"
       redirect_to root_path
