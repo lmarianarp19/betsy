@@ -20,7 +20,7 @@
       <tr class="subtable">
         <td><%= link_to product.name, product_path(product)%></td>
         <td><%= product.order_items[0].quantity %></td>
-        <td><%= product.order_items[0].quantity * product.price %></td>
+        <td><%= number_to_currency(product.order_items[0].quantity * product.price) %></td>
         <% if product.order_items[0].shipped == false %>
           <td>
             <%= link_to "Mark as Shipped" %>
