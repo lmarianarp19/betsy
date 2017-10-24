@@ -20,19 +20,21 @@
       <td>link to payments show here</td>
     </tr>
     <tr>
-      <td>products</td>
-      <td>quantity</td>
-      <td>subtotal</td>
-      <td>shipped</td>
+      <th colspan="2">products</td>
+      <th>quantity</th>
+      <th>subtotal</th>
+      <th>shipped</th>
     </tr>
-    <tr rowspan = >
+
       <% order.products.each do |product| %>
-        <td><%= product.name %></td>
+      <tr>
+        <td colspan="2"><%= product.name %></td>
         <td><%= product.order_items[0].quantity %></td>
-        <td></td>
-        <td></td>
+        <td><%= product.order_items[0].quantity * product.price %></td>
+        <td><%= product.order_items[0].shipped %></td>
+      </tr>
       <% end %>
-    </tr>
+
 
   </tbody>
 </table>
