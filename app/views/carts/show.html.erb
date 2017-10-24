@@ -12,6 +12,7 @@
   <% end %>
 
 <p>Your Total: <%= number_to_currency current_order.calculate_total %></p>
+<%= link_to "Checkout", "/orders/#{current_order.id}/payments/new", class: "button" %> 
 <% else %>
 <p>Your shopping cart is empty.</p>
 <% end %>

@@ -25,6 +25,7 @@ class PaymentsController < ApplicationController
       order.status = "paid"
       order.save
       #@payment.order_id = order.id
+      session[:order_id]= nil 
       flash[:status] = :success
       flash[:message] = "success payment"
       redirect_to root_path

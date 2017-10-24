@@ -9,8 +9,12 @@
     <%= f.label :cc_name, "Name on Credit Card" %>
     <%= f.text_field :cc_name %>
 
+    <%# f.label :cc_expiration, "Expiration Date" %>
+    <%# f.text_field :cc_expiration %>
     <%= f.label :cc_expiration, "Expiration Date" %>
-    <%= f.text_field :cc_expiration %>
+    <%= f.date_select :cc_expiration, start_year: Date.today.year, use_month_numbers: true, discard_day: true %>
+    <%#prompt:{ month:'Select month', year:'Select year'}%>
+
 
     <%= f.label :cc_number, "Creadit Card Number" %>
     <%= f.number_field :cc_number %>
