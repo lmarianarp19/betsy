@@ -25,7 +25,6 @@
 
 body {
   // font-family: 'Pathway Gothic One', sans-serif;
-  // background: url('https://image.freepik.com/free-vector/grey-linen-texture-background_1053-253.jpg');*/
 }
 h1 a {
   font-family: 'Pathway Gothic One', sans-serif;
@@ -210,5 +209,9 @@ table {
   width: 65%;
   .table-order {
     background-color: yellow;
+  }
+
+  a {
+    color: blue;
   }
 }
