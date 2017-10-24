@@ -1,6 +1,7 @@
 class Payment < ApplicationRecord
   has_one :order
 
+  validates :name, presence: {message: "Must include a name"}
   validates :email, presence: {message: "Must have an email"}
   validates :mailing_address, presence: {message: "Must have a mailing address"}
   validates :cc_name, presence: {message: "Must have a credit card name"}
