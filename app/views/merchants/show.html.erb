@@ -1,0 +1,38 @@
+<h2><%= @login_merchant.username %></h2>
+
+<%= link_to "Manage Orders", merchant_orders_path(@login_merchant), class: "button" %>
+<p class="button">
+  <%= link_to "Manage Products"%>
+</p>
+
+<table align="center">
+  <thead>
+    <tr>
+      <th colspan="100%">
+        Summary
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>&nbsp</td>
+      <td>Revenue</td>
+      <td>Orders</td>
+    </tr>
+    <tr>
+      <td>Unfulfilled Orders</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Completed Orders</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Total</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
