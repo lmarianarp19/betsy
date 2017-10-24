@@ -62,9 +62,21 @@
         <%###############  LOGIN NAVIGATION #################### %>
 
         <% if @login_merchant %>
-          <li class="padding">
-            <%= link_to "Merchant #{@login_merchant.username}", merchant_path(@login_merchant), class: "button" %>
-          </li>
+
+        <div class="dropdown">
+          <a><li class="padding">
+            <%= link_to "Merchant #{@login_merchant.username}", merchant_path(@login_merchant), class: "button dropbtn padding" %>
+          </li></a>
+          <div class="dropdown-content">
+            <%= link_to "Manage Orders", merchant_orders_path(@login_merchant.id)%>
+            <%= link_to "Manage Products" %>
+            <%= link_to "Dashboard", merchant_path(@login_merchant.id)%>
+          </div>
+        </div>
+
+
+
+
           <li class="padding">
             <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
           </li>
