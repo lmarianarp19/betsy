@@ -9,7 +9,7 @@
       <img src=<%= "#{@product.photo_url}"%> />
     </div>
     <section>
-      <p>Price: <%= number_to_currency(@product.price) %><br />Sold by: <%= @product.merchant.username %></p>
+      <p>Price: <%= number_to_currency(@product.price) %><br />Sold by: <%= link_to  @product.merchant.username, merchant_products_path(@product.merchant.id) %></p>
 
       <!--DESCRIPTION  -->
       <% if @product.description %>

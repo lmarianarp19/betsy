@@ -69,7 +69,7 @@
           </li></a>
           <div class="dropdown-content">
             <%= link_to "Manage Orders", merchant_orders_path(@login_merchant.id)%>
-            <%= link_to "Manage Products" %>
+            <%= link_to "Manage Products", merchant_products_path(@login_merchant.id) %>
             <%= link_to "Dashboard", merchant_path(@login_merchant.id)%>
           </div>
         </div>

@@ -17,6 +17,7 @@ class ApplicationController < ActionController::Base
   # helper_method :number_to_currency
 
 # helper method to see if there is a session that is holding the order_id, if not, it will create it
+
   def current_order
     if session[:order_id]
       Order.find(session[:order_id])
@@ -46,7 +47,6 @@ class ApplicationController < ActionController::Base
 
 
 
-
 private
   def find_merchant
     if session[:merchant_id]
@@ -54,10 +54,12 @@ private
     end
   end
 
-  def restrict_merchant(id)
-    @merchant = Merchant.find_by(id: params[id])
+
+  def restrict_merchant(expected_merchant_id)
+    @merchant = Merchant.find_by(id: expected_merchant_id)
+    #binding.pry
+
     if @login_merchant.id == @merchant.id
-      @orders = @merchant.orders.distinct
       unless @merchant
         head :not_found
       end

@@ -21,18 +21,18 @@
     </tr>
     <tr>
       <td>Unfulfilled Orders</td>
-      <td></td>
-      <td></td>
+      <td><%= @unfufilled%></td>
+      <td><%= @unfufilled.count%></td>
     </tr>
     <tr>
       <td>Completed Orders</td>
-      <td></td>
-      <td></td>
+      <td><%= @complete.calculate_total%></td>
+      <td><%= @complete.count%></td>
     </tr>
     <tr>
       <td>Total</td>
       <td></td>
-      <td></td>
+      <td><%= @orders.count%></td>
     </tr>
   </tbody>
 </table>
