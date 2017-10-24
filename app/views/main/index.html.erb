@@ -1,17 +1,25 @@
-<main>
+<main class="row">
   <section>
-    
+
     <header>
       <h2>Popular Items</h2>
     </header>
 
-    <div class="small">
-      <% product = @products.sample %>
-      <%= link_to image_tag(product.photo_url) %>
-      <p>
-        <%= product.price %>
-      </p>
-    </div>
+      <% if @products.any? %>
+
+        <div>
+          <% product = @products.sample %>
+          <%= link_to image_tag(product.photo_url), class:"thumbnail" %>
+        </div>
+        <p>
+          <%= product.price %>
+        </p>
+
+      <% else %>
+
+          <h1>Products coming soon!</h1>
+
+      <% end %>
 
   </section>
 </main>

@@ -13,24 +13,40 @@
 
 <body>
 
-  <!-- DESKTOP NAVIGATION -->
+  <%###############  CATEGORIES NAVIGATION #################### %>
+
+  <%# TODO: Make this into columns based on screen size if time %>
 
   <header class="fixed">
-    <nav class="top-bar" data-topbar role="navigation">
+    <nav data-topbar role="navigation">
       <ul class="menu">
-        <% category = Category.all %>
-        <% category[1..9].each do |category| %>
-        <li>
-          <%= link_to category.name, products_categories_path(category) %>
-        </li>
+
+        <% if Category.any? %>
+
+          <% category = Category.all %>
+          <% category[1..9].each do |category| %>
+          <li class="padding">
+            <%= link_to category.name, products_categories_path(category) %>
+          </li>
+          <% end %>
+
+          <div class="dropdown">
+            <a><li class="dropbtn padding">Miscellaneous</li></a>
+            <div class="dropdown-content">
+              <% category[10..category.length].each do |category| %>
+                <%= link_to category.name, products_categories_path(category), class: "inside-dropdown button" %>
+              <% end %>
+            </div>
+          </div>
+
         <% end %>
 
-        <!-- SEARCH BAR -->
+        <%###############  SEARCH BAR #################### %>
 
-        <li class="has-form">
+        <li class="has-form padding">
           <div class="row collapse">
             <div class="large-8 small-9 columns">
-              <input type="text" placeholder="Find Stuff">
+              <input type="text" placeholder="Use the Force">
             </div>
             <div class="large-4 small-3 columns">
               <a href="#" class="alert button expand">Search</a>
@@ -38,22 +54,22 @@
           </div>
         </li>
 
-        <!-- LOGIN NAVIGATION -->
+        <%###############  LOGIN NAVIGATION #################### %>
 
         <% if @login_merchant %>
-          <li>
+          <li class="padding">
             <%= link_to "Merchant #{@login_merchant.username}", merchant_path(@login_merchant), class: "button" %>
           </li>
-          <li>
+          <li class="padding">
             <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
           </li>
 
         <% else %>
-          <li>
+          <li class="padding">
             <%= link_to "Log In", github_path, class: "button float-right" %>
           </li>
         <% end %>
-        <li>
+        <li class="padding">
           <%= link_to "Cart", cart_path, class: "button float-left" %>
         </li>
       </ul>
@@ -61,35 +77,7 @@
     </nav>
   </header>
 
-
-
-  <!-- <div class="menu-centered">
-    <ul class="menu">
-      <% category = Category.all %>
-      <% category[1..9].each do |category| %>
-      <li>
-        <%= link_to category.name, products_categories_path(category), class: "button" %>
-      </li>
-      <% end %> -->
-
-
-
-
-
-
-    </ul>
-  </div>
-      <!-- <li><%= link_to "Clothes", products_categories_path(id: 4), class: "button" %></li>
-      <li><%= link_to "Accessories", products_categories_path(id: 8), class: "button" %></li>
-      <li><%= link_to "Jedi", products_categories_path(id: 1), class: "button" %></li>
-      <li><%= link_to "Sith", products_categories_path(id: 2), class: "button" %></li>
-      <li><%= link_to "Pets", products_categories_path(id: 19), class: "button" %></li>
-      <li><%= link_to "Miscellaneous", class: "button" %></li> -->
-
-
-
-
-  <!-- HERO SECTION -->
+  <%###############  HERO HEADER #################### %>
 
   <section class="hero">
     <div class="hero-section-text">
@@ -99,50 +87,41 @@
     </div>
   </section>
 
-  <!-- LOGIN NAVIGATION -->
-  <!-- <div class="menu-centered"> -->
-    <!-- <div class="top-bar "> -->
-    <!-- <ul class="menu">
-      <% if @login_merchant %>
-        <%= link_to "Merchant #{@login_merchant.username}", merchant_path(@login_merchant), class: "button" %>
-        <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
-      <% else %>
-        <%= link_to "Log In", github_path, class: "button float-right" %>
-      <% end %>
-      <%= link_to "Cart", cart_path, class: "button float-left" %>
-    </ul>
-  </div> -->
-  <!-- MAIN CONTENT -->
 
-  <section class="main">
 
-  </section>
 
 
   <%###############  FLASH MESSAGES #################### %>
 
   <section class="row status <%= flash[:status] %>">
+
     <% if  flash[:status] == :failure %>
-    <%= "A problem occurred: #{flash[:message]}" %>
+      <%= "A problem occurred: #{flash[:message]}" %>
     <% else %>
-    <%= flash[:message] %>
+      <%= flash[:message] %>
     <% end %>
+
   </section>
 
+  <%###############  MAIN CONTENT #################### %>
 
-<!--
-  <main class="row"> -->
+  <%= yield %>
 
-    <%= yield %>
 
-  <!-- </main> -->
+  <%###############  STAR WARS OPENING  #################### %>
 
-  <!-- FOOTER SECTION -->
+  <%# TODO: ADD THE STAR WARS THEME HERE IF TIME
 
-  <footer>
+
+
+  <%###############  FOOTER #################### %>
+
+
+  <footer class="align-center">
     <p>
       COPYRIGHT 2017
     </p>
   </footer>
+
 </body>
 </html>
