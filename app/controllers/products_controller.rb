@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
 
-  skip_before_action :find_merchant, only: [:index, :show]
+  # skip_before_action :find_merchant, only: [:index, :show]
 
 ###### TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING SEE APPLICATION.HTML.ERB%>
 
