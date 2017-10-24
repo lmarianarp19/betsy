@@ -1,9 +1,23 @@
-<h2>Show page ## Payments </h2>
+<h2>Shipping Information </h2>
+<hr />
 
-<header>
-  <h2><%= "Payment Order information for #{@payment.name}" %></h2>
-</header>
-
-
-<%= @payment.each do |detail| %>
-<% end %>
+<table align="center" class="hover">
+  <tbody>
+    <tr class="row large-up-1">
+      <th>Name</td>
+      <th>Email</td>
+      <th>Mailing Address</th>
+      <th>Last four of Credit Card</th>
+      <th>Credit Card Expiration</th>
+    </tr>
+    <% @payment.each do |detail| %>
+      <tr class="row large-up-1">
+        <td><%= detail.name %></td>
+        <td><%= detail.email %></td>
+        <td><%= detail.mailing_address %></td>
+        <td><%= detail.cc_number.split(//).last(4).join %></td>
+        <td><%= detail.cc_expiration %></td>
+      </tr>
+      <% end %>
+  </tbody>
+</table>

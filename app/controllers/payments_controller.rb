@@ -29,7 +29,7 @@ class PaymentsController < ApplicationController
       order.status = "paid"
       order.save
 
-      session[:order_id]= nil
+      session.clear
 
       flash[:status] = :success
       flash[:message] = "success payment"
@@ -56,7 +56,7 @@ class PaymentsController < ApplicationController
   private
 
   def payment_params
-    params.require(:payment).permit(:email, :mailing_address, :cc_name, :cc_expiration, :cc_number, :cc_ccv, :billing_zip)
+    params.require(:payment).permit(:name, :email, :mailing_address, :cc_name, :cc_expiration, :cc_number, :cc_ccv, :billing_zip)
   end
 
 end

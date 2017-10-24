@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 
 # Need to to make method available to controllers and views
   helper_method :current_order
+  helper_method :restrict_merchant
 # formats a number into a currency string
   # helper_method :number_to_currency
 
@@ -31,7 +32,6 @@ class ApplicationController < ActionController::Base
   protected
   def save_and_flash(model)
     result = model.save
-    #binding.pry
     if result
       flash[:status] = :success
       flash[:message] = "Successfully saved #{model.class} #{model.id}"
@@ -44,6 +44,19 @@ class ApplicationController < ActionController::Base
     return result
   end
 
+  def restrict_merchant(id)
+    @merchant = Merchant.find_by(id: params[id])
+    if @login_merchant.id == @merchant.id
+      @orders = @merchant.orders.distinct
+      unless @merchant
+        head :not_found
+      end
+    else
+      flash[:status] = :failure
+      flash[:message] = "You must be authorized to do that"
+      redirect_to root_path
+    end
+  end
 
 
   private

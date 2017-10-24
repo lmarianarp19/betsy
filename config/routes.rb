@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :products do
     resources :reviews, only: [:new, :create]
-    resources :categories, only:[:index, :show, :new, :create]
+    resources :categories, only:[:index]
   end
 
   get 'categories/:id/products', to: 'products#index', as: 'products_categories'

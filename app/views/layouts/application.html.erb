@@ -21,10 +21,12 @@
     <nav data-topbar role="navigation">
       <ul class="menu">
 
+        <%######## TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING %>
+
         <% if Category.any? %>
 
           <% category = Category.all %>
-          <% category[1..9].each do |category| %>
+          <% category[0..9].each do |category| %>
           <li class="padding">
             <%= link_to category.name, products_categories_path(category) %>
           </li>
@@ -33,9 +35,12 @@
           <div class="dropdown">
             <a><li class="dropbtn padding">Miscellaneous</li></a>
             <div class="dropdown-content">
-              <% category[10..category.length].each do |category| %>
-                <%= link_to category.name, products_categories_path(category), class: "inside-dropdown button" %>
-              <% end %>
+
+              <%######## TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING %>
+
+              <%# category[10].each do |category| %>
+                <%# link_to category.name, products_categories_path(category), class: "inside-dropdown button" %>
+              <%# end %>
             </div>
           </div>
 
@@ -57,9 +62,21 @@
         <%###############  LOGIN NAVIGATION #################### %>
 
         <% if @login_merchant %>
-          <li class="padding">
-            <%= link_to "Merchant #{@login_merchant.username}", merchant_path(@login_merchant), class: "button" %>
-          </li>
+
+        <div class="dropdown">
+          <a><li class="padding">
+            <%= link_to "Merchant #{@login_merchant.username}", merchant_path(@login_merchant.id), class: "button dropbtn padding" %>
+          </li></a>
+          <div class="dropdown-content">
+            <%= link_to "Manage Orders", merchant_orders_path(@login_merchant.id)%>
+            <%= link_to "Manage Products" %>
+            <%= link_to "Dashboard", merchant_path(@login_merchant.id)%>
+          </div>
+        </div>
+
+
+
+
           <li class="padding">
             <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
           </li>
