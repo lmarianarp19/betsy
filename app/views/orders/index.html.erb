@@ -1,0 +1,39 @@
+<h1>Show <%= @merchant.username %> orders</h1>
+
+<% @orders.each do |order| %>
+<table class="unstriped hover">
+  <tbody>
+    <tr>
+      <th class="table-order" rowspan="100%">Order ID: <%= order.id %></th>
+      <th>Order Placed: <%= order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
+      <th>Order Status: <%= order.status %></th>
+      <th>Order Total: $INSERT MONEY</th>
+      <th><%= link_to "Shipping Info" %></th>
+    </tr>
+    <tr>
+      <th>PRODUCTS</td>
+      <th>QUANTITY</th>
+      <th>TOTAL</th>
+      <th>SHIPPED</th>
+    </tr>
+      <% order.products.each do |product| %>
+      <tr class="subtable">
+        <td><%= link_to product.name, product_path(product)%></td>
+        <td><%= product.order_items[0].quantity %></td>
+        <td><%= product.order_items[0].quantity * product.price %></td>
+        <% if product.order_items[0].shipped == false %>
+          <td>
+            <%= link_to "Mark as Shipped" %>
+          </td>
+        <% else %>
+          <td>
+            Item Sent!
+          </td>
+        <% end %>
+      </tr>
+      <% end %>
+
+
+  </tbody>
+</table>
+<% end %>
