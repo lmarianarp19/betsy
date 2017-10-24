@@ -65,7 +65,7 @@
 
         <div class="dropdown">
           <a><li class="padding">
-            <%= link_to "Merchant #{@login_merchant.username}", merchant_path(@login_merchant), class: "button dropbtn padding" %>
+            <%= link_to "Merchant #{@login_merchant.username}", merchant_path(@login_merchant.id), class: "button dropbtn padding" %>
           </li></a>
           <div class="dropdown-content">
             <%= link_to "Manage Orders", merchant_orders_path(@login_merchant.id)%>
