@@ -1,17 +1,17 @@
-
 <main>
-
   <section>
+    
     <header>
-      <h2>FEATURE ITEM </h2>
+      <h2>Popular Items</h2>
     </header>
 
-    <div>
-      <img src="http://johngushue.typepad.com/.a/6a00d83451f25369e201630079e317970d-pi">
+    <div class="small">
+      <% product = @products.sample %>
+      <%= link_to image_tag(product.photo_url) %>
+      <p>
+        <%= product.price %>
+      </p>
     </div>
 
-    <p>
-      Item Price?
-    </p>
   </section>
 </main>

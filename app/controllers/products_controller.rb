@@ -3,22 +3,20 @@ class ProductsController < ApplicationController
   skip_before_action :find_merchant, only: [:index, :show]
 
   def index
-    # TODO: Should this be separated out ito its own method?
-    @products = Product.all
+    # TODO: In case we want an all product functionality
+    # @products = Product.all
     @order_item = current_order.order_items.new
-
-    # @category = Category.find_by(id: params[:id])
-    # if @category
-    #   @products = @category.products
-    # else
-    #   head :not_found
-    # end
+    @category = Category.find_by(id: params[:id])
+    if @category
+      @products = @category.products
+    else
+      head :not_found
+    end
   end
 
   def show
     @product = Product.find_by(id: params[:id])
     unless @product
-      # TODO: render a 404 page if not found????
       head :not_found
     end
   end

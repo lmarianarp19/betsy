@@ -2,7 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-
 .show-product img {
   height: 200px;
   width: 200px;
@@ -20,18 +19,28 @@
 
 }
 
-
 .inventory {
   font-size: 1.3em;
 }
 
-// img {
-//   display: inline-block;
-//   border: 2px black solid;
-// }
+
+
+/********* INDEX *********/
+
+img, #new_order_item, p.inline-block {
+  display: inline-block;
+}
 
 .align-center {
   text-align: center;
+}
+
+.small {
+  width: 200px;
+}
+
+.inline-block {
+  display: inline-block;
 }
 
 // <%= link_to product.name, product_path(product.id) %>
