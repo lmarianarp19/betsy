@@ -29,7 +29,7 @@ class PaymentsController < ApplicationController
       order.status = "paid"
       order.save
 
-      session[:order_id]= nil
+      session.clear
 
       flash[:status] = :success
       flash[:message] = "success payment"
