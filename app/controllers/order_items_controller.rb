@@ -4,23 +4,25 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.new
   end
 
+
   def create
     @order = current_order
-    @item = @order.order_items.new(order_items_params)
-    @order.save
-    flash[:status] = :success
-    flash[:message] = "Item was added to your cart"
-    session[:order_id] = @order.id
-    redirect_to cart_path
 
-    
-      # redirect_to product_category_path(:id[params(:id)],:product_id[params(:product_id)])
-    # else
-    #   flash[:status] = :failure
-    #   flash[:message] = "Unable to change quantity"
-    #   redirect_to root_path
-      # redirect_to product_category_path
-    # end
+    @item = @order.order_items.new(order_items_params)
+
+    if !@order.order_items.exists?(:product_id => @item.product_id)
+      @order.save
+      flash[:status] = :success
+      flash[:message] = "Item was added to your cart"
+      session[:order_id] = @order.id
+      redirect_back fallback_location: cart_path
+    else
+      var = @order.order_items.find_by(product_id: @item.product.id).quantity
+      var = params[:quantity]
+      var.save
+      redirect_to cart_path
+    end
+    #redirect_back is going to go first to request.referrer
   end
   # @order_item = OrderItem.new(order_items_params)
   # @order_item.order #insert session[:order_id]

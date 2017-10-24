@@ -1,6 +1,7 @@
 <main class="row">
   <div class="text-center">
 
+<!-- Name, URL, price and merchant  -->
     <header>
       <h1><%= "#{@product.name}" %></h1>
     </header>
@@ -10,12 +11,21 @@
     <section>
       <p>Price: <%= number_to_currency(@product.price) %><br />Sold by: <%= @product.merchant.username %></p>
 
+      <!--DESCRIPTION  -->
       <% if @product.description %>
         <p class='description '><%= "#{@product.description}" %></p>
       <%end %>
 
-    <div>
-      <%= button_to "Add to Cart!" %>
+<!-- Cart section  -->
+      <div>
+        <%= form_for @order_item do |f| %>
+          <%= f.hidden_field :product_id, value: @product.id %>
+          <%= f.label :quantity %>
+          <%= f.select :quantity, 1..@product.inventory %>
+          <%= f.submit "Add to Cart!" %>
+         <% end %>
+      </div>
+
       <p class="inventory"> <%= "#{@product.inventory} in stock!" %></p>
       <%= link_to "Write a Review!!", new_product_review_path(@product.id), class: "button" %>
     </div>
