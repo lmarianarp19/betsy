@@ -8,7 +8,7 @@
       <img src=<%= "#{@product.photo_url}"%> />
     </div>
     <section>
-      <p>Price: <%= number_to_currency(@product.price) %></p>
+      <p>Price: <%= number_to_currency(@product.price) %><br />Sold by: <%= @product.merchant.username %></p>
 
       <% if @product.description %>
         <p class='description '><%= "#{@product.description}" %></p>
