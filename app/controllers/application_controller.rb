@@ -45,10 +45,10 @@ class ApplicationController < ActionController::Base
     return result
   end
 
-  def restrict_merchant(id)
-    @merchant = Merchant.find_by(id: params[id])
+  def restrict_merchant(expected_merchant_id)
+    @merchant = Merchant.find_by(id: expected_merchant_id)
+    #binding.pry
     if @login_merchant.id == @merchant.id
-      @orders = @merchant.orders.distinct
       unless @merchant
         head :not_found
       end
