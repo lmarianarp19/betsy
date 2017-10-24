@@ -1,39 +1,42 @@
 <main class="row">
+  <section>
 
-  <header class="align-center">
-    <h1><%= @category.name %></h1>
-  </header>
+    <header class="align-center">
+      <h1><%= @category.name %></h1>
+    </header>
 
-  <% @products.each do |product| %>
-    <section class="small-12 large-3 columns">
-      <div>
-        <%= link_to image_tag(product.photo_url), product_path(product), class: "thumbnail small" %>
+    <% if @products.any? %>
 
-<<<<<<< HEAD
-        <p class="inline">
-          <%= product.name %> | <%= number_to_currency product.price %>
-        </p>
-      </div>
+      <% @products.each do |product| %>
+        <section class="small-6 large-3 columns align-center border-color product-padding end">
 
-      <div>
-        <%= form_for @order_item do |f| %>
-          <%= f.hidden_field :product_id, value: product.id %>
-          <%= f.number_field :quantity %>
-          <%= f.submit "Add to cart" %>
-         <% end %>
-      </div>
-    </section>
-  <% end %>
+          <div>
+            <%= link_to image_tag(product.photo_url), product_path(product), class: "thumbnail" %>
 
+            <p>
+              <span class="p-style"><%= product.name %></span> |
+              <%= number_to_currency product.price %>
+            </p>
+          </div>
+
+          <div>
+            <%= form_for @order_item do |f| %>
+              <%= f.hidden_field :product_id, value: product.id %>
+
+              <%= f.label :quantity %>
+              <%= f.number_field :quantity, class: "box-height"  %>
+              <%= f.submit "Add to Cart" %>
+             <% end %>
+          </div>
+
+        </section>
+      <% end %>
+
+    <% else %>
+
+        <h1>Products coming soon!</h1>
+
+    <% end %>
+
+  </section>
 </main>
-=======
-<% @products.each do |product| %>
- <p><%= product.name %> | <%= number_to_currency product.price %>
-   <img src=<%="#{product.photo_url}"%> />
- <%= form_for @order_item do |f| %>
-   <%= f.hidden_field :product_id, value: product.id %>
-   <%= f.select :quantity, 1..product.inventory %>
-   <%= f.submit "Add to cart" %>
- <% end %></p>
-<% end %>
->>>>>>> 31ce3b2f19ab5b9c59d052e22083a3a09c790b6b

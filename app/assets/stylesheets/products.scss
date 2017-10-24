@@ -16,7 +16,6 @@
   display: block;
   font-size: 1.3em;
   font-family: sans-serif;
-
 }
 
 .inventory {
@@ -24,24 +23,22 @@
 }
 
 
+/* *****************************************************
+                            INDEX
+****************************************************** */
 
-/********* INDEX *********/
-
-img, #new_order_item, p.inline-block {
+#new_order_item {
   display: inline-block;
 }
 
-.align-center {
-  text-align: center;
+.box-height {
+  height: 30px;
 }
 
-.small {
-  width: 200px;
+.product-padding {
+  padding: 20px;
 }
 
-.inline-block {
-  display: inline-block;
+.p-style {
+  font-weight: bold;
 }
-
-// <%= link_to product.name, product_path(product.id) %>
-// <img class="thumbnail" src="<%= product.photo_url %>" alt="<%= product.name %>">

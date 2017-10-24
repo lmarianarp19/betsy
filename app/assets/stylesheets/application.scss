@@ -17,22 +17,77 @@
  */
 @import url("https://fonts.googleapis.com/css?family=Pathway+Gothic+One");
 
+
+/******************************************************
+                STYLING ACROSS ALL PAGES
+*******************************************************/
+
+
 body {
   font-family: 'Pathway Gothic One', sans-serif;
   /*background: url('https://image.freepik.com/free-vector/grey-linen-texture-background_1053-253.jpg');*/
 }
 h1 a {
-  color: black;
   font-family: 'Pathway Gothic One', sans-serif;
 }
 
+a {
+  color: white;
+}
+
+li.padding {
+  padding: 8px;
+}
+
+.align-center {
+  text-align: center;
+}
+
 /* *****************************************************
-NAV
+                            NAV
 ****************************************************** */
-// 
-// nav.top-bar, ul.menu {
-//   background: none;
-// }
+
+header.fixed {
+  background-color: #282828;
+}
+
+
+/* *****************************************************
+                    DROP DOWN MISC
+****************************************************** */
+
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  // position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #282828;
+  min-width: 130px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.inside-dropdown {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover { background-color: #003366 }
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
 
 
 // div.nav-menu {
@@ -104,13 +159,13 @@ HERO
   // TODO: Make this height reactive with media breaks
   background-image: image-url('hero.jpg');
   background-size: cover;
-  height: 300px;
+  height: 350px;
   text-align: center;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
 
-  .hero-section-text a{
+  .hero-section-text a {
     color: white;
     text-shadow: 1px 1px 2px black;
   }
@@ -137,3 +192,12 @@ HERO
   margin-top: 20px;
   font-size: 1em;
 }
+
+
+/******************************************************
+                        OPENING
+*******************************************************/
+
+/******************************************************
+                          FOOTER
+*******************************************************/
