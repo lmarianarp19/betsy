@@ -7,10 +7,12 @@ class MerchantsController < ApplicationController
     @complete = @orders.where(status: "complete")
   end
 
-
-  # 
-  # def revenue(var)
-  #   var.
-  #
-  # end
+  def products
+    # find_merchant
+    @merchant = Merchant.find_by(id: params[:merchant_id])
+    if @login_merchant && @login_merchant.id == @merchant.id
+      @access = true
+    end
+    @products = @merchant.products
+  end
 end

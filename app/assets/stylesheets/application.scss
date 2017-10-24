@@ -30,7 +30,7 @@ h1 a {
   font-family: 'Pathway Gothic One', sans-serif;
 }
 
-a {
+header a {
   color: white;
 }
 
@@ -205,13 +205,12 @@ HERO
                           TABLES
 *******************************************************/
 table {
-  text-align: center;
-  width: 65%;
+
+  width: 80%;
   .table-order {
     background-color: yellow;
   }
-
-  a {
-    color: blue;
+  .mini{
+    width: 100px;
   }
 }
