@@ -1,9 +1,13 @@
 class OrdersController < ApplicationController
   before_action only:[:index] do
-    restrict_merchant(:merchant_id)
+    restrict_merchant(params[:merchant_id])
   end
 
   def index
+    if params[:merchant_id]
+      @merchant = Merchant.find_by(id: params[:merchant_id])
+      @order_item_merchant = @merchant.order_items
+    end
   end
 
   def show

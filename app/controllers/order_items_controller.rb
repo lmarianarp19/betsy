@@ -1,4 +1,8 @@
 class OrderItemsController < ApplicationController
+  before_action only:[:ship] do
+    @order_item = OrderItem.find_by(id: params[:id])
+    restrict_merchant(@order_item.product.merchant.id)
+  end
 
   def new
     @order_item = OrderItem.new
@@ -9,7 +13,7 @@ class OrderItemsController < ApplicationController
     @item = @order.order_items.new(order_items_params)
     @order.save
     session[:order_id] = @order.id
-    redirect_to products_path
+    redirect_to merchant_orders_path
   end
     # @order_item = OrderItem.new(order_items_params)
     # @order_item.order #insert session[:order_id]
@@ -54,10 +58,18 @@ class OrderItemsController < ApplicationController
   end
 
   def ship
-    @order_item = OrderItem.find_by(id: params[:id])
-    @order_item.update_attributes(order_items_params)
 
+    @order_item.shipped = true
+    @order_item.save
+    flash[:status] = "success"
+    flash[:message] = "Item Shipped"
+    #redirect_to orders_path
+
+    redirect_back fallback_location: merchant_orders_path(:merchant_id)
+    #redirect_back is going to go first to request.referrer
   end
+    #@order_item.update_attributes(order_items_params)
+
 
 private
 
