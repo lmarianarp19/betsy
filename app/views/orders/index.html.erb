@@ -8,7 +8,7 @@
       <th>Order Placed: <%= order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
       <th>Order Status: <%= order.status %></th>
       <th>Order Total: $INSERT MONEY</th>
-      <th><%= link_to "Shipping Info" %></th>
+      <th><%= link_to "Shipping Info", payment_path(order.payment) %></th>
     </tr>
     <tr>
       <th>PRODUCTS</td>
