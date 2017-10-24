@@ -45,6 +45,14 @@ class PaymentsController < ApplicationController
   end
 
 
+  def show
+    @payment = Payment.where(id: params[:id])
+    # @order =  @payment.order_id
+
+
+  end
+
+
   private
 
   def payment_params
