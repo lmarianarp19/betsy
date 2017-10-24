@@ -4,8 +4,8 @@ class SessionsController < ApplicationController
   #TODO: CHECK AUTH HASH IN INTERACTIVE SHELL WHEN PASSING IN
 
   def login
-    # binding.pry
     auth_hash = request.env['omniauth.auth']
+
     if auth_hash['uid']
       merchant = Merchant.find_by(provider: params[:provider], uid: auth_hash['uid'])
       if merchant.nil? # If merchant was not previously logged in
@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
       #will log in the user
     else
       flash[:status] = :failure
-      flash[:message] = "Could not create user from OAuth processes"
+      flash[:message] = "Failed to create a new user"
       #TODO: Not sure if the root_path is the correct reroute if an oath uid is not provided
     end
 

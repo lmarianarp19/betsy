@@ -21,10 +21,12 @@
     <nav data-topbar role="navigation">
       <ul class="menu">
 
+        <%######## TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING %>
+
         <% if Category.any? %>
 
           <% category = Category.all %>
-          <% category[1..9].each do |category| %>
+          <% category[0..9].each do |category| %>
           <li class="padding">
             <%= link_to category.name, products_categories_path(category) %>
           </li>
@@ -33,7 +35,10 @@
           <div class="dropdown">
             <a><li class="dropbtn padding">Miscellaneous</li></a>
             <div class="dropdown-content">
-              <% category[10..category.length].each do |category| %>
+
+              <%######## TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING %>
+
+              <% category[10].each do |category| %>
                 <%= link_to category.name, products_categories_path(category), class: "inside-dropdown button" %>
               <% end %>
             </div>
