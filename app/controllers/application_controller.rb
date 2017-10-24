@@ -44,6 +44,16 @@ class ApplicationController < ActionController::Base
     return result
   end
 
+
+
+
+private
+  def find_merchant
+    if session[:merchant_id]
+      @login_merchant = Merchant.find_by(id: session[:merchant_id])
+    end
+  end
+
   def restrict_merchant(id)
     @merchant = Merchant.find_by(id: params[id])
     if @login_merchant.id == @merchant.id
@@ -55,14 +65,6 @@ class ApplicationController < ActionController::Base
       flash[:status] = :failure
       flash[:message] = "You must be authorized to do that"
       redirect_to root_path
-    end
-  end
-
-
-  private
-  def find_merchant
-    if session[:merchant_id]
-      @login_merchant = Merchant.find_by(id: session[:merchant_id])
     end
   end
 
