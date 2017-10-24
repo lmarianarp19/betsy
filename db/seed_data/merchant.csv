@@ -1,4 +1,4 @@
-username,email
+username,email,uid,provider
 hansolo,hansolo@gmail.com,
 leiasky,lskywalker@gmail.com,
 chewie,chewbacca@gmail.com,
@@ -11,3 +11,7 @@ R2D2,R2D2@droidmail.com,
 C3PO,C3PO@droidmail.com,
 BobaFett,BobaFett@bobba.com,
 JabbatheHutt,JHutt@gmail.com,
+SRBusiness,srbusiness2@gmail.com,30781062,github,
+biciclista22,bianca.maria.fernandez.22@gmail.com,25600980,github,
+idevera,irenneeyyy@gmail.com,21353732,github,
+lmarianarp19,lmarianarp@gmail.com,26218626,github,

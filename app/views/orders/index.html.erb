@@ -1,14 +1,14 @@
 <h1>Show <%= @merchant.username %> orders</h1>
 
 <% @orders.each do |order| %>
-<table class="unstriped hover">
+<table align="center" class="unstriped hover">
   <tbody>
     <tr>
       <th class="table-order" rowspan="100%">Order ID: <%= order.id %></th>
       <th>Order Placed: <%= order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
       <th>Order Status: <%= order.status %></th>
       <th>Order Total: $INSERT MONEY</th>
-      <th><%= link_to "Shipping Info" %></th>
+      <th><%= link_to "Shipping Info", payment_path(order.payment) %></th>
     </tr>
     <tr>
       <th>PRODUCTS</td>
@@ -20,7 +20,7 @@
       <tr class="subtable">
         <td><%= link_to product.name, product_path(product)%></td>
         <td><%= product.order_items[0].quantity %></td>
-        <td><%= product.order_items[0].quantity * product.price %></td>
+        <td><%= number_to_currency(product.order_items[0].quantity * product.price) %></td>
         <% if product.order_items[0].shipped == false %>
           <td>
             <%= link_to "Ship", order_path(order.id), method: :patch %>

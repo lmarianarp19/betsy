@@ -10,6 +10,8 @@ CSV.foreach(MERCHANT_FILE, :headers => true) do |row|
   merchant = Merchant.new
   merchant.username = row['username']
   merchant.email = row['email']
+  merchant.uid = row['uid']
+  merchant.provider = row['provider']
   puts "Created merchant: #{merchant.inspect}"
   successful = merchant.save
   if !successful
@@ -151,6 +153,7 @@ d1 = Date.new(2017,5,8)
 payment_failures = []
 CSV.foreach(PAYMENT_FILE, :headers => true) do |row|
   payment = Payment.new
+  payment.name = row['name']
   payment.email = row['email']
   payment.mailing_address = row['mailing_address']
   payment.cc_name = row['cc_name']

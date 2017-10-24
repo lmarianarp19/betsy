@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
+  before_action only:[:index] do
+    restrict_merchant(:merchant_id)
+  end
 
   def index
-    @merchant = Merchant.find_by(id: params[:merchant_id])
-    @orders = @merchant.orders.distinct
   end
 
   def show
