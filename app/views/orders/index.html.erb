@@ -1,41 +1,40 @@
 <h1>Show <%= @merchant.username %> orders</h1>
 
-<% @order_item_merchant.each do |order_item| %>
-<table align="center" class="unstriped hover">
-  <tbody>
-    <tr>
-      <th class="table-order" rowspan="100%">Order ID: <%= order_item.order.id %></th>
-      <th>Order Placed: <%= order_item.order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
-      <th>Order Status: <%= order_item.order.status %></th>
-      <th>Order Total: $INSERT MONEY</th>
-      <th><%= link_to "Shipping Info", payment_path(order_item.order.payment) %></th>
-    </tr>
-    <tr>
-      <th>PRODUCTS</td>
-      <th>QUANTITY</th>
-      <th>TOTAL</th>
-      <th>SHIPPED</th>
-    </tr>
-      <%# order.order_items.each do |order_item| %>
-      <%# order.order_items.each do |order_item| %>
-        <% product = order_item.product %>
-      <tr align="center" class="subtable">
-        <td><%= link_to product.name, product_path(product)%></td>
-        <td><%= order_item.quantity %></td>
-        <td><%= number_to_currency(order_item.quantity * product.price) %></td>
-        <% if order_item.shipped == false %>
-          <td>
-            <%= link_to "Ship", ship_order_item_path(order_item), method: :patch %>
-          </td>
-        <% else %>
-          <td>
-            Item Sent!
-          </td>
-        <% end %>
+
+<% @orders.each do |order| %>
+  <table align="center" class="unstriped hover">
+    <tbody>
+      <tr>
+        <th class="table-order" rowspan="100%">Order ID: <%= order.id %></th>
+        <th>Order Placed: <%= order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
+        <th>Order Status: <%= order.status %></th>
+        <th>Order Total: $INSERT MONEY</th>
+        <th><%= link_to "Shipping Info", payment_path(order.payment) %></th>
       </tr>
-      <%# end %>
-
-
-  </tbody>
-</table>
+      <tr>
+        <th>PRODUCTS</td>
+        <th>QUANTITY</th>
+        <th>TOTAL</th>
+        <th>SHIPPED</th>
+      </tr>
+      <% order.order_items.each do |oi| %>
+        <% if oi.merchant == @merchant %>
+          <tr align="center" class="subtable">
+            <td><%= link_to oi.product.name, product_path(oi.product)%></td>
+            <td><%= oi.quantity %></td>
+            <td><%= number_to_currency(oi.line_item_total) %></td>
+            <% if oi.shipped == false %>
+              <td>
+                <%= link_to "Ship", ship_order_item_path(oi), method: :patch %>
+              </td>
+            <% else %>
+              <td>
+                Item Sent!
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

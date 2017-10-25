@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   def index
     if params[:merchant_id]
       @merchant = Merchant.find_by(id: params[:merchant_id])
+      @orders = @merchant.orders.distinct
       @order_item_merchant = @merchant.order_items
     end
   end
