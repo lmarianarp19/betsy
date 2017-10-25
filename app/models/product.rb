@@ -14,9 +14,11 @@ class Product < ApplicationRecord
   accepts_nested_attributes_for :categories
 
   def categories_attributes=(category_attributes)
-    category_attributes.values.each do |category_attribute|
+  category_attributes.values.each do |category_attribute|
       category = Category.find_or_create_by(category_attribute)
-      self.categories << category
+      if !self.categories.include? category
+        self.categories << category
+      end
     end
   end
 

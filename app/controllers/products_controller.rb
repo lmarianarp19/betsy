@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
 
   # skip_before_action :find_merchant, only: [:index, :show]
 
-###### TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING SEE APPLICATION.HTML.ERB%>
+  ###### TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING SEE APPLICATION.HTML.ERB%>
 
   def index
     @category = Category.find_by(id: params[:id])
@@ -41,13 +41,13 @@ class ProductsController < ApplicationController
       #@category = Category.find(input_cat_name)
 
       #if @category # If category exists make a new product
-        @product = Product.new(products_params)
-        #@product.categories << @category
-        # @product.category_id = category.id
-        @product.merchant_id = @login_merchant.id
-        save_and_flash(@product)
+      @product = Product.new(products_params) # This pulls in the params from the form and uses the categories and checks to see if the names are already in the database.
+      #@product.categories << @category
+      # @product.category_id = category.id
+      @product.merchant_id = @login_merchant.id
+      save_and_flash(@product)
 
-        redirect_to root_path
+      redirect_to root_path
       # else
       #   # If category does not exist and is valid
       #   @category = Category.create_cat(input_cat_name)
@@ -57,7 +57,7 @@ class ProductsController < ApplicationController
       #   save_and_flash(@product)
       #
       #   redirect_to product_path(@product)
-    #  end
+      #  end
 
     else
       # TODO: Make flash messages for unauthorized!!! When use is not logged in
@@ -85,29 +85,39 @@ class ProductsController < ApplicationController
   def update
     # TODO: how to not use Product.find and get test to pass?
     if @login_merchant
-      input_cat_name = params[:product][:categories]
-      @category = Category.find_by(name: input_cat_name)
-      @product = Product.find_by(id: params[:id])
-
-      if @category && @product # If category exists update prodouct
-        @product.update_attributes(products_params)
-        if save_and_flash(@product)
-          redirect_to product_path(@product)
-        else
-          redirect_to root_path
-        end
-      else
-        # If category does not exist and is valid make a new category and update product
-        @category = Category.create_cat(input_cat_name)
-        @product.categories << @category
-        save_and_flash(@product)
-
+      @product = Product.find(params[:id])
+      if @product.update_attributes(products_params) # This pulls in the params from the form and uses the categories and checks to see if the names are already in the database.
+        flash[:status] = :success
+        flash[:message] = "Successfully updated #{@product.name}!"
+        #@product.categories << @category
+        # @product.category_id = category.id
+        # @product.merchant_id = @login_merchant.id
         redirect_to product_path(@product)
+        # input_cat_name = params[:product][:categories]
+        # @category = Category.find_by(name: input_cat_name)
+        # @product = Product.find_by(id: params[:id])
+        #
+        # if @category && @product # If category exists update prodouct
+        #   @product.update_attributes(products_params)
+        #   if save_and_flash(@product)
+        #     redirect_to product_path(@product)
+        #   else
+        #     redirect_to root_path
+        #   end
+        # else
+        # If category does not exist and is valid make a new category and update product
+        # @category = Category.create_cat(input_cat_name)
+        # @product.categories << @category
+        # save_and_flash(@product)
+        #
+        # redirect_to product_path(@product)
+        # end
+      else
+        flash[:status] = :failure
+        flash[:message] = "There was an error when updating your product"
+        flash[:details] = @product.errors.messages
+        render :edit, status: :bad_request
       end
-    else
-      flash[:status] = :failure
-      flash[:message] = "You must be authorized to do that"
-      redirect_to root_path
     end
   end
 
