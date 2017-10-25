@@ -22,12 +22,15 @@ class OrdersController < ApplicationController
 
 
   def create
-    @order = Order.new(status: "paid")
-    unless @order.save
-      flash[:status] = :failure
-      flash[:message] = "Could not create a new order. Please try again!"
-      #flash[:errors] = @review.errors.messages
+    @order = current_order
+    @item = OrderItem.new(order_items_params)
+    @order.order_items << @item
+    # @item = @order.order_items.new(order_items_params)
+    if save_and_flash(@order)
+      session[:order_id] = @order.id
     end
+    redirect_to cart_path
+
   end
 
   # def update

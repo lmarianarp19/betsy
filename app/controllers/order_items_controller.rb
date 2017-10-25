@@ -12,14 +12,7 @@ class OrderItemsController < ApplicationController
 
   def create
     # Create a new order if there is session[:order_id]
-    @order = current_order
-    @item = OrderItem.new(order_items_params)
-    @order.order_items << @item
-    # @item = @order.order_items.new(order_items_params)
-    if save_and_flash(@order)
-      session[:order_id] = @order.id
-    end
-    redirect_to cart_path
+
   end
 
 #### Bianca working on this ###
