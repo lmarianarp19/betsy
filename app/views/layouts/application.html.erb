@@ -9,6 +9,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon_red.png'%>
 </head>
 
 <body>
@@ -23,30 +24,47 @@
 
         <%######## TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING %>
 
-        <% if Category.any? %>
-
-          <% category = Category.all %>
-          <% category[0..9].each do |category| %>
-          <li class="padding">
-            <%= link_to category.name, products_categories_path(category) %>
-          </li>
+        <% category = Category.all %>
+        <li class="padding">
+          <%= link_to products_categories_path(category[0]) do %>
+          Jedi &nbsp;<%= image_tag'yoda.png', class: "navimg" %>
           <% end %>
-
-          <div class="dropdown">
-            <a><li class="dropbtn padding">Miscellaneous</li></a>
-            <div class="dropdown-content">
-
-              <%######## TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING %>
-
-              <%# category[10].each do |category| %>
-                <%# link_to category.name, products_categories_path(category), class: "inside-dropdown button" %>
-              <%# end %>
-            </div>
-          </div>
-
-        <% end %>
-      <div>
-
+        </li>
+        <li class="padding">
+          <%= link_to products_categories_path(category[1]) do %>
+          Sith &nbsp;<%= image_tag 'darth-vader.png', class: "navimg" %>
+          <% end %>
+        </li>
+        <li class="padding">
+          <%= link_to products_categories_path(category[2]) do %>
+          Droids &nbsp;<%= image_tag 'c3p0.png', class: "navimg" %>
+          <% end %>
+        </li>
+        <li class="padding">
+          <%= link_to products_categories_path(category[3]) do %>
+          Clothing &nbsp;<%= image_tag 'obiwan-kenobi.png', class: "navimg" %>
+          <% end %>
+        </li>
+        <li class="padding">
+          <%= link_to products_categories_path(category[4]) do %>
+          Toys &nbsp;<%= image_tag 'boba-fett.png', class: "navimg" %>
+          <% end %>
+        </li>
+        <li class="padding">
+          <%= link_to products_categories_path(category[5]) do %>
+          Gear &nbsp;<%= image_tag 'red-five.png', class: "navimg" %>
+          <% end %>
+        </li>
+        <li class="padding">
+          <%= link_to products_categories_path(category[18]) do %>
+          Pets &nbsp;<%= image_tag 'ewok.png', class: "navimg" %>
+          <% end %>
+        </li>
+        <li class="padding">
+          <%= link_to products_categories_path(category[18]) do %>
+          Accessories &nbsp;<%= image_tag 'stormtrooper.png', class: "navimg" %>
+          <% end %>
+        </li>
 
         <%###############  SEARCH BAR #################### %>
 
@@ -62,7 +80,6 @@
         </li>
 
         <%###############  LOGIN NAVIGATION #################### %>
-      </div>
         <% if @login_merchant %>
 
         <div class="dropdown">
@@ -121,8 +138,10 @@
   </section>
 
   <%###############  MAIN CONTENT #################### %>
+  <main>
+    <%= yield %>
+  </main>
 
-  <%= yield %>
 
 
   <%###############  STAR WARS OPENING  #################### %>
