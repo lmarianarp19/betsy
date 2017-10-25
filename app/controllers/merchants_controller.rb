@@ -4,6 +4,7 @@ class MerchantsController < ApplicationController
   end
 
   def show
+    @merchant.products
     @unfufilled = @merchant.orders_hash_by_status("paid").count
     @unfufilled_revenue = @merchant.sum_ord_hash("paid")
     @complete = @merchant.orders_hash_by_status("complete").count

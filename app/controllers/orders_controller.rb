@@ -6,6 +6,7 @@ class OrdersController < ApplicationController
   def index
     if params[:merchant_id]
       @merchant = Merchant.find_by(id: params[:merchant_id])
+      @orders = @merchant.distinct_orders
       @paid_orders_hash = @merchant.orders_hash_by_status("paid")
       @complete_orders_hash = @merchant.orders_hash_by_status("complete")
     end

@@ -2,6 +2,8 @@
 <% if @access %>
   <%= link_to "Add Product", new_product_path, class: "button"%>
 <% end %>
+
+<% unless @products.empty? %>
 <table width="90%" align="center">
   <thead>
     <tr>
@@ -28,3 +30,8 @@
     <% end %>
   </tbody>
 </table>
+<% else %>
+  <h3>
+    <strong>No Products:</strong> Merchant has no products.
+  </h3>
+<% end %>

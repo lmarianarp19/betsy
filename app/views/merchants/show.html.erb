@@ -1,9 +1,13 @@
-<h2><%= @login_merchant.username %></h2>
+<h2>Merchant: <%= @login_merchant.username %></h2>
+<h2>Member Since: <%= @login_merchant.created_at.strftime("%e %b %Y")%></h2>
 
 <%= link_to "Manage Orders", merchant_orders_path(@login_merchant), class: "button" %>
 
 <%= link_to "Manage Products", merchant_products_path(@login_merchant), class: "button"%>
 
+<% if @merchant.products.empty? %>
+  <h3>Please add products!</h3>
+<% end %>
 
 <table align="center">
   <thead>

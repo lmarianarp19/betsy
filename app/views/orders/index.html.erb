@@ -1,9 +1,15 @@
 <h1>Show <%= @merchant.username %> orders</h1>
 
-<%= render partial: "orderstable", locals: {
-  orders_hash: @paid_orders_hash, add_class: "paid"
-} %>
+<% unless @orders.empty? %>
+  <%= render partial: "orderstable", locals: {
+    orders_hash: @paid_orders_hash, add_class: "paid"
+  } %>
 
-<%= render partial: "orderstable", locals: {
-  orders_hash: @complete_orders_hash, add_class: "complete"
-} %>
+  <%= render partial: "orderstable", locals: {
+    orders_hash: @complete_orders_hash, add_class: "complete"
+  } %>
+<% else %>
+  <h3>
+    <strong>No Orders:</strong> Merchant hasn't sold any products.
+  </h3>
+<% end %>
