@@ -1,38 +1,15 @@
 <h1>Show <%= @merchant.username %> orders</h1>
 
-<% @orders_hash.keys.each do |order| %>
-<table align="center" class="unstriped hover">
-  <tbody>
-    <tr>
-      <th class="table-order" rowspan="100%">Order ID: <%= order.id %></th>
-      <th>Order Placed: <%= order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
-      <th>Order Status: <%= order.status %></th>
-      <th>Order Total: $INSERT MONEY</th>
-      <th><%= link_to "Shipping Info", payment_path(order.payment) %></th>
-    </tr>
-    <tr>
-      <th>PRODUCTS</td>
-      <th>QUANTITY</th>
-      <th>TOTAL</th>
-      <th>SHIPPED</th>
-    </tr>
-    <% @orders_hash[order].each do |oi| %>
-      <% if oi.merchant == @merchant %>
-        <tr align="center" class="subtable">
-          <td><%= link_to oi.product.name, product_path(oi.product)%></td>
-          <td><%= oi.quantity %></td>
-          <td><%= number_to_currency(oi.line_item_total) %></td>
-          <% if oi.shipped == false %>
-            <td>
-              <%= link_to "Ship", ship_order_item_path(oi), method: :patch %>
-            </td>
-          <% else %>
-            <td>
-              Item Sent!
-            </td>
-          <% end %>
-        </tr>
-      <% end %>
-    <% end %>
-  </table>
-  <% end %>
+<% unless @orders.empty? %>
+  <%= render partial: "orderstable", locals: {
+    orders_hash: @paid_orders_hash, add_class: "paid"
+  } %>
+
+  <%= render partial: "orderstable", locals: {
+    orders_hash: @complete_orders_hash, add_class: "complete"
+  } %>
+<% else %>
+  <h3>
+    <strong>No Orders:</strong> Merchant hasn't sold any products.
+  </h3>
+<% end %>

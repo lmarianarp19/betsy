@@ -16,15 +16,20 @@
         <p class='description '><%= "#{@product.description}" %></p>
       <%end %>
 
-<!-- Cart section  -->
+
+<!-- form_tag('/posts/1', method: :put) -->
       <div>
-        <%= form_for @order_item do |f| %>
-          <%= f.hidden_field :product_id, value: @product.id %>
-          <%= f.label :quantity %>
-          <%= f.select :quantity, 1..@product.inventory %>
-          <%= f.submit "Add to Cart!" %>
-         <% end %>
-      </div>
+        <%= form_tag('/orders', method: :post) %>
+        <!-- Tags::Select.new(object, method, self, choices, options, html_options, &block).render
+         -->
+          <%= select_tag :quantity, options_for_select(1..@product.inventory) %>
+          <%= hidden_field_tag :product_id, @product.id  %>
+          <%= submit_tag "Add to Cart!" %>
+        </div>
+
+
+
+
 
       <p class="inventory"> <%= "#{@product.inventory} in stock!" %></p>
       <%= link_to "Write a Review!!", new_product_review_path(@product.id), class: "button" %>

@@ -1,5 +1,24 @@
 require 'csv'
 
+
+#ORDERS#
+ORDERS_FILE = Rails.root.join('db','seed_data','orders.csv')
+puts "Loading raw media data from #{ORDERS_FILE}"
+
+orders_failures = []
+CSV.foreach(ORDERS_FILE, :headers => true) do |row|
+  order = Order.new
+  order.status = row['status']
+  puts "Created order: #{order.inspect}"
+  successful = order.save
+  if !successful
+    orders_failures << order
+  end
+end
+
+puts "Added #{Order.count} orders records"
+puts "#{orders_failures.length} orders failed to save"
+
 # MERCHANTS #
 
 MERCHANT_FILE = Rails.root.join('db','seed_data','merchant.csv')
@@ -109,17 +128,17 @@ puts "#{product_category_failures.length} product_category failed to save"
 
 # ORDER ITEMS #
 
-order_failures = []
-10.times do
-  order = Order.new
-  successful = order.save
-  if !successful
-    order_failures << order_item
-  end
-  puts "Created order: #{order.inspect}"
-end
-puts "Added #{Order.count} order item records"
-puts "#{order_failures.length} orders failed to save"
+# order_failures = []
+# 10.times do
+#   order = Order.new
+#   successful = order.save
+#   if !successful
+#     order_failures << order_item
+#   end
+#   puts "Created order: #{order.inspect}"
+# end
+# puts "Added #{Order.count} order item records"
+# puts "#{order_failures.length} orders failed to save"
 
 # ORDER ITEMS #
 

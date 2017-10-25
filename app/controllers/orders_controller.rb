@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+
   before_action only:[:index] do
     restrict_merchant(params[:merchant_id])
   end
@@ -6,11 +7,9 @@ class OrdersController < ApplicationController
   def index
     if params[:merchant_id]
       @merchant = Merchant.find_by(id: params[:merchant_id])
-
-      @orders = @merchant.orders.distinct
-      @orders_hash = OrderItem.to_orders_hash(@orders, @merchant)
-
-      @order_item_merchant = @merchant.order_items
+      @orders = @merchant.distinct_orders
+      @paid_orders_hash = @merchant.orders_hash_by_status("paid")
+      @complete_orders_hash = @merchant.orders_hash_by_status("complete")
     end
   end
 
@@ -20,44 +19,28 @@ class OrdersController < ApplicationController
     unless @order
       head :not_found
     end
-
   end
 
 
   def create
-    @order = Order.new(status: "paid")
-    unless @order.save
-      flash[:status] = :failure
-      flash[:message] = "Could not create a new order. Please try again!"
-      #flash[:errors] = @review.errors.messages
+    @order = current_order # An order already exists, use existing order
+    if @order.product_ids.empty? # If the order is EMPTY
+      order_item = OrderItem.new(order_items_params)
+      @order.order_items << order_item
+    elsif @order.product_ids.include? params[:product_id].to_i # IF THE PRODUCT IS ALREADY IN THE CART
+      order_item = @order.order_items.find_by(product_id: params[:product_id])
+      order_item.quantity += params[:quantity].to_i
+      order_item.save
+    else # FOR ALL OTHER CASES
+      order_item = OrderItem.new(order_items_params)
+      @order.order_items << order_item
     end
+
+    if save_and_flash(@order)
+      session[:order_id] = @order.id
+    end
+    redirect_to cart_path
   end
-
-  # def update
-  #   @order.update_attributes(orders_params)
-    #if @order.save
-      # if @order.payment_id
-      #   @order.status = "paid"
-      #   flash[:status] = :success
-      #   flashs[:message] = "Your payment was receive. Thanks for shopping."
-      #   redirect_to root_path
-      # else
-      #   flash[:status] = :failure
-      #   flash[:message] = "Invalid payment information"
-      #   flash[:erros] = @order.errors.messages
-      #   redirect_to new_payment_path
-      #   render "payment/show"
-      # end
-    # unless @order.save
-    #   flash[:status] = :failure
-    #   flash[:message] = "Could not update your order"
-    #   flash[:errors] = @order.errors.messages
-    #   redirect_to root_path
-    # end
-
-
-#  end
-
 
   def destroy # CANCEL
     if @order.destroy
@@ -72,7 +55,7 @@ class OrdersController < ApplicationController
 
   private
 
-  def orders_params
-    params.require(:order).permit(:order_status)
+  def order_items_params
+    params.permit(:quantity, :product_id)
   end
 end

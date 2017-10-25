@@ -45,6 +45,8 @@
           </div>
 
         <% end %>
+      <div>
+
 
         <%###############  SEARCH BAR #################### %>
 
@@ -60,17 +62,15 @@
         </li>
 
         <%###############  LOGIN NAVIGATION #################### %>
-
+      </div>
         <% if @login_merchant %>
 
         <div class="dropdown">
-          <a><li class="padding">
-            <%= link_to "Merchant #{@login_merchant.username}", merchant_path(@login_merchant.id), class: "button dropbtn padding" %>
-          </li></a>
+          <a><li class="dropbtn padding button"><%= @login_merchant.username %></li></a>
           <div class="dropdown-content">
+            <%= link_to "Dashboard", merchant_path(@login_merchant.id)%>
             <%= link_to "Manage Orders", merchant_orders_path(@login_merchant.id)%>
             <%= link_to "Manage Products", merchant_products_path(@login_merchant.id) %>
-            <%= link_to "Dashboard", merchant_path(@login_merchant.id)%>
           </div>
         </div>
 

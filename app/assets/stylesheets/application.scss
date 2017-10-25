@@ -207,8 +207,11 @@ HERO
 table {
 
   width: 80%;
-  .table-order {
-    background-color: yellow;
+  .complete {
+    background-color: lightgreen;
+  }
+  .paid {
+    background-color: pink;
   }
   .mini{
     width: 100px;

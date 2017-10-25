@@ -4,10 +4,13 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @orders = @merchant.orders
-    @unfufilled = @orders.where(status: "pending")
-    
-    @complete = @orders.where(status: "complete")
+    @merchant.products
+    @unfufilled = @merchant.orders_hash_by_status("paid").count
+    @unfufilled_revenue = @merchant.sum_ord_hash("paid")
+    @complete = @merchant.orders_hash_by_status("complete").count
+    @complete_revenue = @merchant.sum_ord_hash("complete")
+    @total = @unfufilled + @complete
+    @total_revenue = @unfufilled_revenue + @complete_revenue
   end
 
   def products
@@ -18,4 +21,5 @@ class MerchantsController < ApplicationController
     end
     @products = @merchant.products
   end
+
 end
