@@ -30,9 +30,9 @@ Rails.application.routes.draw do
 #, only: [:show, :create, :update]
 
 
-  resources :orders, only: [:show, :create, :update]
+  resources :orders, only: [:show, :create, :update] do
 
-  resources :orders do
+  # resources :orders do
 #    resources :payments, only: [:new, :create, :index]
     resources :payments, only: [:index, :new, :create]
   end

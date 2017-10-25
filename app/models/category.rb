@@ -5,8 +5,9 @@ class Category < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
-  def self.create_cat(input_name)
-    category = Category.new(name: input_name)
-    return category
-  end
+  # def self.create_cat(input_name)
+  #   category = Category.new(name: input_name)
+  #   return category
+  # end
+
 end

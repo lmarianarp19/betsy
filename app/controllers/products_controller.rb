@@ -36,28 +36,29 @@ class ProductsController < ApplicationController
 
   def create
     if @login_merchant
-      input_cat_name = params[:product][:categories]
+      #input_cat_name = params[:product][:category_ids]
 
-      @category = Category.find_by(name: input_cat_name)
+      #@category = Category.find(input_cat_name)
 
-      if @category # If category exists make a new product
+      #if @category # If category exists make a new product
         @product = Product.new(products_params)
-        @product.categories << @category
+        #@product.categories << @category
         # @product.category_id = category.id
         @product.merchant_id = @login_merchant.id
         save_and_flash(@product)
 
         redirect_to root_path
-      else
-        # If category does not exist and is valid
-        @category = Category.create_cat(input_cat_name)
-        @product = Product.new(products_params)
-        @product.merchant_id = @login_merchant.id
-        @product.categories << @category
-        save_and_flash(@product)
+      # else
+      #   # If category does not exist and is valid
+      #   @category = Category.create_cat(input_cat_name)
+      #   @product = Product.new(products_params)
+      #   @product.merchant_id = @login_merchant.id
+      #   @product.categories << @category
+      #   save_and_flash(@product)
+      #
+      #   redirect_to product_path(@product)
+    #  end
 
-        redirect_to product_path(@product)
-      end
     else
       # TODO: Make flash messages for unauthorized!!! When use is not logged in
       flash[:status] = :failure
@@ -126,7 +127,7 @@ class ProductsController < ApplicationController
   private
 
   def products_params
-    params.permit(:name, :price, :inventory,  :description, :photo_url)
+    params.require(:product).permit(:name, :price, :inventory,  :description, :photo_url, category_ids:[], categories_attributes: [:name])
   end
 
 end

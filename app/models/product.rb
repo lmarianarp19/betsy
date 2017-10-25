@@ -11,6 +11,14 @@ class Product < ApplicationRecord
   validates :inventory, presence: true, numericality: { greater_than_or_equal_to: 0}
   # TODO: Ask instructors if we need to state this validation b/c the relationship dictates that we need a merchant
   validates :merchant, presence: true
+  accepts_nested_attributes_for :categories
+
+  def categories_attributes=(category_attributes)
+    category_attributes.values.each do |category_attribute|
+      category = Category.find_or_create_by(category_attribute)
+      self.categories << category
+    end
+  end
 
 
   def average_rating
