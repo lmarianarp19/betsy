@@ -12,6 +12,23 @@ class Order < ApplicationRecord
     self.order_items.collect { |item| item.product.price * item.quantity}.sum
   end
 
+  def ship_order
+    all_items = self.order_items
+    all_items.each do |order_item|
+      if order_item.shipped == false
+        return false
+      end
+    end
+    return true
+  end
+
+  def change_to_shipped
+    if self.ship_order
+      return self.status = "complete"
+    end
+
+  end
+
   def order_item_attributes=(order_item_attributes)
     if @order.product_ids.include? order_item_attributes[:product_id]
       order_item = @order.product_ids.where(:product_id)
