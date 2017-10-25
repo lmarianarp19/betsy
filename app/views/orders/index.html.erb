@@ -17,22 +17,20 @@
       <th>SHIPPED</th>
     </tr>
     <% @orders_hash[order].each do |oi| %>
-      <% if oi.merchant == @merchant %>
-        <tr align="center" class="subtable">
-          <td><%= link_to oi.product.name, product_path(oi.product)%></td>
-          <td><%= oi.quantity %></td>
-          <td><%= number_to_currency(oi.line_item_total) %></td>
-          <% if oi.shipped == false %>
-            <td>
-              <%= link_to "Ship", ship_order_item_path(oi), method: :patch %>
-            </td>
-          <% else %>
-            <td>
-              Item Sent!
-            </td>
-          <% end %>
-        </tr>
+    <tr align="center" class="subtable">
+      <td><%= link_to oi.product.name, product_path(oi.product)%></td>
+      <td><%= oi.quantity %></td>
+      <td><%= number_to_currency(oi.line_item_total) %></td>
+      <% if oi.shipped == false %>
+      <td>
+        <%= link_to "Ship", ship_order_item_path(oi), method: :patch %>
+      </td>
+      <% else %>
+      <td>
+        Item Sent!
+      </td>
       <% end %>
+    </tr>
     <% end %>
   </table>
   <% end %>

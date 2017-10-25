@@ -15,7 +15,7 @@ class OrderItem < ApplicationRecord
     return total
   end
 
-  def self.to_orders_hash(orders, arb)
+  def to_orders_hash(orders, merchant)
     data = {}
     orders.each do |order|
       data[order] = []

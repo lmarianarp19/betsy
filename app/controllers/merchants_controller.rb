@@ -4,10 +4,9 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @orders = @merchant.orders
-    @unfufilled = @orders.where(status: "pending")
-    
-    @complete = @orders.where(status: "complete")
+    @total = @merchant.orders
+    @unfufilled = @merchant.orders_hash_by_status("pending")
+    @complete = @merchant.orders_hash_by_status("complete")
   end
 
   def products
@@ -18,4 +17,5 @@ class MerchantsController < ApplicationController
     end
     @products = @merchant.products
   end
+
 end
