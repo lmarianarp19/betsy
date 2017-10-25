@@ -9,4 +9,5 @@ class Category < ApplicationRecord
     category = Category.new(name: input_name)
     return category
   end
+
 end

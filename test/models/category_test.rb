@@ -17,16 +17,23 @@ describe Category do
 
   describe "validations" do
     it "requires a name" do
-
+      first_catagory.name = nil
+      first_catagory.valid?.must_equal false
     end
-    it "requres that the name be unique" do
 
+    it "requres that the name be unique" do
+      not_unique = Category.new(name: "fruit_category")
+      not_unique.valid?.must_equal false
     end
   end
 
   describe "methods" do
     describe "create_cat" do
-      
+      droids = Category.create_cat("droids")
+      droids.name.must_equal "droids"
+      droids.must_be_kind_of Category
+      droids.valid?.must_equal true
+      # droids.must_respond_to :products
     end
   end
 end
