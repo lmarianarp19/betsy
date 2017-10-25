@@ -1,10 +1,12 @@
 class MerchantsController < ApplicationController
   before_action only:[:show] do
-    restrict_merchant(:id)
+    restrict_merchant(params[:id])
   end
 
   def show
+    @orders = @merchant.orders
     @unfufilled = @orders.where(status: "pending")
+    
     @complete = @orders.where(status: "complete")
   end
 

@@ -1,9 +1,9 @@
 <h2><%= @login_merchant.username %></h2>
 
 <%= link_to "Manage Orders", merchant_orders_path(@login_merchant), class: "button" %>
-<p class="button">
-  <%= link_to "Manage Products"%>
-</p>
+
+  <%= link_to "Manage Products", merchant_products_path(@login_merchant), class: "button"%>
+
 
 <table align="center">
   <thead>
@@ -26,7 +26,7 @@
     </tr>
     <tr>
       <td>Completed Orders</td>
-      <td><%= @complete.calculate_total%></td>
+      <td><%= @complete%></td>
       <td><%= @complete.count%></td>
     </tr>
     <tr>
