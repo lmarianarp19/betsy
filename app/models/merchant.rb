@@ -31,4 +31,25 @@ class Merchant < ApplicationRecord
     return merchant
   end
 
+  def orders_hash
+    data = {}
+    self.distinct_orders.each do |order|
+      data[order] = order.order_items.select { |oi| oi.merchant == self }
+    end
+    return data
+  end
+
+  def orders_hash_by_status(order_status)
+    var = self.orders_hash
+    return var.select{ |k,v| k.status == order_status}
+  end
+
+  def distinct_orders
+    return self.orders.distinct
+  end
+
+  def sum_ord_hash(order_status)
+    var = self.orders_hash_by_status(order_status)
+    return var.values.flatten.inject(0) {|sum, oi| sum + oi.line_item_total}
+  end
 end

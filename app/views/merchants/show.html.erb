@@ -2,7 +2,7 @@
 
 <%= link_to "Manage Orders", merchant_orders_path(@login_merchant), class: "button" %>
 
-  <%= link_to "Manage Products", merchant_products_path(@login_merchant), class: "button"%>
+<%= link_to "Manage Products", merchant_products_path(@login_merchant), class: "button"%>
 
 
 <table align="center">
@@ -21,18 +21,18 @@
     </tr>
     <tr>
       <td>Unfulfilled Orders</td>
+      <td><%= number_to_currency(@unfufilled_revenue)%></td>
       <td><%= @unfufilled%></td>
-      <td><%= @unfufilled.count%></td>
     </tr>
     <tr>
       <td>Completed Orders</td>
+      <td><%= number_to_currency(@complete_revenue)%></td>
       <td><%= @complete%></td>
-      <td><%= @complete.count%></td>
     </tr>
     <tr>
       <td>Total</td>
-      <td></td>
-      <td><%= @orders.count%></td>
+      <td><%=number_to_currency(@total_revenue)%></td>
+      <td><%= @total%></td>
     </tr>
   </tbody>
 </table>
