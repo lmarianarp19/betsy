@@ -18,11 +18,11 @@ class OrderItem < ApplicationRecord
   def self.to_orders_hash(orders, arb)
     data = {}
     orders.each do |order|
-      data[order.id] = []
+      data[order] = []
       a = by_order(order)
       a.each do |order_item|
         if order_item.merchant == arb
-          data[order.id] << order_item
+          data[order] << order_item
         end
       end
     end

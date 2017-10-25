@@ -8,7 +8,8 @@ class OrdersController < ApplicationController
       @merchant = Merchant.find_by(id: params[:merchant_id])
 
       @orders = @merchant.orders.distinct
-      @orders_hash = to_orders_hash(@orders)
+      @orders_hash = OrderItem.to_orders_hash(@orders, @merchant)
+
       @order_item_merchant = @merchant.order_items
     end
   end
