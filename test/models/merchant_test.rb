@@ -78,13 +78,22 @@ describe Merchant do
       end
     end
 
-
-
-    describe "from_auth_hash" do
-
-    end
+    # describe "from_auth_hash" do
+    #   # no idea how to do this, doesnt seem important give our other priorities.
+    # end
 
     describe "orders_hash" do
+      it "for a user with orders it returns a hash where the keys are orders and the values are order items" do
+        o_hash = merchant_one.orders_hash
+        o_hash.must_be_kind_of Hash
+      end
+
+      it "returns an empty hash when no one has ordered a merchants products" do
+        merchant_new.orders_hash.must_equal Hash.new
+      end
+    end
+
+    describe "orders_hash_by_status" do
 
     end
 
