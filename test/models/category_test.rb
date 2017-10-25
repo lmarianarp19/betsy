@@ -36,7 +36,6 @@ describe Category do
         example.must_be_kind_of Category
         example.valid?.must_equal true
         count.must_equal Category.count, +1
-
       end
 
     end

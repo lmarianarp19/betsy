@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 payment_one:
+  name: blue origin
   email: blue_origin@gmail.com
   mailing_address: Kent all the way
   cc_name: Jeff Bezos
@@ -10,6 +11,7 @@ payment_one:
   billing_zip: 12345
 
 payment_two:
+  name: chewie
   email: MyString
   mailing_address: chewbacca@uber.com
   cc_name: Chewie
