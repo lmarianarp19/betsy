@@ -1,7 +1,7 @@
 class OrderItemsController < ApplicationController
   before_action only:[:ship] do
     @order_item = OrderItem.find_by(id: params[:id])
-    restrict_merchant(@order_item.product.merchant.id)
+    restrict_merchant(@order_item.merchant.id)
   end
 
   # TODO: DO WE NEED THIS ORDERITEM?????
@@ -13,7 +13,7 @@ class OrderItemsController < ApplicationController
     # Create a new order if there is session[:order_id]
     @order = current_order
     #TODO: This is the old code prior to order_item testing
-    
+
     # @item = @order.order_items.new(order_items_params)
     # @order.save
     # session[:order_id] = @order.id
@@ -51,13 +51,12 @@ class OrderItemsController < ApplicationController
   end
 
   def ship
-
     @order_item.shipped = true
     @order_item.save
+    @order_item.order.change_to_shipped
+    @order_item.order.save
     flash[:status] = "success"
     flash[:message] = "Item Shipped"
-    #redirect_to orders_path
-
     redirect_back fallback_location: merchant_orders_path(:merchant_id)
     #redirect_back is going to go first to request.referrer
   end
