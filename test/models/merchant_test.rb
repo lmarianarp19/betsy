@@ -26,22 +26,16 @@ describe Merchant do
     end
   end
 
-  describe "#products" do
-    it "should return a collection of products" do
+  describe "relationships" do
+    it "has a list of products" do
       merchant_one.must_respond_to :products
       merchant_one.products.must_be_kind_of Enumerable
       merchant_one.products.each do |product|
         product.must_be_kind_of Product
       end
     end
+    it "" do
 
-    it "Will respond to product" do
-      merchant_one.products.must_include products(:first_product)
-    end
-
-    it "will return an empty array when a merchant has no products" do
-      m = Merchant.new
-      m.products.must_equal []
     end
   end
 end
