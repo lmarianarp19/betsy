@@ -14,4 +14,22 @@ class OrderItem < ApplicationRecord
     total = price * quantity
     return total
   end
+
+  def self.to_orders_hash(orders, arb)
+    data = {}
+    orders.each do |order|
+      data[order.id] = []
+      a = by_order(order)
+      a.each do |order_item|
+        if order_item.merchant == arb
+          data[order.id] << order_item
+        end
+      end
+    end
+    return data
+  end
+
+  def self.by_order(order)
+    self.where(order: order)
+  end
 end

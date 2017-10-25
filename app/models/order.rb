@@ -1,4 +1,5 @@
 class Order < ApplicationRecord
+  CATEGORIES = %w(paid complete)
   has_many :order_items
   has_many :products, through: :order_items
   has_one :payment
@@ -8,6 +9,6 @@ class Order < ApplicationRecord
   #TODO test calculate total
 
   def calculate_total
-    self.order_items.collect { |item| item.product.price * item.quantity}.sum 
+    self.order_items.collect { |item| item.product.price * item.quantity}.sum
   end
 end
