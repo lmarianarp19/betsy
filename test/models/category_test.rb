@@ -28,12 +28,17 @@ describe Category do
   end
 
   describe "methods" do
-    describe "create_cat" do
-      droids = Category.create_cat("droids")
-      droids.name.must_equal "droids"
-      droids.must_be_kind_of Category
-      droids.valid?.must_equal true
-      # droids.must_respond_to :products
+    describe "#create_cat" do
+
+      it "Can create a new instance of category" do
+        count = Category.all.count
+        example = Category.create_cat("droids")
+        example.must_be_kind_of Category
+        example.valid?.must_equal true
+        count.must_equal Category.count, +1
+
+      end
+
     end
   end
 end
