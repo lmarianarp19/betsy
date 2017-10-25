@@ -17,14 +17,26 @@
       <%end %>
 
 <!-- Cart section  -->
-      <div>
-        <%= form_for @order_item do |f| %>
+
+
+:url => "/url/create", :html => {:method => :post} d
+<div>
+  <%= form_for @order, :url => orders_path, :html => {:action => "create"} do |f| %>
+    <%= f.fields_for :order_items, @order.order_items.build do|order_items_fields| %>
+      <%= order_items_fields.select :quantity, 1..@product.inventory %>
+      <%= order_items_fields.hidden_field :product_id, value: @product.id  %>
+      <%= f.submit "Add to Cart!" %>
+   <% end %>
+</div>
+
+      <!-- <div>
+        <%= form_for @order, :url => {:action => "create"} do |f| %>
           <%= f.hidden_field :product_id, value: @product.id %>
           <%= f.label :quantity %>
           <%= f.select :quantity, 1..@product.inventory %>
           <%= f.submit "Add to Cart!" %>
          <% end %>
-      </div>
+      </div> -->
 
       <p class="inventory"> <%= "#{@product.inventory} in stock!" %></p>
       <%= link_to "Write a Review!!", new_product_review_path(@product.id), class: "button" %>

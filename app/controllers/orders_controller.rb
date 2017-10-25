@@ -17,21 +17,31 @@ class OrdersController < ApplicationController
     unless @order
       head :not_found
     end
-
   end
 
 
   def create
-    @order = current_order
-    @item = OrderItem.new(order_items_params)
-    @order.order_items << @item
+    @order = current_order # An order already exists, use existing order
+    @item = OrderItem.new(orders_params)
+    # @order.order_items << @item
     # @item = @order.order_items.new(order_items_params)
     if save_and_flash(@order)
       session[:order_id] = @order.id
     end
     redirect_to cart_path
-
   end
+
+  # def current_order
+  #   if session[:order_id]
+  #     Order.find(session[:order_id])
+  #   else
+  #     Order.new
+  #   end
+  # end
+
+
+
+
 
   # def update
   #   @order.update_attributes(orders_params)
@@ -73,6 +83,6 @@ class OrdersController < ApplicationController
   private
 
   def orders_params
-    params.require(:order).permit(:order_status)
+    params.require(:order).permit(order_item_attributes:[:product_id, :quantity])
   end
 end

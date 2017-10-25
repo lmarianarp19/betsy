@@ -11,8 +11,6 @@ class OrderItemsController < ApplicationController
 
 
   def create
-    # Create a new order if there is session[:order_id]
-
   end
 
 #### Bianca working on this ###
