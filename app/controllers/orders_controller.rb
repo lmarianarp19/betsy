@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+
   before_action only:[:index] do
     restrict_merchant(params[:merchant_id])
   end
@@ -22,52 +23,23 @@ class OrdersController < ApplicationController
 
   def create
     @order = current_order # An order already exists, use existing order
-    @item = OrderItem.new(orders_params)
-    # @order.order_items << @item
-    # @item = @order.order_items.new(order_items_params)
+    if @order.product_ids.empty? # If the order is EMPTY
+      order_item = OrderItem.new(order_items_params)
+      @order.order_items << order_item
+    elsif @order.product_ids.include? params[:product_id].to_i # IF THE PRODUCT IS ALREADY IN THE CART
+      order_item = @order.order_items.find_by(product_id: params[:product_id])
+      order_item.quantity += params[:quantity].to_i
+      order_item.save
+    else # FOR ALL OTHER CASES
+      order_item = OrderItem.new(order_items_params)
+      @order.order_items << order_item
+    end
+
     if save_and_flash(@order)
       session[:order_id] = @order.id
     end
     redirect_to cart_path
   end
-
-  # def current_order
-  #   if session[:order_id]
-  #     Order.find(session[:order_id])
-  #   else
-  #     Order.new
-  #   end
-  # end
-
-
-
-
-
-  # def update
-  #   @order.update_attributes(orders_params)
-    #if @order.save
-      # if @order.payment_id
-      #   @order.status = "paid"
-      #   flash[:status] = :success
-      #   flashs[:message] = "Your payment was receive. Thanks for shopping."
-      #   redirect_to root_path
-      # else
-      #   flash[:status] = :failure
-      #   flash[:message] = "Invalid payment information"
-      #   flash[:erros] = @order.errors.messages
-      #   redirect_to new_payment_path
-      #   render "payment/show"
-      # end
-    # unless @order.save
-    #   flash[:status] = :failure
-    #   flash[:message] = "Could not update your order"
-    #   flash[:errors] = @order.errors.messages
-    #   redirect_to root_path
-    # end
-
-
-#  end
-
 
   def destroy # CANCEL
     if @order.destroy
@@ -82,7 +54,7 @@ class OrdersController < ApplicationController
 
   private
 
-  def orders_params
-    params.require(:order).permit(order_item_attributes:[:product_id, :quantity])
+  def order_items_params
+    params.permit(:quantity, :product_id)
   end
 end

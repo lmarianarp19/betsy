@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
   end
 
   def show
-    @order_item = current_order.order_items.new
+    @order = current_order
 
     @product = Product.find_by(id: params[:id])
     unless @product

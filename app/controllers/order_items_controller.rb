@@ -1,33 +1,9 @@
 class OrderItemsController < ApplicationController
+
   before_action only:[:ship] do
     @order_item = OrderItem.find_by(id: params[:id])
     restrict_merchant(@order_item.product.merchant.id)
   end
-
-  # TODO: DO WE NEED THIS ORDERITEM?????
-  def new
-    @order_item = OrderItem.new
-  end
-
-
-  def create
-  end
-
-#### Bianca working on this ###
-  # @item = @order.order_items.new(order_items_params)
-  #
-  # if !@order.order_items.exists?(:product_id => @item.product_id)
-  #   @order.save
-  #   flash[:status] = :success
-  #   flash[:message] = "Item was added to your cart"
-  #   session[:order_id] = @order.id
-  #   redirect_back fallback_location: cart_path
-  # else
-  #   var = @order.order_items.find_by(product_id: @item.product.id).quantity
-  #   var = params[:quantity]
-  #   var.save
-  #   redirect_to cart_path
-  # end
 
   def update
     @order_item = OrderItem.find_by(id: params[:id])
@@ -53,7 +29,6 @@ class OrderItemsController < ApplicationController
   end
 
   def ship
-
     @order_item.shipped = true
     @order_item.save
     flash[:status] = "success"
@@ -71,6 +46,5 @@ class OrderItemsController < ApplicationController
   def order_items_params
     params.require(:order_item).permit(:product_id, :quantity)
   end
-
 
 end
