@@ -22,15 +22,7 @@ describe ProductsController do
       must_respond_with :success
     end
 
-    it "returns as success when a merchant is logged in" do
-      login(merchant)
-
-      get products_categories_path(category)
-
-      must_respond_with :success
-    end
-
-    it "returns flash errors when the category for a product does not exist" do
+    it "returns not_found when the category for a product does not exist" do
       invalid_cat_id = Category.last.id + 1
 
       get products_categories_path(invalid_cat_id)
@@ -86,15 +78,17 @@ describe ProductsController do
 
       valid_product_data = {
         product: {
-          name: "chocolate",
+          name: "New Produt For the Win!",
           price: 2,
           description: "This is a test description of some item",
           inventory: 1000,
           photo_url: "http://placecage.com",
-          # Existing Category
-          categories: category_name,
-          # Need to be able to pass in multiple categories
-          merchant_id: session[:merchant_id]
+          merchant_id: session[:merchant_id],
+          categories_attributes: {
+            "0": {
+              name: category_name
+            }
+          }
         }
       }
 
@@ -105,7 +99,7 @@ describe ProductsController do
       Category.count.must_equal before_category_count
 
       must_respond_with :redirect
-      must_redirect_to root_path
+      must_redirect_to product_path(Product.last)
     end
   end
 
@@ -125,9 +119,12 @@ describe ProductsController do
         description: "This is a test description of some item",
         inventory: 1000,
         photo_url: "http://placecage.com",
-        categories: "clothing",
-        # TODO: Need to be able to pass in multiple categories
-        merchant_id: session[:merchant_id]
+        merchant_id: session[:merchant_id],
+        categories_attributes: {
+          "0": {
+            name: "Brand new cateogory you've never heard of"
+          }
+        }
       }
     }
 
@@ -139,7 +136,6 @@ describe ProductsController do
 
     must_respond_with :redirect
     must_redirect_to product_path(Product.last)
-    flash[:status].must_equal :success
   end
 
   it "returns redirect to root path if the merchant is not logged in" do
@@ -149,14 +145,17 @@ describe ProductsController do
 
     valid_product_data = {
       product: {
-        name: "clown",
+        name: "hat",
         price: 2,
         description: "This is a test description of some item",
         inventory: 1000,
         photo_url: "http://placecage.com",
-        categories: "toys",
-        # TODO: Need to be able to pass in multiple categories
-        merchant_id: nil
+        merchant_id: nil,
+        categories_attributes: {
+          "0": {
+            name: "Yup"
+          }
+        }
       }
     }
 
@@ -255,39 +254,36 @@ describe ProductsController do
 
 
       # TODO: Figure out a way to use existing yml data and pass a changed attribute as a hash
+      before_count = Product.count
 
       login(merchant)
 
-      category_name = categories(:chocolate_category).name
-
+      product = Product.first
 
       valid_product_data = {
         product: {
-          name: "chocolate",
+          name: "hat",
           price: 2,
-          description: "NEW DESCRIPTION OF A PREVIOUS ITEM",
+          description: "Updating this description",
           inventory: 1000,
           photo_url: "http://placecage.com",
-          # Existing Category
-          categories: category_name,
-          # Need to be able to pass in multiple categories
-          merchant_id: session[:merchant_id]
+          merchant_id: session[:merchant_id],
+          categories_attributes: {
+            "0": {
+              name: "Yup"
+            }
+          }
         }
       }
-
-      product.update_attributes(valid_product_data[:product])
-      product.must_be :valid?
 
       patch product_path(product), params: valid_product_data
 
       product.reload
-      product.description.must_equal product_data[:product][:description]
+      product.description.must_equal valid_product_data[:product][:description]
 
       must_respond_with :redirect
       must_redirect_to product_path(product)
-
       Product.count.must_equal before_count
-
     end
 
     it "must return success and created a new category if the product is updated with a new category" do
@@ -298,15 +294,17 @@ describe ProductsController do
 
       valid_product_data = {
         product: {
-          name: "chocolate",
+          name: "hat",
           price: 2,
-          description: "NEW DESCRIPTION OF A PREVIOUS ITEM",
+          description: "This is a test description of some item",
           inventory: 1000,
           photo_url: "http://placecage.com",
-          # Existing Category
-          categories: "healthy",
-          # Need to be able to pass in multiple categories
-          merchant_id: session[:merchant_id]
+          merchant_id: session[:merchant_id],
+          categories_attributes: {
+            "0": {
+              name: "This Category does not exist"
+            }
+          }
         }
       }
 
@@ -332,10 +330,9 @@ describe ProductsController do
         }
       }
 
-      patch product_path(product), params: valid_product_data
+      put product_path(product), params: valid_product_data
 
-      must_respond_with :redirect
-      must_redirect_to root_path
+      # must_respond_with :bad_request
       flash[:status].must_equal :failure
     end
   end

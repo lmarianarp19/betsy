@@ -36,6 +36,7 @@ class ProductsController < ApplicationController
 
   def create
     if @login_merchant
+      # binding.pry
       #input_cat_name = params[:product][:category_ids]
 
       #@category = Category.find(input_cat_name)
@@ -47,7 +48,7 @@ class ProductsController < ApplicationController
       @product.merchant_id = @login_merchant.id
       save_and_flash(@product)
 
-      redirect_to root_path
+      redirect_to product_path(@product)
       # else
       #   # If category does not exist and is valid
       #   @category = Category.create_cat(input_cat_name)
@@ -116,7 +117,7 @@ class ProductsController < ApplicationController
         flash[:status] = :failure
         flash[:message] = "There was an error when updating your product"
         flash[:details] = @product.errors.messages
-        render :edit, status: :bad_request
+        render :edit
       end
     end
   end
@@ -137,7 +138,7 @@ class ProductsController < ApplicationController
   private
 
   def products_params
-    params.require(:product).permit(:name, :price, :inventory,  :description, :photo_url, category_ids:[], categories_attributes: [:name])
+    params.require(:product).permit(:name, :price, :inventory,  :description, :photo_url, categories_attributes: [:name])
   end
 
 end
