@@ -35,7 +35,7 @@
 
               <%# TODO: Working Code %>
 
-            
+
     <%###############  LOGIN NAVIGATION #################### %>
 
         </div>
@@ -46,9 +46,9 @@
             <div class="dropdown">
               <li class="padding"><a><%= @login_merchant.username %></a></li>
               <div class="dropdown-content">
-                <%= link_to "Dashboard", merchant_path(@login_merchant.id)%>
-                <%= link_to "Manage Orders", merchant_orders_path(@login_merchant.id)%>
-                <%= link_to "Manage Products", merchant_products_path(@login_merchant.id) %>
+                <%= link_to "Dashboard", merchant_path(@login_merchant)%>
+                <%= link_to "Manage Orders", merchant_orders_path(@login_merchant)%>
+                <%= link_to "Manage Products", merchant_products_path(@login_merchant) %>
               </div>
             </div>
 
