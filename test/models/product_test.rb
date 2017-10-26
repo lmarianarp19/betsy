@@ -8,19 +8,6 @@ describe Product do
   let(:cat_att_hash_old) {{"0"=>{"name"=>"jedi_category"}}}
   let(:new_product) {Product.new}
 
-
-  # "categories_attributes"=>{"0"=>{"name"=>"gggg"}}
-
-  # let(:user_params) { {"email" => user.email, "password" => user.password} }
-
-  # categories_attributes: {
-  #   “0”: {
-  #     name: “Yup”
-  #   }
-  # }
-
-
-
   describe "relations" do
     it "has a merchant" do
       first_product.must_respond_to :merchant
@@ -169,10 +156,18 @@ describe Product do
         end
       end
 
-      describe "Category does not exists" do
-        # if category is new then no product can have that category already meaning we only have one test case for a new category
+      describe "New category" do
         it "will assign the category to a product" do
+          # arrange
+          new_category_name = cat_att_hash_new.values[0].values[0]
+          Category.find_by(name: new_category_name).must_be_nil
+          before = new_product.categories.length
 
+          # act
+          new_product.categories_attributes=(cat_att_hash_new)
+
+          # assert
+          new_product.categories.length.must_equal before + 1
         end
       end
     end
