@@ -17,9 +17,6 @@
   <%###############  CATEGORIES NAVIGATION #################### %>
 
   <%# TODO: Make this into columns based on screen size if time %>
-<!--
-  <header class="top-bar" id="responsive-menu"> -->
-    <!-- <nav class="top-bar-left"> -->
 
     <header>
       <div class="top-bar" id="responsive-menu">
@@ -123,21 +120,18 @@
     <% if  flash[:status] == :failure %>
       <%= "A problem occurred: #{flash[:message]}" %>
       <% if flash[:cc_errors] %>
-      <ul>
-       <% flash[:cc_errors].each do |errors_array| %>
-
-
-          <% errors_array[1].each do |error| %>
-          <li>  <%= error %> </li>
+        <ul>
+         <% flash[:cc_errors].each do |errors_array| %>
+            <% errors_array[1].each do |error| %>
+              <li>  <%= error %> </li>
+            <% end %>
           <% end %>
-
-
         <% end %>
-      </ul>
-      <% end %>
+        </ul>
       <% else %>
-      <%= flash[:message] %>
-    <% end %>
+        <%= flash[:message] %>
+      <% end %>
+
 
   </section>
 
@@ -157,7 +151,7 @@
   <%###############  FOOTER #################### %>
 
 
-  <footer class="align-center bg">
+  <footer class="align-center bg footer-margin min-width">
 
     <p>
       COPYRIGHT 2017

@@ -31,14 +31,16 @@
   display: inline-block;
 }
 
-.box-height {
+#quantity {
   height: 30px;
+  width: 100px;
 }
 
-.product-padding {
-  padding: 20px;
+.button-style {
+  font-family: 'Bungee Inline', cursive;
+  color: #ffdf00
 }
 
-.p-style {
-  font-weight: bold;
+header.bottom-margin {
+  margin-bottom: 80px;
 }
