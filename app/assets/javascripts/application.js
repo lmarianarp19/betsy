@@ -17,7 +17,7 @@
 
 $(function(){ $(document).foundation(); });
 
-*/
+
 StarWars = (function() {
 
   /*
