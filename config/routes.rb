@@ -12,9 +12,6 @@ Rails.application.routes.draw do
   #   resources :products, only:[:show]
   # end
 
-  #TODO: POSSIBLE NESTED ROUTES
-  # merchant/:id/products to show all merchant products?
-
   resources :products do
     resources :reviews, only: [:new, :create]
     resources :categories, only:[:index]
@@ -46,7 +43,7 @@ Rails.application.routes.draw do
 
   get '/auth/github', as: 'github'
   get '/auth/:provider/callback', to: 'sessions#login', as: "auth_callback"
-  post '/logout', to: 'sessions#logout', as: 'logout'
+  get '/logout', to: 'sessions#logout', as: 'logout'
 
   patch '/order_items/:id/ship', to: 'order_items#ship', as:'ship_order_item'
 
