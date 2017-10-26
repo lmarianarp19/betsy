@@ -17,6 +17,7 @@
              <%= form_tag('/orders', method: :post) %>
              <%= select_tag :quantity, options_for_select(1..product.inventory), class: "box-size" %>
              <br>
+             <%# binding.pry %>
              <%= hidden_field_tag :product_id, product.id  %>
              <%= submit_tag "Add to Cart", class:"button small bg button-style" %>
            </div>
