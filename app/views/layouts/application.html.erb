@@ -57,6 +57,7 @@
               <div class="dropdown">
                 <li class="padding"><a>Misc &nbsp;<%= image_tag 'red-five.png', class: "navimg" %></a></li>
                 <div class="dropdown-content">
+                  <%# TODO: FIX THIS %>
                   <% if Category.any? %>
                     <% Category.all.each do |cat| %>
                       <%= link_to cat.name, products_categories_path(cat) %>
