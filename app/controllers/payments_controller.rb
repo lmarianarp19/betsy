@@ -39,6 +39,10 @@ class PaymentsController < ApplicationController
     else
       flash[:status] = :failure
       flash[:message] = "Whoops! Something was wrong when placing your order!"
+      flash[:cc_errors] = @payment.errors.messages
+      # unless @payment.name
+      #   flash[:cc_errors] = ["You must enter a name"]
+      # end
       render :new, status: :bad_request
       #TODO to put specific messages for errors i.e. Invalid Credit Card number...
     end
