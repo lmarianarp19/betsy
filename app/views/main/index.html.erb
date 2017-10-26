@@ -1,18 +1,20 @@
 <main class="row">
   <section>
 
-    <header>
-      <h2>Popular Items</h2>
+    <header class="align-center row force-index">
+      <h2>The Force's Pick </h2>
     </header>
 
-    <section class="small-6 large-3 columns text-align-center border-color product-padding end">
+    <section class="clearfix small-6 small-centered large-5 large-centered columns border-color product-padding ">
       <% if @products.any? %>
-        <div>
+        <div class="float-center feature align-center ">
           <% product = @products.sample %>
-          <%= link_to image_tag(product.photo_url), class:"thumbnail" %>
+          <%= link_to image_tag(product.photo_url), product_path(product), class:"thumbnail" %>
+          <span><%= product.name %></span>
+          <span><%= number_to_currency product.price %></span>
         </div>
         <p>
-          <%# product.price %>
+
         </p>
       <% else %>
           <h1>Products coming soon!</h1>

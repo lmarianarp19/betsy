@@ -1,18 +1,37 @@
-<% if @order_items.any? %>
-  <% @order_items.each do |item| %>
-    <img src=<%="#{item.product.photo_url}"%> />
-    <p><%= item.product.name %> | <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"} %></p>
-    <p> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> | Total Price: <%= number_to_currency (item.product.price * item.quantity) %></p>
 
-    <%= form_for item do |f| %>
-    <%= f.select :quantity, 1..item.product.inventory %>
-    <%= f.submit %>
-    <% end %>
+<main>
+  <h2 class="cart-heading text-center">Your Cart</h2>
 
+<p class="text-center">Your Total: <%= number_to_currency current_order.calculate_total %></p>
+
+<div class='text-center checkout'>
+  <%= link_to "Checkout", "/orders/#{current_order.id}/payments/new", class: 'button large' %>
+</div>
+
+<div class='row'>
+      <% if @order_items.any? %>
+      <% @order_items.each do |item| %>
+      <div class='small-12 medium-6 large-6 column cart-image'>
+        <img src=<%="#{item.product.photo_url}"%> />
+    </div>
+
+    <div class="small-12 medium-6 large-5 column text-block">
+    <p class="text-center"> Unit Price: <%= number_to_currency item.product.price %> | Quantity: <%= item.quantity %> </p>
+      <p class="text-center"> Total Price: <%= number_to_currency (item.product.price * item.quantity) %></p>
+      <%= form_for item do |f| %>
+      <%= f.select :quantity, 1..item.product.inventory %>
+      <%= f.submit %>
+      <% end %>
+    <div class="large-8 column"><%= button_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"} %></div>
+  </div>
+
+  <hr />
   <% end %>
 
-<p>Your Total: <%= number_to_currency current_order.calculate_total %></p>
-<%= link_to "Checkout", "/orders/#{current_order.id}/payments/new", class: "button" %> 
+
 <% else %>
 <p>Your shopping cart is empty.</p>
 <% end %>
+</div>
+</section>
+</main>
