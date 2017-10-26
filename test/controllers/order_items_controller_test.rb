@@ -77,8 +77,6 @@ describe OrderItemsController do
 
   describe "#destroy" do
 
-    #TODO: THIS IS NOT PASSING
-
     it "must redirect to cart_path if order item was successfully destroyed as a guest user" do
       # Create a new order to get an order_id in the session
       before_count = OrderItem.count
@@ -94,10 +92,13 @@ describe OrderItemsController do
       post order_items_path, params: valid_data
       current_order = Order.last
       session[:order_id].must_equal current_order.id
+      OrderItem.count.must_equal before_count + 1
 
       delete order_item_path(current_order.order_items.last)
 
-      OrderItem.count.must_equal before_count - 1
+      OrderItem.count.must_equal before_count
+      must_respond_with :redirect
+      must_redirect_to cart_path
     end
   end
 end

@@ -31,9 +31,13 @@ class OrderItemsController < ApplicationController
   def destroy
     @order = current_order
     @item = @order.order_items.find(params[:id])
-    @item.destroy
-    @order.save
-
+    if @item
+      @item.destroy
+      @order.save
+    else
+      flash[:status] = :failure
+      flash[:message] = "You must be authorized to do that"
+    end
     redirect_to cart_path
   end
 
