@@ -24,6 +24,8 @@
 
 @font-face {font-family:"STARWARS";src:font-url("STARWARS.eot?") format("eot"),font-url("STARWARS.woff") format("woff"),font-url("STARWARS.ttf") format("truetype"),font-url("STARWARS.svg#STARWARS") format("svg");font-weight:normal;font-style:normal;}
 
+
+@font-face {font-family: 'Bungee Inline';src:font-url("BungeeInline-Regular.eot?") format("eot"), font-url("BungeeInline-Regular.woff") format("woff"), font-url("BungeeInline-Regular.ttf") format("truetype"), font-url("BungeeInline-Regular.svg#BungeeInline-Regular") format("svg");font-weight:normal;font-style:normal;}
 /******************************************************
                 STYLING ACROSS ALL PAGES
 *******************************************************/
@@ -37,7 +39,6 @@ body, html {
 body {
   background-image: image-url('ep_naturalblack.png');
   color: #F6F6F6;
-  // font-family: 'Didact Gothic', sans-serif;
 }
 
 header a {
