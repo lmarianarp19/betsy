@@ -24,6 +24,11 @@ describe OrderItem do
       order_item_one.order.must_be_kind_of Order
     end
 
+    it "has a merchant" do
+      order_item_one.must_respond_to :merchant
+      order_item_one.merchant.must_be_kind_of Merchant
+    end
+
     it "allows one product to have many orders" do
       first_product.orders.count.must_be :>, 1
       first_product.orders.must_include first_order
@@ -82,6 +87,14 @@ describe OrderItem do
       result = oi.save
       result.must_equal false
       oi.errors.messages.must_include :order
+    end
+  end
+
+  describe "line_item_total" do
+    it "will return the total cost (product price * quantity) for an order_item" do
+      expected = order_item_one.product.price * order_item_one.quantity
+      actual = order_item_one.line_item_total
+      actual.must_equal expected
     end
   end
 end
