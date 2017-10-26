@@ -23,7 +23,7 @@
       <%= f.submit %>
       <% end %>
     <div class="large-8 column ">
-      <%= button_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"} %></div>
+      <%= link_to "Delete", order_item_path(item), :data => {:confirm => "You sure?", :method => "delete"} %></div>
   </div>
 
   <hr />
