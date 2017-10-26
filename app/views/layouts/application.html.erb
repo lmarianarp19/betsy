@@ -25,7 +25,7 @@
 
               <% category = Category.all %>
               <li class="padding">
-                <%= link_to products_categories_path(category[0]) do %>
+                <%= link_to products_categories_path(category[0]), class: 'nav-link' do %>
                 Jedi &nbsp;<%= image_tag'yoda.png', class: "navimg" %>
                 <% end %>
               </li>
