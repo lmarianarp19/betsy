@@ -14,13 +14,14 @@
           <p><%= number_to_currency product.price %></p>
 
            <div>
+<<<<<<< HEAD
 
              <%= form_for @order_item do |f| %>
                 <%= f.hidden_field :product_id, value: product.id %>
                 <%= f.number_field :quantity %>
                 <%= f.submit "Add to cart" %>
               <% end %></p>
-           </div>
+
 
         </div>
       <% end %>
