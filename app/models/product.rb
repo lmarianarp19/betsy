@@ -22,7 +22,6 @@ class Product < ApplicationRecord
     end
   end
 
-
   def average_rating
     if self.reviews.count > 0
       total = 0.0
