@@ -32,6 +32,5 @@ class Product < ApplicationRecord
        total /= self.reviews.count
        return total
     end
-
   end#def
 end#class

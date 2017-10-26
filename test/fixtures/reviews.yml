@@ -5,11 +5,16 @@ review_one:
   product: second_product
 
 review_two:
-  review: This is the second review for my first product
+  review: This is the first review for my first product
   rating: 3
   product: first_product
 
 review_three:
   review: This is the second review for my first product
   rating: 3
+  product: first_product
+
+review_four:
+  review: This is the third review for my first product
+  rating: 4
   product: first_product

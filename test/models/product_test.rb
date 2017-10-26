@@ -81,12 +81,13 @@ describe Product do
         product3 = Product.new(merchant: first_merchant, price: Date.today, name: "name", inventory: 10)
         product3.valid?.must_equal false
       end
+
       it "#price returns false if the price is less than 1" do
         product1 = Product.new(merchant: first_merchant, price: 0, name: "name", inventory: 10)
         product1.valid?.must_equal false
       end
-
     end
+
     describe "merchant" do
       it "requires a merchant" do
         product = Product.new
@@ -94,6 +95,7 @@ describe Product do
         product.errors.messages.must_include :merchant
       end
     end
+
     describe "inventory" do
       it "requires an inventory" do
         product = Product.new
@@ -111,5 +113,27 @@ describe Product do
         product.errors.messages.must_include :inventory
       end
     end
+  end
+
+  describe "custom methods" do
+    describe "average_rating" do
+      it "will return the average rating for a product" do
+        expected = 0.0
+        first_product.reviews.each do |review|
+          expected += review.rating
+        end
+        expected /= first_product.reviews.count
+        actual = first_product.average_rating
+        actual.must_equal expected
+      end
+
+      it "will return nil for a product without reviews" do
+        Product.new.average_rating.must_equal nil
+      end
+    end
+
+    # describe "category_attributes=" do
+    #   # TODO: IRENE OR BIANCA WRITE THIS TESTS!
+    # end
   end
 end
