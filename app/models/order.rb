@@ -15,9 +15,13 @@ class Order < ApplicationRecord
 
   def ship_order
     all_items = self.order_items
-    all_items.each do |order_item|
-      if order_item.shipped == false
-        return false
+    if all_items.empty?
+      return false
+    else
+      all_items.each do |order_item|
+        if order_item.shipped == false
+          return false
+        end
       end
     end
     return true

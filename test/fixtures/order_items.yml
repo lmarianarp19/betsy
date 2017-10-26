@@ -4,13 +4,16 @@ order_item_one:
   quantity: 1
   order: first_order
   product: first_product
+  shipped: true
 
 order_item_two:
   quantity: 1
   order: second_order
   product: first_product
+  shipped: false
 
 order_item_three:
   quantity: 1
   order: first_order
   product: second_product
+  shipped: true

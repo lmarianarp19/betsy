@@ -8,4 +8,4 @@ first_order:
   status: pending
 
 second_order:
-  status: complete
+  status: paid

@@ -3,6 +3,7 @@ require "test_helper"
 describe Order do
   # orders
   let(:first_order) {orders :first_order}
+  let(:second_order) {orders :second_order}
   # payments
   let(:payment_one) {payments :payment_one}
 
@@ -63,5 +64,33 @@ describe Order do
         Order.new.calculate_total.must_equal 0
       end
     end
+  end
+
+  describe 'change_to_shipped' do
+    it "will update and orders status to 'complete' if all of an orders order_items have been shipped, returns complete" do
+      first_order.status.wont_equal "complete"
+      first_order.order_items.each do |oi|
+        oi.shipped.must_equal true
+      end
+      first_order.change_to_shipped.must_equal "complete"
+      # first_order.status.must_equal "complete"
+    end
+
+    it "will not change an orders status if all of the order_items have not been shipped, returns complete" do
+      second_order.status.wont_equal "complete"
+      second_order.order_items.each do |oi|
+        oi.shipped.must_equal false
+      end
+      second_order.change_to_shipped.wont_equal "complete"
+      # second_order.status.wont_equal "complete"
+    end
+
+    it "will return nil for a Order with no order_items" do
+      Order.new.change_to_shipped.must_equal nil
+    end
+  end
+
+  describe "order_item_attributes" do
+    # TODO: WRITE ME!
   end
 end
