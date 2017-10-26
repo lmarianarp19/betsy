@@ -12,7 +12,7 @@ class Payment < ApplicationRecord
   validates :cc_ccv, presence: {message: "Must include a ccv number"}
   validates :cc_ccv, format: {with: /\b\d{3}\b/, message: "Must enter a valid CCV"}
   validates :billing_zip, presence: {message: "Must include a billing zip code"}
-
+  validates :billing_zip, format: { with: /\b\d{5}\b/, message: "Enter a valid ZIP code" }
   def expiration_date_cannot_be_in_the_past
     if cc_expiration.present? && cc_expiration < Date.today
       errors.add(:cc_expiration, "Expiration date can't be in the past")

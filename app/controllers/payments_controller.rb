@@ -39,7 +39,7 @@ class PaymentsController < ApplicationController
     else
       flash[:status] = :failure
       flash[:message] = "Whoops! Something was wrong when placing your order!"
-      flash[:cc_errors] = @payment.errors.messages
+      flash[:details] = @payment.errors.messages
       render :new, status: :bad_request
     end
   end
