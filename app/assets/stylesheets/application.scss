@@ -16,28 +16,29 @@
  *= require foundation_and_overrides
 
  */
-// @import url("https://fonts.googleapis.com/css?family=Pathway+Gothic+One");
+@import url("https://fonts.googleapis.com/css?family=Didact+Gothic");
 
 @import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
 
 @import url('https://fonts.googleapis.com/css?family=Asar|Open+Sans');
 
+@font-face {font-family:"STARWARS";src:url("STARWARS.eot?") format("eot"),url("STARWARS.woff") format("woff"),url("STARWARS.ttf") format("truetype"),url("STARWARS.svg#STARWARS") format("svg");font-weight:normal;font-style:normal;}
 
 /******************************************************
                 STYLING ACROSS ALL PAGES
 *******************************************************/
 
-
 body, html {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
   font-size: 1em;
-
-  // font-family: 'Pathway Gothic One', sans-serif;
 }
-// h1 a {
-//   font-family: 'Pathway Gothic One', sans-serif;
-// }
+
+body {
+  background-image: url('ep_naturalblack.png');
+  color: #F6F6F6;
+  // font-family: 'Didact Gothic', sans-serif;
+}
 
 header a {
   color: white;
@@ -63,9 +64,6 @@ header a {
   min-width: 100%
 }
 
-
-
-
 /* *****************************************************
                             NAV
 ****************************************************** */
@@ -83,7 +81,6 @@ header a {
   color: #ffdf00;
   font-family: 'Bungee Inline', cursive;
 }
-
 
 /* *****************************************************
                     DROP DOWN MISC
@@ -191,6 +188,12 @@ HERO
 //   }
 // }
 
+.hero h1 {
+  padding-top: 125px;
+  font-family: 'STARWARS';
+  font-size: 5em;
+}
+
 
 .hero {
   // TODO: Make this height reactive with media breaks
@@ -250,7 +253,69 @@ HERO
 //     min-width: 100%;
 //   }
 // }
+/******************************************************
+                    INDEX/ROOT
+*******************************************************/
 
+h1 {
+  padding: 50px;
+}
+
+.force-index h2 {
+  padding: 30px;
+  font-family: 'STARWARS';
+}
+
+
+/******************************************************
+                      MAIN
+*******************************************************/
+
+////////CART////////////
+
+.cart-heading {
+  margin-top: 20px;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  font-family: 'STARWARS';
+}
+
+.cart-name {
+  font-size: 1.5em;
+  padding-top: 15px;
+}
+
+.checkout {
+  padding-bottom: 40px;
+  padding-top: 20px;
+}
+
+.cart-image img {
+  width: 60%;
+  padding-bottom: 20px;
+  padding-left: 80px;
+}
+
+select {
+  width: 40%;
+  margin-left: 50px;
+}
+
+input {
+  margin-left: 10px;
+}
+
+.text-block {
+  padding-top: 40px;
+}
+
+.button-large{
+  color: #CA4C3D;
+}
+
+hr {
+  opacity: .5;
+}
 /******************************************************
                         OPENING
 *******************************************************/
@@ -259,10 +324,18 @@ HERO
                           FOOTER
 *******************************************************/
 
+
 .footer-margin {
   margin-top: 100px;
   padding: 20px;
 }
+
+// footer p {
+//   opacity: .6;
+//   margin-bottom: 0;
+//   // background-color: #282828;
+//   padding-top: 20px;
+// }
 
 /******************************************************
                           TABLES
