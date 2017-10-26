@@ -1,3 +1,28 @@
 // Place all the styles related to the main controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h2, footer.bg {
+  color: #ffdf00;
+  font-family: 'Bungee Inline', cursive;
+}
+
+.bg {
+  background-color: black;
+}
+
+.small-thumb {
+  width: 300px;
+}
+
+.more-padding {
+  padding: 50px;
+}
+
+main.no-bg {
+  background-color: transparent;
+}
+
+blockquote {
+  display: inline;
+}

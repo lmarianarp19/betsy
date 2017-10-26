@@ -7,6 +7,7 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
@@ -19,30 +20,52 @@
 
 @import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
 
+@import url('https://fonts.googleapis.com/css?family=Asar|Open+Sans');
+
 
 /******************************************************
                 STYLING ACROSS ALL PAGES
 *******************************************************/
 
 
-body {
+body, html {
+  margin: 0;
   // font-family: 'Pathway Gothic One', sans-serif;
 }
-h1 a {
-  font-family: 'Pathway Gothic One', sans-serif;
-}
+// h1 a {
+//   font-family: 'Pathway Gothic One', sans-serif;
+// }
 
 header a {
   color: white;
 }
 
-li.padding {
+main, h3 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.more-margin {
+  margin: 50px;
+}
+
+.padding {
   padding: 5px;
 }
 
 .align-center {
   text-align: center;
 }
+
+.margin-zero {
+  margin: 0;
+}
+
+.min-width {
+  min-width: 100%
+}
+
+
+
 
 /* *****************************************************
                             NAV
@@ -58,7 +81,7 @@ li.padding {
 }
 
 header a {
-  color: yellow;
+  color: #ffdf00;
   font-family: 'Bungee Inline', cursive;
 }
 
