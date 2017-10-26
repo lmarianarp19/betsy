@@ -46,8 +46,9 @@ private
 
   def restrict_merchant(expected_merchant_id)
     @merchant = Merchant.find_by(id: expected_merchant_id)
-
-    if @login_merchant.id == @merchant.id
+    
+    if @login_merchant && @login_merchant.id == @merchant.id
+    # if @login_merchant.id == @merchant.id
       unless @merchant
         head :not_found
       end
