@@ -7,7 +7,6 @@ describe MerchantsController do
   describe "#show" do
     it "returns success when showing a merchant show page" do
       login(merchant)
-
       merchant.must_be :valid?
 
       get merchant_path(merchant)
@@ -15,14 +14,13 @@ describe MerchantsController do
       must_respond_with :success
     end
 
-    it "returns not found if the merchant_id is not found" do
+    it "returns success if the merchant has no summary of products" do
+      merchant.products.destroy_all
       login(merchant)
 
-      invalid_merchant_id = Merchant.last.id + 1
+      get merchant_path(merchant)
 
-      get merchant_path(invalid_merchant_id)
-
-      must_respond_with :not_found
+      must_respond_with :success
     end
 
     it "returns redirect to root path if the merchant is not logged in" do
@@ -30,7 +28,25 @@ describe MerchantsController do
 
       must_respond_with :redirect
       must_redirect_to root_path
-      flash[:status].must_equal :failure
+      flash[:status] = :failure
     end
+  end
+
+  describe "#products" do
+    it "returns success if the merchant has products" do
+      login(merchant)
+
+      get merchant_products_path(merchant)
+
+      must_respond_with :success
+    end
+    #
+    # it "return success if the merchant has no current products" do
+    #   merchant.products.destroy_all
+    #
+    #   get merchant_product_path(merchant)
+    #
+    #   must_respond_with :success
+    # end
   end
 end

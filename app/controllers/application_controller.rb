@@ -46,15 +46,17 @@ private
 
   def restrict_merchant(expected_merchant_id)
     @merchant = Merchant.find_by(id: expected_merchant_id)
-
-    if @login_merchant.id == @merchant.id
+    
+    if @login_merchant && @login_merchant.id == @merchant.id
+    # if @login_merchant.id == @merchant.id
       unless @merchant
         head :not_found
       end
     else
       flash[:status] = :failure
       flash[:message] = "You must be authorized to do that"
-      redirect_to root_path
+      #redirect_to root_path
+      redirect_back fallback_location: root_path
     end
   end
 
