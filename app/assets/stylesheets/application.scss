@@ -263,7 +263,9 @@ h1 {
 
 .force-index h2 {
   padding: 30px;
-  font-family: 'STARWARS';
+}
+.force-index {
+  background: url('ep_naturalblack.png');
 }
 
 
@@ -277,7 +279,6 @@ h1 {
   margin-top: 20px;
   padding-top: 30px;
   padding-bottom: 20px;
-  font-family: 'STARWARS';
 }
 
 .cart-name {
