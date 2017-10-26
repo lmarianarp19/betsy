@@ -131,7 +131,20 @@
 
     <% if  flash[:status] == :failure %>
       <%= "A problem occurred: #{flash[:message]}" %>
-    <% else %>
+      <% if flash[:cc_errors] %>
+      <ul>
+       <% flash[:cc_errors].each do |errors_array| %>
+
+
+          <% errors_array[1].each do |error| %>
+          <li>  <%= error %> </li>
+          <% end %>
+
+
+        <% end %>
+      </ul>
+      <% end %>
+      <% else %>
       <%= flash[:message] %>
     <% end %>
 
