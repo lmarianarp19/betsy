@@ -1,9 +1,5 @@
 class ProductsController < ApplicationController
 
-  # skip_before_action :find_merchant, only: [:index, :show]
-
-  ###### TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING SEE APPLICATION.HTML.ERB%>
-
   def index
     @category = Category.find_by(id: params[:id])
     if @category
@@ -28,6 +24,7 @@ class ProductsController < ApplicationController
     if @login_merchant
       @product = Product.new
     else
+      # TODO: Make flash messages for unauthorized!!! When use is not logged in
       flash[:status] = :failure
       flash[:message] = "You must be authorized to do that"
       redirect_to root_path
@@ -36,30 +33,11 @@ class ProductsController < ApplicationController
 
   def create
     if @login_merchant
-      # binding.pry
-      #input_cat_name = params[:product][:category_ids]
-
-      #@category = Category.find(input_cat_name)
-
-      #if @category # If category exists make a new product
+      # If category exists make a new product
       @product = Product.new(products_params) # This pulls in the params from the form and uses the categories and checks to see if the names are already in the database.
-      #@product.categories << @category
-      # @product.category_id = category.id
       @product.merchant_id = @login_merchant.id
       save_and_flash(@product)
-
       redirect_to product_path(@product)
-      # else
-      #   # If category does not exist and is valid
-      #   @category = Category.create_cat(input_cat_name)
-      #   @product = Product.new(products_params)
-      #   @product.merchant_id = @login_merchant.id
-      #   @product.categories << @category
-      #   save_and_flash(@product)
-      #
-      #   redirect_to product_path(@product)
-      #  end
-
     else
       # TODO: Make flash messages for unauthorized!!! When use is not logged in
       flash[:status] = :failure
@@ -72,11 +50,11 @@ class ProductsController < ApplicationController
     if @login_merchant
       @product = Product.find_by(id: params[:id])
 
-      # TODO: Render a 404 error when not found ruby specific 404 page?
       unless @product
         head :not_found
       end
     else
+      # TODO: Make flash messages for unauthorized!!! When use is not logged in
       flash[:status] = :failure
       flash[:message] = "You must be authorized to do that"
       redirect_to root_path
@@ -84,35 +62,13 @@ class ProductsController < ApplicationController
   end
 
   def update
-    # TODO: how to not use Product.find and get test to pass?
     if @login_merchant
       @product = Product.find(params[:id])
-      if @product.update_attributes(products_params) # This pulls in the params from the form and uses the categories and checks to see if the names are already in the database.
+      if @product.update_attributes(products_params)
         flash[:status] = :success
         flash[:message] = "Successfully updated #{@product.name}!"
-        #@product.categories << @category
-        # @product.category_id = category.id
-        # @product.merchant_id = @login_merchant.id
+
         redirect_to product_path(@product)
-        # input_cat_name = params[:product][:categories]
-        # @category = Category.find_by(name: input_cat_name)
-        # @product = Product.find_by(id: params[:id])
-        #
-        # if @category && @product # If category exists update prodouct
-        #   @product.update_attributes(products_params)
-        #   if save_and_flash(@product)
-        #     redirect_to product_path(@product)
-        #   else
-        #     redirect_to root_path
-        #   end
-        # else
-        # If category does not exist and is valid make a new category and update product
-        # @category = Category.create_cat(input_cat_name)
-        # @product.categories << @category
-        # save_and_flash(@product)
-        #
-        # redirect_to product_path(@product)
-        # end
       else
         flash[:status] = :failure
         flash[:message] = "There was an error when updating your product"
@@ -122,6 +78,8 @@ class ProductsController < ApplicationController
     end
   end
 
+
+  # TODO: DELETE IF NOT USING THIS
   def destroy # RETIRE
     if @login_merchant
       @product = Product.find_by(id: params[:id])

@@ -1,8 +1,5 @@
 class SessionsController < ApplicationController
 
-  #TODO: REFACTOR FLASHES INTO THE APPLICATIONS CONTROLLER
-  #TODO: CHECK AUTH HASH IN INTERACTIVE SHELL WHEN PASSING IN
-
   def login
     auth_hash = request.env['omniauth.auth']
 

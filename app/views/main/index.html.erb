@@ -1,23 +1,25 @@
-<main class="row">
-  <section>
+<main class="row margin-zero min-width no-bg">
+  <section class="align-center">
 
-    <header>
-      <h2>Popular Items</h2>
+    <header class="bg">
+      <h2 class="more-padding">Popular Items</h2>
     </header>
 
-      <% if @products.any? %>
+    <% if Product.any? %>
+      <% product = Product.first %>
 
-        <div>
-          <% product = @products.sample %>
-          <%= link_to image_tag(product.photo_url), class:"thumbnail" %>
+        <div class="thumbnail small-thumb small-12 large-3 small-centered large-centered columns padding more-margin">
+          <%= link_to image_tag(product.photo_url), class:"padding", alt:"#{product.name}" %>
+
+          <p><strong><%= product.name %></strong></p>
+          <p>
+            $ <%= product.price %>.00
+          </p>
         </div>
-        <p>
-          <%= product.price %>
-        </p>
 
       <% else %>
 
-          <h1>Products coming soon!</h1>
+          <h2>Products coming soon!</h2>
 
       <% end %>
 

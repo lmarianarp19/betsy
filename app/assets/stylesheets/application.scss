@@ -7,6 +7,7 @@
  *
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
@@ -17,39 +18,71 @@
  */
 // @import url("https://fonts.googleapis.com/css?family=Pathway+Gothic+One");
 
+@import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
+
+@import url('https://fonts.googleapis.com/css?family=Asar|Open+Sans');
+
 
 /******************************************************
                 STYLING ACROSS ALL PAGES
 *******************************************************/
 
 
-body {
+body, html {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+
   // font-family: 'Pathway Gothic One', sans-serif;
 }
-h1 a {
-  font-family: 'Pathway Gothic One', sans-serif;
-}
+// h1 a {
+//   font-family: 'Pathway Gothic One', sans-serif;
+// }
 
 header a {
   color: white;
 }
 
-li.padding {
-  padding: 8px;
+.more-margin {
+  margin: 50px;
+}
+
+.padding {
+  padding: 5px;
 }
 
 .align-center {
   text-align: center;
 }
 
+.margin-zero {
+  margin: 0;
+}
+
+.min-width {
+  min-width: 100%
+}
+
+
+
+
 /* *****************************************************
                             NAV
 ****************************************************** */
 
-header.fixed {
-  background-color: #282828;
+.top-bar ul, .top-bar {
+  background-color: black;
 }
 
+.navimg {
+  max-width: 35px;
+  max-height: 25px;
+}
+
+header a {
+  color: #ffdf00;
+  font-family: 'Bungee Inline', cursive;
+}
 
 
 /* *****************************************************
@@ -88,10 +121,12 @@ header.fixed {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-.navimg {
-  max-width: 35px;
-  max-height: 25px;
+
+.margin-top {
+  margin-top: 8px;
+  margin-right: 10px;
 }
+
 // div.nav-menu {
 //  width: 60%;
 //  display: flex;
@@ -181,18 +216,22 @@ HERO
 
 .row.status.success {
   border-radius: 5px;
-  background-color: lightgreen;
+  background-color: lightblue;
   padding: 20px 25px;
-  margin-top: 20px;
   font-size: 1em;
+  min-width: 100%;
 }
 
 .row.status.failure {
   border-radius: 5px;
   background-color: pink;
   padding: 20px 25px;
-  margin-top: 20px;
   font-size: 1em;
+  min-width: 100%;
+}
+
+.no-bg-color {
+  background-color: transparent;
 }
 
 
@@ -203,6 +242,11 @@ HERO
 /******************************************************
                           FOOTER
 *******************************************************/
+
+.footer-margin {
+  margin-top: 100px;
+  padding: 20px;
+}
 
 /******************************************************
                           TABLES
