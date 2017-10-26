@@ -8,20 +8,20 @@
     <% if @products.any? %>
 
       <% @products.each do |product| %>
-          <div class="small-12 large-4 columns thumbnail end">
-            <%= link_to image_tag(product.photo_url), product_path(product) %>
-            <p><strong><%= product.name %></strong></p>
-            <p><%= number_to_currency product.price %></p>
+        <div class="small-12 large-4 columns thumbnail end">
+          <%= link_to image_tag(product.photo_url), product_path(product) %>
+          <p><strong><%= product.name %></strong></p>
+          <p><%= number_to_currency product.price %></p>
 
-             <div>
-               <%= form_tag('/orders', method: :post) %>
-               <%= select_tag :quantity, options_for_select(1..product.inventory), class: "box-size" %>
-               <br>
-               <%= hidden_field_tag :product_id, product.id  %>
-               <%= submit_tag "Add to Cart", class:"button small bg button-style" %>
-             </div>
+           <div>
+             <%= form_tag('/orders', method: :post) %>
+             <%= select_tag :quantity, options_for_select(1..product.inventory), class: "box-size" %>
+             <br>
+             <%= hidden_field_tag :product_id, product.id  %>
+             <%= submit_tag "Add to Cart", class:"button small bg button-style" %>
+           </div>
 
-          </div>
+        </div>
       <% end %>
 
 
