@@ -25,24 +25,24 @@ class OrdersController < ApplicationController
 
 
   def create
-    @order = current_order # Check to see if the order already is in the session
-
-    if @order.product_ids.empty? # If the order has no products
-      order_item = OrderItem.new(order_items_params)
-      @order.order_items << order_item
-    elsif @order.product_ids.include? params[:product_id].to_i # IF THE PRODUCT IS ALREADY IN THE CART
-      order_item = @order.order_items.find_by(product_id: params[:product_id])
-      order_item.quantity += params[:quantity].to_i
-      order_item.save
-    else
-      order_item = OrderItem.new(order_items_params)
-      @order.order_items << order_item
-    end
-
-    if save_and_flash(@order)
-      session[:order_id] = @order.id
-    end
-    redirect_to cart_path
+    # @order = current_order # Check to see if the order already is in the session
+    #
+    # if @order.product_ids.empty? # If the order has no products
+    #   order_item = OrderItem.new(order_items_params)
+    #   @order.order_items << order_item
+    # elsif @order.product_ids.include? params[:product_id].to_i # IF THE PRODUCT IS ALREADY IN THE CART
+    #   order_item = @order.order_items.find_by(product_id: params[:product_id])
+    #   order_item.quantity += params[:quantity].to_i
+    #   order_item.save
+    # else
+    #   order_item = OrderItem.new(order_items_params)
+    #   @order.order_items << order_item
+    # end
+    #
+    # if save_and_flash(@order)
+    #   session[:order_id] = @order.id
+    # end
+    # redirect_to cart_path
   end
 
   def destroy # CANCEL
