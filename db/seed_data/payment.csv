@@ -1,4 +1,4 @@
-name,email,mailing_address,cc_name,cc_number,cc_ccv,billing_zip,order_id
+name,email,mailing_address,cc_name,cc_number,cc_ccv,billing_zip,order_id,cc_expiration,
 mariana,mariana@gmail.com,12345 SW 123 st,Mariana L,123456789012345,134,34567,2,
 bianca,biancaf@gmail.com,15167 nw 45th st,bianca f,34567890123456,232,43511,10,
 cookie monster,lmnashf12342@yahoo.com,453 s albert street,cookie monster,45367892098465,398,87965,11,
