@@ -4,6 +4,22 @@ describe Product do
   # products
   let(:first_product) {products :first_product}
   let(:first_merchant) {merchants :first_merchant}
+  let(:cat_att_hash_new) {{"0"=>{"name"=>"Ewok"}}}
+  let(:cat_att_hash_old) {{"0"=>{"name"=>"jedi_category"}}}
+  let(:new_product) {Product.new}
+
+
+  # "categories_attributes"=>{"0"=>{"name"=>"gggg"}}
+
+  # let(:user_params) { {"email" => user.email, "password" => user.password} }
+
+  # categories_attributes: {
+  #   “0”: {
+  #     name: “Yup”
+  #   }
+  # }
+
+
 
   describe "relations" do
     it "has a merchant" do
@@ -50,9 +66,8 @@ describe Product do
   describe "validations" do
     describe "name" do
       it "requires a name" do
-        product = Product.new
-        product.valid?.must_equal false
-        product.errors.messages.must_include :name
+        new_product.valid?.must_equal false
+        new_product.errors.messages.must_include :name
       end
       it "requires the name to be unique" do
         name = "NameMcNameFace"
@@ -64,11 +79,11 @@ describe Product do
         product2.errors.messages.must_include :name
       end
     end
+
     describe "price" do
       it "requires a price" do
-        product = Product.new
-        product.valid?.must_equal false
-        product.errors.messages.must_include :price
+        new_product.valid?.must_equal false
+        new_product.errors.messages.must_include :price
       end
 
       it "#price returns false if the price is not a number" do
@@ -90,17 +105,15 @@ describe Product do
 
     describe "merchant" do
       it "requires a merchant" do
-        product = Product.new
-        product.valid?.must_equal false
-        product.errors.messages.must_include :merchant
+        new_product.valid?.must_equal false
+        new_product.errors.messages.must_include :merchant
       end
     end
 
     describe "inventory" do
       it "requires an inventory" do
-        product = Product.new
-        product.valid?.must_equal false
-        product.errors.messages.must_include :inventory
+        new_product.valid?.must_equal false
+        new_product.errors.messages.must_include :inventory
       end
       it "returns false if the inventory is not a number" do
         product = Product.new(merchant: first_merchant, price: 1000, name: "name", inventory: "one")
@@ -116,8 +129,7 @@ describe Product do
 
     describe "current" do
       it "#current attribute defualts to 'true'" do
-        product = Product.new
-        product.current.must_equal true
+        new_product.current.must_equal true
       end
     end
   end
@@ -135,23 +147,34 @@ describe Product do
       end
 
       it "will return nil for a product without reviews" do
-        Product.new.average_rating.must_equal nil
+        new_product.average_rating.must_be_nil
       end
     end
 
     describe "category_attributes=" do
-      it "for a category that already exists if a product doesn't have that category with will assign it to the produc" do
+      describe "Category already exists" do
+        it "will assign the existing category to a product, for a product that doesn't have that category" do
+          before = new_product.categories.length
+          new_product.categories_attributes=(cat_att_hash_old)
+          new_product.categories.length.must_equal before + 1
+          # there must be a better way to test this... but I'm not sure how - SRB
+          new_product.categories.first.name.must_equal cat_att_hash_old.values[0].values[0]
+        end
 
+        it "it will do nothing if a product already has the category assigned to it" do
+          new_product.categories_attributes=(cat_att_hash_old)
+          before = new_product.categories.length
+          new_product.categories_attributes=(cat_att_hash_old)
+          new_product.categories.length.must_equal before
+        end
       end
 
-      it "for cat that already exists for a product that already has that category it will do nothing" do
+      describe "Category does not exists" do
+        # if category is new then no product can have that category already meaning we only have one test case for a new category
+        it "will assign the category to a product" do
 
-      end
-
-      it "will create a new category if it doesn't exist and assign it to the product" do
-
+        end
       end
     end
-
   end
 end
