@@ -18,12 +18,12 @@ describe SessionsController do
 
       start_count = Merchant.count
 
-      merchant = Merchant.new(
+      merchant = {
         username: "John",
         email: "johndoe@gmail.com",
         uid: 77777777,
         provider: "github"
-      )
+      }
 
       login(merchant)
 
