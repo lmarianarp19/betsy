@@ -2,9 +2,9 @@ class ProductsController < ApplicationController
 
   def index
     @category = Category.find_by(id: params[:id])
+
     if @category
       @order_item = OrderItem.new
-      # @order_item = current_order.order_items.new
       @products = @category.products
     else
       head :not_found

@@ -16,68 +16,26 @@
 
   <%###############  CATEGORIES NAVIGATION #################### %>
 
-  <%# TODO: Make this into columns based on screen size if time %>
-
+    <% @products %> <%# Need to utilize %>
     <header>
       <div class="top-bar" id="responsive-menu">
         <div class="top-bar-left">
           <ul class="menu">
 
               <% category = Category.all %>
-              <li class="padding">
-                <%= link_to products_categories_path(category[0]) do %>
-                Jedi &nbsp;<%= image_tag'yoda.png', class: "navimg" %>
-                <% end %>
-              </li>
-              <li class="padding">
-                <%= link_to products_categories_path(category[1]) do %>
-                Sith &nbsp;<%= image_tag 'darth-vader.png', class: "navimg" %>
-                <% end %>
-              </li>
-              <li class="padding">
-                <%= link_to products_categories_path(category[2]) do %>
-                Droids &nbsp;<%= image_tag 'c3p0.png', class: "navimg" %>
-                <% end %>
-              </li>
-              <li class="padding">
-                <%= link_to products_categories_path(category[3]) do %>
-                Clothing &nbsp;<%= image_tag 'obiwan-kenobi.png', class: "navimg" %>
-                <% end %>
-              </li>
-              <li class="padding">
-                <%= link_to products_categories_path(category[4]) do %>
-                Toys &nbsp;<%= image_tag 'boba-fett.png', class: "navimg" %>
-                <% end %>
-              </li>
-              <li class="padding">
-                <%= link_to products_categories_path(category[18]) do %>
-                Pets &nbsp;<%= image_tag 'ewok.png', class: "navimg" %>
-                <% end %>
-              </li>
-              <div class="dropdown">
-                <li class="padding"><a>Misc &nbsp;<%= image_tag 'red-five.png', class: "navimg" %></a></li>
-                <div class="dropdown-content">
-                  <%# TODO: FIX THIS %>
-                  <% if Category.any? %>
-                    <% Category.all.each do |cat| %>
-                      <%= link_to cat.name, products_categories_path(cat) %>
+              <% if category %>
+                <% category.each do |category| %>
+                  <li class="padding">
+                    <%= link_to products_categories_path(category) do %>
+                    <%= category.name %> &nbsp;<%= image_tag'yoda.png', class: "navimg" %>
                     <% end %>
-                  <% end %>
-                </div>
-              </div>
-              <!-- <li class="padding">
-                <%= link_to products_categories_path(category[5]) do %>
-                Gear &nbsp;<%= image_tag 'red-five.png', class: "navimg" %>
+                  </li>
                 <% end %>
-              </li> -->
-            </ul>
+              <% end %>
 
-              <!-- <li class="padding">
-                <%= link_to products_categories_path(category[18]) do %>
-                Misellaneous &nbsp;<%= image_tag 'stormtrooper.png', class: "navimg" %>
-                <% end %>
-              </li> -->
+              <%# TODO: Working Code %>
 
+            
     <%###############  LOGIN NAVIGATION #################### %>
 
         </div>
