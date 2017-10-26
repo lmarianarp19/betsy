@@ -54,7 +54,8 @@ private
     else
       flash[:status] = :failure
       flash[:message] = "You must be authorized to do that"
-      redirect_to root_path
+      #redirect_to root_path
+      redirect_back fallback_location: root_path
     end
   end
 
