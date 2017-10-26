@@ -17,101 +17,95 @@
   <%###############  CATEGORIES NAVIGATION #################### %>
 
   <%# TODO: Make this into columns based on screen size if time %>
+<!--
+  <header class="top-bar" id="responsive-menu"> -->
+    <!-- <nav class="top-bar-left"> -->
 
-  <header class="fixed">
-    <nav data-topbar role="navigation">
-      <ul class="menu">
+    <header>
+      <div class="top-bar" id="responsive-menu">
+        <div class="top-bar-left">
+          <ul class="menu">
 
-        <%######## TODO: NOT WORKING. IF CATEGORY IS NIL. PRODUCTS TEST ARE NOT PASSING %>
+              <% category = Category.all %>
+              <li class="padding">
+                <%= link_to products_categories_path(category[0]) do %>
+                Jedi &nbsp;<%= image_tag'yoda.png', class: "navimg" %>
+                <% end %>
+              </li>
+              <li class="padding">
+                <%= link_to products_categories_path(category[1]) do %>
+                Sith &nbsp;<%= image_tag 'darth-vader.png', class: "navimg" %>
+                <% end %>
+              </li>
+              <li class="padding">
+                <%= link_to products_categories_path(category[2]) do %>
+                Droids &nbsp;<%= image_tag 'c3p0.png', class: "navimg" %>
+                <% end %>
+              </li>
+              <li class="padding">
+                <%= link_to products_categories_path(category[3]) do %>
+                Clothing &nbsp;<%= image_tag 'obiwan-kenobi.png', class: "navimg" %>
+                <% end %>
+              </li>
+              <li class="padding">
+                <%= link_to products_categories_path(category[4]) do %>
+                Toys &nbsp;<%= image_tag 'boba-fett.png', class: "navimg" %>
+                <% end %>
+              </li>
+              <li class="padding">
+                <%= link_to products_categories_path(category[5]) do %>
+                Gear &nbsp;<%= image_tag 'red-five.png', class: "navimg" %>
+                <% end %>
+              </li>
+              <li class="padding">
+                <%= link_to products_categories_path(category[18]) do %>
+                Pets &nbsp;<%= image_tag 'ewok.png', class: "navimg" %>
+                <% end %>
+              </li>
+            </ul>
 
-        <% category = Category.all %>
-        <li class="padding">
-          <%= link_to products_categories_path(category[0]) do %>
-          Jedi &nbsp;<%= image_tag'yoda.png', class: "navimg" %>
-          <% end %>
-        </li>
-        <li class="padding">
-          <%= link_to products_categories_path(category[1]) do %>
-          Sith &nbsp;<%= image_tag 'darth-vader.png', class: "navimg" %>
-          <% end %>
-        </li>
-        <li class="padding">
-          <%= link_to products_categories_path(category[2]) do %>
-          Droids &nbsp;<%= image_tag 'c3p0.png', class: "navimg" %>
-          <% end %>
-        </li>
-        <li class="padding">
-          <%= link_to products_categories_path(category[3]) do %>
-          Clothing &nbsp;<%= image_tag 'obiwan-kenobi.png', class: "navimg" %>
-          <% end %>
-        </li>
-        <li class="padding">
-          <%= link_to products_categories_path(category[4]) do %>
-          Toys &nbsp;<%= image_tag 'boba-fett.png', class: "navimg" %>
-          <% end %>
-        </li>
-        <li class="padding">
-          <%= link_to products_categories_path(category[5]) do %>
-          Gear &nbsp;<%= image_tag 'red-five.png', class: "navimg" %>
-          <% end %>
-        </li>
-        <li class="padding">
-          <%= link_to products_categories_path(category[18]) do %>
-          Pets &nbsp;<%= image_tag 'ewok.png', class: "navimg" %>
-          <% end %>
-        </li>
-        <li class="padding">
-          <%= link_to products_categories_path(category[18]) do %>
-          Accessories &nbsp;<%= image_tag 'stormtrooper.png', class: "navimg" %>
-          <% end %>
-        </li>
+              <!-- <li class="padding">
+                <%= link_to products_categories_path(category[18]) do %>
+                Misellaneous &nbsp;<%= image_tag 'stormtrooper.png', class: "navimg" %>
+                <% end %>
+              </li> -->
 
-        <%###############  SEARCH BAR #################### %>
+    <%###############  LOGIN NAVIGATION #################### %>
 
-        <li class="has-form padding">
-          <div class="row collapse">
-            <div class="large-8 small-9 columns">
-              <input type="text" placeholder="Use the Force">
-            </div>
-            <div class="large-4 small-3 columns">
-              <a href="#" class="alert button expand">Search</a>
-            </div>
-          </div>
-        </li>
-
-        <%###############  LOGIN NAVIGATION #################### %>
-        <% if @login_merchant %>
-
-        <div class="dropdown">
-          <a><li class="dropbtn padding button"><%= @login_merchant.username %></li></a>
-          <div class="dropdown-content">
-            <%= link_to "Dashboard", merchant_path(@login_merchant.id)%>
-            <%= link_to "Manage Orders", merchant_orders_path(@login_merchant.id)%>
-            <%= link_to "Manage Products", merchant_products_path(@login_merchant.id) %>
-          </div>
         </div>
+        <div class="top-bar-right">
+          <ul class="menu">
+            <% if @login_merchant %>
 
+            <div class="dropdown">
+              <li class="padding"><a><%= @login_merchant.username %></a></li>
+              <div class="dropdown-content">
+                <%= link_to "Dashboard", merchant_path(@login_merchant.id)%>
+                <%= link_to "Manage Orders", merchant_orders_path(@login_merchant.id)%>
+                <%= link_to "Manage Products", merchant_products_path(@login_merchant.id) %>
+              </div>
+            </div>
 
+            <li class="padding">
+              <%= link_to "Log Out", logout_path, method: :post %>
+            </li>
 
-
+          <% else %>
+            <li class="padding">
+              <%= link_to "Log In", github_path, class: "float-right" %>
+            </li>
+          <% end %>
           <li class="padding">
-            <%= link_to "Log Out", logout_path, method: :post, class: "button" %>
+            <%= link_to "Cart", cart_path, class: "float-left no-bg-color" %>
           </li>
+        </ul>
 
-        <% else %>
-          <li class="padding">
-            <%= link_to "Log In", github_path, class: "button float-right" %>
-          </li>
-        <% end %>
-        <li class="padding">
-          <%= link_to "Cart", cart_path, class: "button float-left" %>
-        </li>
-      </ul>
-
-    </nav>
+      </div>
+    </div>
   </header>
 
   <%###############  HERO HEADER #################### %>
+
 
   <section class="hero">
     <div class="hero-section-text">
@@ -120,9 +114,6 @@
       <% end %>
     </div>
   </section>
-
-
-
 
 
   <%###############  FLASH MESSAGES #################### %>
@@ -151,10 +142,10 @@
   </section>
 
   <%###############  MAIN CONTENT #################### %>
+
   <main>
     <%= yield %>
   </main>
-
 
 
   <%###############  STAR WARS OPENING  #################### %>

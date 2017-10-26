@@ -17,6 +17,8 @@
  */
 // @import url("https://fonts.googleapis.com/css?family=Pathway+Gothic+One");
 
+@import url('https://fonts.googleapis.com/css?family=Bungee+Inline');
+
 
 /******************************************************
                 STYLING ACROSS ALL PAGES
@@ -35,7 +37,7 @@ header a {
 }
 
 li.padding {
-  padding: 8px;
+  padding: 5px;
 }
 
 .align-center {
@@ -46,10 +48,19 @@ li.padding {
                             NAV
 ****************************************************** */
 
-header.fixed {
-  background-color: #282828;
+.top-bar ul, .top-bar {
+  background-color: black;
 }
 
+.navimg {
+  max-width: 35px;
+  max-height: 25px;
+}
+
+header a {
+  color: yellow;
+  font-family: 'Bungee Inline', cursive;
+}
 
 
 /* *****************************************************
@@ -88,10 +99,12 @@ header.fixed {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-.navimg {
-  max-width: 35px;
-  max-height: 25px;
+
+.margin-top {
+  margin-top: 8px;
+  margin-right: 10px;
 }
+
 // div.nav-menu {
 //  width: 60%;
 //  display: flex;
