@@ -2,10 +2,18 @@
 <table align="center" class="unstriped hover">
   <tbody>
     <tr>
-      <th class='<%=add_class.to_s%>' rowspan="100%">Order ID: <%= order.id %></th>
+      <th class='<%=order.status%>' rowspan="100%">
+        Order ID: <%= order.id %><br />
+        <% if order.status == 'paid' %>
+          <%= image_tag 'darth-maul.png', class: "orderindex" %>
+        <% else %>
+          <%= image_tag 'qui-gon-jinn.png', class: "orderindex" %>
+        <% end %>
+
+      </th>
       <th>Order Placed: <%= order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
       <th>Order Status: <%= order.status %></th>
-      <th>Order Total: $INSERT MONEY</th>
+      <th>Order Total: <%= number_to_currency(orders_hash[order].inject(0) {|sum, oi| sum + oi.line_item_total})%></th>
       <th><%= link_to "Shipping Info", payment_path(order.payment) %></th>
     </tr>
     <tr>

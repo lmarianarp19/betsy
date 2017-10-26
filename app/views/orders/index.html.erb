@@ -2,12 +2,12 @@
 
 <% unless @orders.empty? %>
   <%= render partial: "orderstable", locals: {
-    orders_hash: @paid_orders_hash, add_class: "paid"
+    orders_hash: @paid_orders_hash
   } %>
 
   <%= render partial: "orderstable", locals: {
-    orders_hash: @complete_orders_hash, add_class: "complete"
-  } %>
+    orders_hash: @complete_orders_hash
+    } %>
 <% else %>
   <h3>
     <strong>No Orders:</strong> Merchant hasn't sold any products.

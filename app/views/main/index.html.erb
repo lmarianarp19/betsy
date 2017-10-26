@@ -1,27 +1,17 @@
 <main class="row margin-zero min-width no-bg">
   <section class="align-center">
-
-    <header class="bg">
-      <h2 class="more-padding">Popular Item</h2>
+    <header class="bg align-center row force-index">
+      <h2 class="more-padding">The Force's Pick </h2>
     </header>
-
-    <% if Product.any? %>
-      <% product = Product.first %>
-
-      <div class="thumbnail small-thumb small-12 large-6 columns small-centered large-centered padding more-margin">
-        <%= link_to image_tag(product.photo_url), class:"padding", alt:"#{product.name}" %>
-
-        <p><strong><%= product.name %></strong></p>
-        <p>
-          $ <%= product.price %>.00
-        </p>
-      </div>
-
-    <% else %>
-
-      <h2>Products coming soon!</h2>
-
-    <% end %>
-
-  </section>
+      <% if Product.any? %>
+        <% product = Product.first %>
+          <div class="thumbnail small-thumb small-12 large-3 small-centered large-centered columns padding more-margin">
+            <%= link_to image_tag(product.photo_url), product_path(product), class:"padding", alt:"#{product.name}" %>
+            <p><strong><%= product.name %></strong></p>
+            <p><%= number_to_currency product.price %></p>
+          </div>
+      <% else %>
+          <h2>Products coming soon!</h2>
+      <% end %>
+    </section>
 </main>
