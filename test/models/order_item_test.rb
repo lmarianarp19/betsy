@@ -88,6 +88,11 @@ describe OrderItem do
       result.must_equal false
       oi.errors.messages.must_include :order
     end
+
+    it "#shipped attribute defualts to 'false'" do
+      oi = OrderItem.new
+      oi.shipped.must_equal false
+    end
   end
 
   describe "line_item_total" do

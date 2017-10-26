@@ -113,6 +113,13 @@ describe Product do
         product.errors.messages.must_include :inventory
       end
     end
+
+    describe "current" do
+      it "#current attribute defualts to 'true'" do
+        product = Product.new
+        product.current.must_equal true
+      end
+    end
   end
 
   describe "custom methods" do

@@ -28,10 +28,6 @@ describe Order do
       first_order.payment = payment_one
       first_order.payment.must_be_kind_of Payment
     end
-    # TODO: Ask instructors how to test this?
-    # it "cannot have more than one payment" do
-    #
-    # end
   end
 
   describe "validations" do
@@ -46,11 +42,26 @@ describe Order do
       order.valid?.must_equal false
       order.errors.messages.must_include :status
     end
+  end
 
+  describe "custom methods" do
+    describe "calculate_total" do
+      it "will return an integer that equals the total revenue for a given order" do
+        # arrange
+        expected = 0
+        first_order.order_items.each do |oi|
+          expected += oi.product.price * oi.quantity
+        end
+        # act
+        actual = first_order.calculate_total
+        # assert
+        actual.must_equal expected
+        actual.must_be_kind_of Integer
+      end
 
-
-
-
-  #   # TODO: ask if we need to test default value? AKA do we need to test that status defaults to "pending?"
+      it "it will return 0 for an order without any order_items" do
+        Order.new.calculate_total.must_equal 0
+      end
+    end
   end
 end

@@ -8,6 +8,7 @@ class Order < ApplicationRecord
 
   #TODO test calculate total
 
+  #TODO can we use line_item_total here?
   def calculate_total
     self.order_items.collect { |item| item.product.price * item.quantity}.sum
   end
@@ -26,7 +27,6 @@ class Order < ApplicationRecord
     if self.ship_order
       return self.status = "complete"
     end
-
   end
 
   def order_item_attributes=(order_item_attributes)
