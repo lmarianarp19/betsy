@@ -1,4 +1,9 @@
 class ProductsController < ApplicationController
+  before_action only:[:edit] do
+    @product = Product.find_by(id: params[:id])
+    restrict_merchant(@product.merchant.id)
+  end
+
 
   def index
     @category = Category.find_by(id: params[:id])
@@ -53,11 +58,9 @@ class ProductsController < ApplicationController
       unless @product
         head :not_found
       end
-    else
-      # TODO: Make flash messages for unauthorized!!! When use is not logged in
-      flash[:status] = :failure
-      flash[:message] = "You must be authorized to do that"
-      redirect_to root_path
+    #else
+
+      #redirect_to merchant_products_path(@login_merchant.id)
     end
   end
 
