@@ -1,1 +1,23 @@
-show para orders
+<main class="row">
+  <section>
+    <header class="align-center">
+      <h1>Your Order</h1>
+    </header>
+
+    <% @order.products.each do |product| %>
+    <section class="small-6 large-4 columns align-center border-color product-padding end">
+
+      <div>
+        <%= link_to image_tag(product.photo_url), product_path(product), class: "thumbnail" %>
+
+
+        <p>  <span class="p-style"><%= product.name %></span> </p>
+        <p>  <%= number_to_currency product.price %> </p>
+          <% item = OrderItem.find_by(product_id: product.id, order_id: @order.id) %>
+          <%= "Quantity: #{item.quantity}" %>
+        </p>
+      </div>
+  </section>
+    <% end %>
+
+</main>
