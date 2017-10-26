@@ -33,18 +33,14 @@ class PaymentsController < ApplicationController
 
       flash[:status] = :success
       flash[:message] = "success payment"
-      redirect_to root_path
+      redirect_to order_path(params[:order_id])
       #redirect_to order_path(@payment.order_id)
       #TODO redirect to page with the order view
     else
       flash[:status] = :failure
       flash[:message] = "Whoops! Something was wrong when placing your order!"
       flash[:cc_errors] = @payment.errors.messages
-      # unless @payment.name
-      #   flash[:cc_errors] = ["You must enter a name"]
-      # end
       render :new, status: :bad_request
-      #TODO to put specific messages for errors i.e. Invalid Credit Card number...
     end
   end
 
