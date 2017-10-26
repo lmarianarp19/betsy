@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
       Order.new
     end
   end
-
+  
   # def currency
   #   self.number_to_currency
   # end

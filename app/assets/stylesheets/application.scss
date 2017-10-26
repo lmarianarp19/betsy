@@ -51,6 +51,7 @@ header.fixed {
 }
 
 
+
 /* *****************************************************
                     DROP DOWN MISC
 ****************************************************** */
@@ -87,8 +88,10 @@ header.fixed {
 .dropdown:hover .dropdown-content {
   display: block;
 }
-
-
+.navimg {
+  max-width: 35px;
+  max-height: 25px;
+}
 // div.nav-menu {
 //  width: 60%;
 //  display: flex;
