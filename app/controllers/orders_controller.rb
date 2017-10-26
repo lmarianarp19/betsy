@@ -9,7 +9,9 @@ class OrdersController < ApplicationController
       @merchant = Merchant.find_by(id: params[:merchant_id])
       @orders = @merchant.distinct_orders
       @paid_orders_hash = @merchant.orders_hash_by_status("paid")
+      # @paid_total = @merchant.sum_ord_hash("paid")
       @complete_orders_hash = @merchant.orders_hash_by_status("complete")
+      # @complete_total = @merchant.sum_ord_hash("complete")
     end
   end
 

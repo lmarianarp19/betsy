@@ -233,7 +233,23 @@ HERO
 .no-bg-color {
   background-color: transparent;
 }
-
+// TODO: would the below code be the same as above and help clean things up?
+// .row.status{
+//   .success {
+//   border-radius: 5px;
+//   background-color: lightblue;
+//   padding: 20px 25px;
+//   font-size: 1em;
+//   min-width: 100%;
+//   }
+//   .status.failure {
+//     border-radius: 5px;
+//     background-color: pink;
+//     padding: 20px 25px;
+//     font-size: 1em;
+//     min-width: 100%;
+//   }
+// }
 
 /******************************************************
                         OPENING
@@ -262,5 +278,9 @@ table {
   }
   .mini{
     width: 100px;
+  }
+  .orderindex{
+    max-width: 90px;
+    max-height: 70px;
   }
 }
