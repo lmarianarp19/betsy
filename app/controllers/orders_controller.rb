@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    if params[:merchant_id]
+    if params[:merchant_id] # TODO: USE INSTANCE VARIABLE OF @LOGIN_MERCHANT
       @merchant = Merchant.find_by(id: params[:merchant_id])
       @orders = @merchant.distinct_orders
       @paid_orders_hash = @merchant.orders_hash_by_status("paid")
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find_by(id: params[:id])
-    # render_404 unless @order
+
     unless @order
       head :not_found
     end
@@ -23,15 +23,16 @@ class OrdersController < ApplicationController
 
 
   def create
-    @order = current_order # An order already exists, use existing order
-    if @order.product_ids.empty? # If the order is EMPTY
+    @order = current_order # Check to see if the order already is in the session
+
+    if @order.product_ids.empty? # If the order has no products
       order_item = OrderItem.new(order_items_params)
       @order.order_items << order_item
     elsif @order.product_ids.include? params[:product_id].to_i # IF THE PRODUCT IS ALREADY IN THE CART
       order_item = @order.order_items.find_by(product_id: params[:product_id])
       order_item.quantity += params[:quantity].to_i
       order_item.save
-    else # FOR ALL OTHER CASES
+    else
       order_item = OrderItem.new(order_items_params)
       @order.order_items << order_item
     end
