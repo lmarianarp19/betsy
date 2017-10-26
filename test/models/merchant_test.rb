@@ -117,10 +117,6 @@ describe Merchant do
         merchant_new.orders_hash_by_status("pending").must_equal Hash.new
       end
 
-      it "returns an empty hash if the merchant doesn't have an order that matched the status argumetn passed into method" do
-        merchant_one.orders_hash_by_status("paid").must_equal Hash.new
-      end
-
       it "returns an emtpy hash if call this method with invalid arguements for a merchant, with or without orders" do
         invalid_arguments = [[1],1,Date.today,"yoda", merchant_one]
         invalid_arguments.each do |bad_arg|
@@ -129,6 +125,7 @@ describe Merchant do
         end
       end
     end
+
     describe "sum_ord_hash" do
       #success case, orders
       it "will return the total marchant revenue for orders of a given status" do
