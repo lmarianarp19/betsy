@@ -139,8 +139,19 @@ describe Product do
       end
     end
 
-    # describe "category_attributes=" do
-    #   # TODO: IRENE OR BIANCA WRITE THIS TESTS!
-    # end
+    describe "category_attributes=" do
+      it "for a category that already exists if a product doesn't have that category with will assign it to the produc" do
+
+      end
+
+      it "for cat that already exists for a product that already has that category it will do nothing" do
+
+      end
+
+      it "will create a new category if it doesn't exist and assign it to the product" do
+
+      end
+    end
+
   end
 end

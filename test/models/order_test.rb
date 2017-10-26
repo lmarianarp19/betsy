@@ -89,8 +89,4 @@ describe Order do
       Order.new.change_to_shipped.must_equal nil
     end
   end
-
-  describe "order_item_attributes" do
-    # TODO: WRITE ME!
-  end
 end
