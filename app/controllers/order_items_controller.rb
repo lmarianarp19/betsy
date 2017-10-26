@@ -5,6 +5,15 @@ class OrderItemsController < ApplicationController
     restrict_merchant(@order_item.merchant.id)
   end
 
+  def create
+    @order = current_order
+    @item = @order.order_items.new(order_items_params)
+    @order.save
+    session[:order_id] = @order.id
+    redirect_to cart_path
+  end
+
+
   def update
     @order_item = OrderItem.find_by(id: params[:id])
     @order_item.update_attributes(order_items_params)
@@ -38,7 +47,7 @@ class OrderItemsController < ApplicationController
     redirect_back fallback_location: merchant_orders_path(:merchant_id)
     #redirect_back is going to go first to request.referrer
   end
-    #@order_item.update_attributes(order_items_params)
+  #@order_item.update_attributes(order_items_params)
 
   private
 
