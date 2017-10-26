@@ -5,21 +5,17 @@
       <h2>Popular Items</h2>
     </header>
 
+    <section class="small-6 large-3 columns text-align-center border-color product-padding end">
       <% if @products.any? %>
-
         <div>
           <% product = @products.sample %>
           <%= link_to image_tag(product.photo_url), class:"thumbnail" %>
         </div>
         <p>
-          <%= product.price %>
+          <%# product.price %>
         </p>
-
       <% else %>
-
           <h1>Products coming soon!</h1>
-
       <% end %>
-
-  </section>
+    </section>
 </main>
