@@ -159,4 +159,12 @@ describe Merchant do
       end
     end
   end
+
+  describe "from_auth_hash" do
+    # TODO: return and write this test if you have time - SRB
+    # before = Merchant.count
+    # auth_hash = {'provider'=>"github", 'uid'=>77777777, "info"=>{'email'=>"MasterYoda@gmail.com", 'nickname'=>"MasterYoda"}}
+    # merchant = Merchant.from_auth_hash('github', auth_hash)
+    # binding.pry
+  end
 end
