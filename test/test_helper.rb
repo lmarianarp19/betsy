@@ -48,6 +48,6 @@ class ActiveSupport::TestCase
   end
 
   def logout
-    post logout_path
+    get logout_path
   end
 end
