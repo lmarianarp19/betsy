@@ -15,10 +15,10 @@
       <p>Sold by: <%= link_to  @product.merchant.username, merchant_products_path(@product.merchant.id) %></p>
 
       <!--DESCRIPTION  -->
+      <div class="row text-center">
       <% if @product.description %>
-        <p class='description '><%= "#{@product.description}" %></p>
+        <p class='description small-12 large-8 large-centered columns'><%= "#{@product.description}" %></p>
       <%end %>
-
       <!-- form_tag('/posts/1', method: :put) -->
       <%# TODO: Change this back to the form_for tag from product index page %>
       <div>
@@ -29,20 +29,47 @@
       </div>
 
       <p class="inventory"> <%= "#{@product.inventory} in stock!" %></p>
+
+    <div class="review-button">
       <%= link_to "Write a Review!!", new_product_review_path(@product.id), class: "button" %>
     </section>
 
-    <section>
-      <% if @product.reviews.count > 0 %>
-        <h3> Reviews </h3>
-        <p><%= "Average Rating = #{@product.average_rating}" %></p>
-        <% @product.reviews.each do |review| %>
-          <div><%= review.review %></div>
-          <div><%= review.rating %></div>
-          <hr>
-        <%end%>
-      <%end%>
-    </section>
+  <section class="review large-8 large-centered columns">
+    <% if @product.reviews.count > 0 %>
+    <h2> Reviews </h2>
+    <strong class="review">Average Rating = </strong><%= "#{@product.average_rating.round(2)}" %>
+    <hr>
+    <hr>
 
-  </div>
+      <% @product.reviews.each do |review| %>
+      <div class="review-details text-center large-centered columns">
+        <%=  "\'#{review.review}\'"  %> <br />
+        <% if review.rating == 1 %>
+          <%= image_tag("darth-vader.png", :alt => "darth vader icon") %>
+        <% elsif review.rating == 2 %>
+          <%= image_tag("boba-fett.png", :alt => "boba fett icon") %>
+          <%= image_tag("jabba-the-hutt.png", :alt => "jabba the hutt icon") %>
+        <% elsif review.rating == 3 %>
+          <%= image_tag("chewbacca.png", :alt => "chewbacca icon") %>
+          <%= image_tag("han-solo.png", :alt => "han solo icon") %>
+          <%= image_tag("lando-calrissian.png", :alt => "lando calrissian icon") %>
+        <% elsif review.rating == 4 %>
+          <%= image_tag("r2d2.png", :alt => "r2d2 icon") %>
+          <%= image_tag("c3p0.png", :alt => "c3p0 icon") %>
+          <%= image_tag("admiral-ackbar.png", :alt => "darth vader icon") %>
+          <%= image_tag("obiwan-kenobi.png", :alt => "darth vader icon") %>
+        <% else review.rating == 5 %>
+          <%= image_tag("princess-leia.png", :alt => "darth vader icon") %>
+          <%= image_tag("obiwan-kenobi.png", :alt => "darth vader icon") %>
+          <%= image_tag("yoda.png", :alt => "darth vader icon") %>
+          <%= image_tag("ewok.png", :alt => "darth vader icon") %>
+          <%= image_tag("luke-skywalker.png", :alt => "darth vader icon") %>
+        <% end %>
+    </div>
+      <hr>
+        <%end%>
+    <%end%>
+  </section>
+  </section>
+    </div>
 </main>
