@@ -360,19 +360,22 @@ hr {
                           TABLES
 *******************************************************/
 table {
-
   width: 80%;
-  .complete {
+}
+
+.complete {
     background-color:  #47020a;
   }
+
   .paid {
     background-color: #202b82;
   }
+
   .mini{
     width: 100px;
   }
+
   .orderindex{
     max-width: 90px;
     max-height: 70px;
   }
-}
