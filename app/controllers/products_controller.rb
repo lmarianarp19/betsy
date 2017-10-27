@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
 
   def show
     @order = current_order
-
+    @order_item = OrderItem.new
     @product = Product.find_by(id: params[:id])
     unless @product
       head :not_found

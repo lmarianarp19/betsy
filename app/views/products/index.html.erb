@@ -17,9 +17,9 @@
 
           <%= form_for @order_item do |f| %>
             <%= f.hidden_field :product_id, value: product.id %>
-              <%= f.select :quantity, 1..product.inventory %>
-              <%= f.submit "Add to cart" %>
-            <% end %></p>
+            <%= f.select :quantity, 1..product.inventory %>
+            <%= f.submit "Add to cart" %>
+          <% end %>
 
         </div>
 
