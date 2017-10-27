@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # root 'main#root'
   get '/', to: 'main#index', as: 'root'
 
-  resources :merchants, only: :show
+  resources :merchants, only: [:show]
   get '/merchants/:merchant_id/products', to: 'merchants#products', as: 'merchant_products'
 
   resources :products, except: :destroy do
@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'categories/:id/products', to: 'products#index', as: 'products_categories'
 
   # Add resource not resources because a customer will only have one shopping cart and doesn't create an index route
-  resource :cart, only: :show
+  resource :cart, only: [:show]
 
   resources :payments, only: [:show]
 

@@ -3,14 +3,13 @@ require "test_helper"
 describe CartsController do
   describe "#show" do
     it "should return success if all the order_items in the order are valid" do
-      
-      # Create a new category and add it to the cart
+      # Create a new order and add it to the cart
       valid_data = {
         quantity: 1,
         product_id: Product.second
       }
 
-      post orders_path, params: valid_data
+      post orders_items_path, params: valid_data
       get cart_path
 
       must_respond_with :success

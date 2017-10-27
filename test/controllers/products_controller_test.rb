@@ -311,6 +311,34 @@ describe ProductsController do
       must_redirect_to root_path
       flash[:status].must_equal :failure
     end
+
+    it "returns a bad request if the product attributes are invalid" do
+      login(merchant)
+
+      invalid_product_data = {
+        product: {
+          name: "",
+          price: "",
+          description: "Updating this description",
+          inventory: 1000,
+          photo_url: "http://placecage.com",
+          merchant_id: session[:merchant_id],
+          categories_attributes: {
+            "0": {
+              name: "Yup"
+            }
+          }
+        }
+      }
+
+      product.update_attributes(invalid_product_data[:product])
+      product.wont_be :valid?
+
+      patch product_path(product), params: invalid_product_data
+
+      flash[:status].must_equal :failure
+      must_respond_with :bad_request
+    end
   end
 
 end
