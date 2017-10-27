@@ -34,16 +34,25 @@
     </tr>
     <% end %>
     <tr>
-      <td align="center", colspan="100%">
-        ORDER DETAILS
-      </td>
-    </tr>
-    <tr>
-      <th>Order Placed: <%= order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
-      <th>Order Status: <%= order.status %></th>
-      <th>Order Total: <%= number_to_currency(orders_hash[order].inject(0) {|sum, oi| sum + oi.line_item_total})%></th>
-      <th><%= link_to "Shipping Info", payment_path(order.payment) %></th>
+      <th></th>
+    <th align="center">
+         ORDER DETAILS
+    </th>
+      <th></th>
+        <th></th>
     </tr>
 
+    <tr>
+
+
+    <th>Placed: <%= order.payment.created_at.strftime("%e %b %Y") %></th>
+    <% if order.status == "paid" %>
+      <th>Status: <span id="paid" ><%= order.status.capitalize %></span></th>
+    <%elsif order.status == "complete" %>
+      <th>Status: <span id="complete" ><%= order.status.capitalize %></span></th>
+    <% end %>
+    <th>Total: <%= number_to_currency(orders_hash[order].inject(0) {|sum, oi| sum + oi.line_item_total})%></th>
+    <th><%= link_to "Shipping Info", payment_path(order.payment) %></th>
+  </tr>
   </table>
   <% end %>

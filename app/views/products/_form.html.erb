@@ -9,13 +9,15 @@
         <%= f.text_field :price %>
 
         <%= f.label :description %>
-        <%= f.text_area :description %>
+        <%= f.text_area :description, cols: 10, rows: 5 %>
+        <%# f.text_area :description %>
 
         <%= f.label :inventory %>
         <%= f.text_field :inventory %>
 
         <%= f.label :photo_url %>
-        <%= f.text_area :photo_url %>
+        <%= f.text_area :photo_url, cols: 10, rows: 5 %>
+        <%# f.text_area :photo_url %>
 
         <%= f.label :categories %>
         <%= f.fields_for :categories, @product.categories.build do |categories_fields| %>

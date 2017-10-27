@@ -282,7 +282,6 @@ h1 {
 
 .force-index h2 {
   padding: 30px;
-  font-family: "STARWARS"
 }
 .force-index {
   background: image-url('ep_naturalblack.png');
@@ -319,7 +318,7 @@ h1 {
 
 select {
   width: 40%;
-  margin-left: 50px;
+  // margin-left: 50px;
 }
 
 input {
@@ -336,6 +335,10 @@ input {
 
 hr {
   opacity: .5;
+}
+
+.button {
+  font-size: 1em;
 }
 /******************************************************
                         OPENING
