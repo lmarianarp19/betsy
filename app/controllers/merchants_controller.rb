@@ -4,6 +4,7 @@ class MerchantsController < ApplicationController
     @try_merchant = Merchant.find_by(id: params[:id])
     restrict_merchant(@try_merchant)
   end
+  
   def show
     # if @merchant.products
       @unfufilled = @merchant.orders_hash_by_status("paid").count

@@ -3,16 +3,10 @@ Rails.application.routes.draw do
   # root 'main#root'
   get '/', to: 'main#index', as: 'root'
 
-  resources :merchants, only: [:show]
-
-  get '/merchants/:merchant_id/orders', to: 'orders#index', as: 'merchant_orders'
-
+  resources :merchants, only: :show
   get '/merchants/:merchant_id/products', to: 'merchants#products', as: 'merchant_products'
-  # resources :merchants, only:[:show] do
-  #   resources :products, only:[:show]
-  # end
 
-  resources :products do
+  resources :products, except: :destroy do
     resources :reviews, only: [:new, :create]
     resources :categories, only:[:index]
   end
@@ -22,7 +16,6 @@ Rails.application.routes.draw do
   #add resource not resources because a customer will only have one shopping cart and doesn't create an index route
   resource :cart, only: [:show, :update]
 
-  # TODO: # Check if we need index and show
   resources :payments, only: [:index, :show]
 #, only: [:show, :create, :update]
 
@@ -40,6 +33,7 @@ Rails.application.routes.draw do
 
   resources :order_items, only: [:new, :create, :update, :destroy]
   # post 'order_items', to: 'order_items#create', as: 'order_items'
+  get '/merchants/:merchant_id/orders', to: 'orders#index', as: 'merchant_orders'
 
   get '/auth/github', as: 'github'
   get '/auth/:provider/callback', to: 'sessions#login', as: "auth_callback"
@@ -47,12 +41,5 @@ Rails.application.routes.draw do
 
   patch '/order_items/:id/ship', to: 'order_items#ship', as:'ship_order_item'
 
-  # get "/users", to: "users#index", as: "users"
-  # get "/users/new", to: "users#new", as: "new_user"
-  # post "/users", to: "users#create"
-  # get "/users/:id", to: "users#show", as: "user"
-  # get "/users/:id/edit", to: "users#edit", as: "edit_user"
-  # patch "/users/:id", to: "users#update"
-  # delete "/users/:id", to: "users#destroy"
 
 end
