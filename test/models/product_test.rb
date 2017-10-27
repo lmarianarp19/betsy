@@ -90,12 +90,21 @@ describe Product do
       end
     end
 
+
+    describe "category" do
+      it "requires a category" do
+        new_product.valid?.must_equal false
+        new_product.errors.messages.must_include :categories
+      end
+    end
+
     describe "merchant" do
       it "requires a merchant" do
         new_product.valid?.must_equal false
         new_product.errors.messages.must_include :merchant
       end
     end
+
 
     describe "inventory" do
       it "requires an inventory" do
