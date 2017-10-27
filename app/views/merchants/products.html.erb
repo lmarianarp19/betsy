@@ -12,7 +12,6 @@
       <th>Img</th>
       <% if @access %>
         <th>&nbsp</th>
-        <th>&nbsp</th>
       <% end %>
     </tr>
   </thead>
@@ -24,7 +23,6 @@
         <td><%= image_tag product.photo_url, class:"thumbnail mini"%></td>
         <% if @access %>
           <td><%= link_to "Edit", edit_product_path(product)%></td>
-          <td><%= link_to "Retire Product"%></td>
         <% end %>
       </tr>
     <% end %>
