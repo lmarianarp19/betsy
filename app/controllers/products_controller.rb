@@ -42,8 +42,11 @@ class ProductsController < ApplicationController
       # If category exists make a new product
       @product = Product.new(products_params) # This pulls in the params from the form and uses the categories and checks to see if the names are already in the database.
       @product.merchant_id = @login_merchant.id
-      save_and_flash(@product)
-      redirect_to product_path(@product)
+      if save_and_flash(@product)
+        redirect_to product_path(@product)
+      else
+        render :new, status: :bad_request
+      end
     else
       flash[:status] = :failure
       flash[:message] = "You must be authorized to do that"

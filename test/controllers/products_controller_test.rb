@@ -107,13 +107,11 @@ describe ProductsController do
     before_product_count = Product.count
     before_category_count = Category.count
 
-    merchant = merchants(:grace)
-
     login(merchant)
 
     valid_product_data = {
       product: {
-        name: "hat",
+        name: "New Product For the Win!",
         price: 2,
         description: "This is a test description of some item",
         inventory: 1000,
@@ -121,7 +119,7 @@ describe ProductsController do
         merchant_id: session[:merchant_id],
         categories_attributes: {
           "0": {
-            name: "Brand new cateogory you've never heard of"
+            name: "THIS IS A BRAND NEW CATEGORY YOU'VE NEVER HEARD OF"
           }
         }
       }
@@ -170,8 +168,6 @@ describe ProductsController do
     flash[:status].must_equal :failure
   end
 
-  # TODO: Write a test to validate a nil form in views prior to create action  ActionView::Template::Error: First argument in form cannot contain nil or be empty
-
   it "returns bad_request when the category data is invalid" do
     before_pc_count = ProductCategory.count
     before_product_count = Product.count
@@ -199,7 +195,6 @@ describe ProductsController do
     ProductCategory.count.must_equal before_pc_count
     Category.count.must_equal before_category_count
 
-    assert_template :new
     must_respond_with :bad_request
     flash[:status].must_equal :failure
   end
