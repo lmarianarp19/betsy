@@ -1,58 +1,62 @@
-<% orders_hash.keys.each do |order| %>
-<table align="center" class="unstriped hover">
-  <tbody>
-    <tr>
-      <th class='<%=order.status%>' rowspan="100%" width="10%">
-        Order ID: <%= order.id %><br />
-        <% if order.status == 'paid' %>
-          <%= image_tag 'darth-maul.png', class: "orderindex" %>
+<% if !orders_hash.empty? %>
+  <% orders_hash.keys.each do |order| %>
+  <table align="center" class="unstriped hover">
+    <tbody>
+      <tr>
+        <th class='<%=order.status%>' rowspan="100%" width="10%">
+          Order ID: <%= order.id %><br />
+          <% if order.status == 'paid' %>
+            <%= image_tag 'darth-maul.png', class: "orderindex" %>
+          <% else %>
+            <%= image_tag 'qui-gon-jinn.png', class: "orderindex" %>
+          <% end %>
+        </th>
+      </tr>
+      <tr>
+        <th>PRODUCTS</th>
+        <th>QUANTITY</th>
+        <th>TOTAL</th>
+        <th>SHIPPED</th>
+      </tr>
+      <% orders_hash[order].each do |oi| %>
+      <tr align="center" class="subtable">
+        <td width="30%"><%= link_to oi.product.name, product_path(oi.product)%></td>
+        <td width="20%"><%= oi.quantity %></td>
+        <td width="20%"><%= number_to_currency(oi.line_item_total) %></td>
+        <% if oi.shipped == false %>
+        <td width="20%">
+          <%= link_to "Ship", ship_order_item_path(oi), method: :patch %>
+        </td>
         <% else %>
-          <%= image_tag 'qui-gon-jinn.png', class: "orderindex" %>
+        <td width="20%">
+          Item Sent!
+        </td>
         <% end %>
-      </th>
-    </tr>
-    <tr>
-      <th>PRODUCTS</th>
-      <th>QUANTITY</th>
-      <th>TOTAL</th>
-      <th>SHIPPED</th>
-    </tr>
-    <% orders_hash[order].each do |oi| %>
-    <tr align="center" class="subtable">
-      <td width="30%"><%= link_to oi.product.name, product_path(oi.product)%></td>
-      <td width="20%"><%= oi.quantity %></td>
-      <td width="20%"><%= number_to_currency(oi.line_item_total) %></td>
-      <% if oi.shipped == false %>
-      <td width="20%">
-        <%= link_to "Ship", ship_order_item_path(oi), method: :patch %>
-      </td>
-      <% else %>
-      <td width="20%">
-        Item Sent!
-      </td>
+      </tr>
       <% end %>
-    </tr>
-    <% end %>
-    <tr>
-      <th></th>
-    <th align="center">
-         ORDER DETAILS
-    </th>
-      <th></th>
+      <tr>
         <th></th>
+      <th align="center">
+           ORDER DETAILS
+      </th>
+        <th></th>
+          <th></th>
+      </tr>
+
+      <tr>
+
+
+      <th>Placed: <%= order.payment.created_at.strftime("%e %b %Y") %></th>
+      <% if order.status == "paid" %>
+        <th>Status: <span id="paid" ><%= order.status.capitalize %></span></th>
+      <%elsif order.status == "complete" %>
+        <th>Status: <span id="complete" ><%= order.status.capitalize %></span></th>
+      <% end %>
+      <th>Total: <%= number_to_currency(orders_hash[order].inject(0) {|sum, oi| sum + oi.line_item_total})%></th>
+      <th><%= link_to "Shipping Info", payment_path(order.payment) %></th>
     </tr>
-
-    <tr>
-
-
-    <th>Placed: <%= order.payment.created_at.strftime("%e %b %Y") %></th>
-    <% if order.status == "paid" %>
-      <th>Status: <span id="paid" ><%= order.status.capitalize %></span></th>
-    <%elsif order.status == "complete" %>
-      <th>Status: <span id="complete" ><%= order.status.capitalize %></span></th>
+    </table>
     <% end %>
-    <th>Total: <%= number_to_currency(orders_hash[order].inject(0) {|sum, oi| sum + oi.line_item_total})%></th>
-    <th><%= link_to "Shipping Info", payment_path(order.payment) %></th>
-  </tr>
-  </table>
-  <% end %>
+<% else %>
+  <h1>NO ORDERS HAVE BEEN PLACED!</h1>
+<% end %>
