@@ -16,6 +16,7 @@ class Product < ApplicationRecord
   def categories_attributes=(category_attributes)
   category_attributes.values.each do |category_attribute|
       category = Category.find_or_create_by(category_attribute)
+       # TODO: Fix this to raise a flash if blank
       if !self.categories.include? category
         self.categories << category
       end

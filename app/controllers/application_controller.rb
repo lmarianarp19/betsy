@@ -5,10 +5,8 @@ class ApplicationController < ActionController::Base
 
   helper :all
 
-  # Need to to make method available to controllers and views
   helper_method :current_order
   helper_method :restrict_merchant
-  # formats a number into a currency string
   # helper_method :number_to_currency
 
   protected
@@ -46,16 +44,14 @@ private
 
   def restrict_merchant(expected_merchant_id)
     @merchant = Merchant.find_by(id: expected_merchant_id)
-    
+
     if @login_merchant && @login_merchant.id == @merchant.id
-    # if @login_merchant.id == @merchant.id
       unless @merchant
         head :not_found
       end
     else
       flash[:status] = :failure
       flash[:message] = "You must be authorized to do that"
-      #redirect_to root_path
       redirect_back fallback_location: root_path
     end
   end

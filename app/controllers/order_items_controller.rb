@@ -17,7 +17,8 @@ class OrderItemsController < ApplicationController
   def update
     @order_item = OrderItem.find_by(id: params[:id])
     @order_item.update_attributes(order_items_params)
-    # order_item can only update the quantity in th cart_controller show
+
+    # order_item can only update the quantity in the cart_controller show
     if @order_item.save
       flash[:status] = :success
       flash[:message] = "The quantity for #{@order_item.product.name} was updated!"
@@ -48,10 +49,9 @@ class OrderItemsController < ApplicationController
     @order_item.order.save
     flash[:status] = "success"
     flash[:message] = "Item Shipped"
-    redirect_back fallback_location: merchant_orders_path(:merchant_id)
-    #redirect_back is going to go first to request.referrer
+    redirect_back fallback_location: merchant_orders_path(:merchant_id)  # redirect_back is going to go first to request.referrer
+
   end
-  #@order_item.update_attributes(order_items_params)
 
   private
 
