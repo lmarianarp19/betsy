@@ -84,19 +84,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  # def destroy # RETIRE
-  #   if @login_merchant
-  #     @product = Product.find_by(id: params[:id])
-  #     @product.current = false # Make status of the product false
-  #     save_and_flash(@product)
-  #     redirect_to root_path
-  #   else
-  #     flash[:status] = :failure
-  #     flash[:result_text] = "You must be the product owner to delete this work!"
-  #     redirect_to root_path
-  #   end
-  # end
-
   private
 
   def products_params
