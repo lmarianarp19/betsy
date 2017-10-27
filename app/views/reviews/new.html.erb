@@ -1,19 +1,21 @@
-<div id="review_body">
-<h2>Write a review!</h2>
-<div class="row text-center">
-<section class="review-form large-8 small-8 small-centered large-centered columns">
+<main>
+  <div id="review_body">
+    <h2>Write a review!</h2>
+    <div class="row text-center">
+      <section class="review-form large-8 small-8 small-centered large-centered columns">
 
-  <%= form_for :review, :url => {:action => "create", :id => @product} do |f| %>
+        <%= form_for :review, :url => {:action => "create", :id => @product} do |f| %>
 
-    <%= f.label :review %>
-    <%= f.text_area :review, cols: 10, rows: 8 %>
+          <%= f.label :review %>
+          <%= f.text_area :review, cols: 10, rows: 8 %>
 
-    <%= f.label :rating %>
-    <%= f.select :rating, options_for_select(1.. 5) %>
+          <%= f.label :rating %>
+          <%= f.select :rating, options_for_select(1.. 5) %>
 
-  <p>  <%= f.submit class: "button" %></p>
-  <% end %>
+        <p>  <%= f.submit class: "button" %></p>
+        <% end %>
 
-</section>
-</div>
-</div>
+      </section>
+    </div>
+  </div>
+</main>

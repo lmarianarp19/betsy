@@ -1,8 +1,10 @@
 <main>
-  <h2><%= @merchant.username%>'s Products</h2>
-  <% if @access %>
-    <%= link_to "Add Product", new_product_path, class: "button"%>
-  <% end %>
+  <header class="bg align-center row force-index more-padding">
+    <h3><%= @merchant.username %>'s Products</h3>
+    <% if @access %>
+      <%= link_to "Add Product", new_product_path, class: "button"%>
+    <% end %>
+  </header>
 
   <% unless @products.empty? %>
   <table width="90%" align="center">
