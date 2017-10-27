@@ -86,7 +86,7 @@ describe Order do
     end
 
     it "will return nil for a Order with no order_items" do
-      Order.new.change_to_shipped.must_equal nil
+      Order.new.change_to_shipped.must_be_nil
     end
   end
 end
