@@ -19,14 +19,19 @@
       <% if @product.description %>
         <p class='description small-12 large-8 large-centered columns'><%= "#{@product.description}" %></p>
       <%end %>
-      <!-- form_tag('/posts/1', method: :put) -->
-      <%# TODO: Change this back to the form_for tag from product index page %>
-      <div>
+
+      <%= form_for @order_item do |f| %>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <%= f.select :quantity, 1..@product.inventory %>
+        <%= f.submit "Add to cart" %>
+      <% end %>
+
+      <!-- <div>
         <%= form_tag('/order_items', method: :post) %>
         <%= select_tag :quantity, options_for_select(1..@product.inventory) %>
         <%= hidden_field_tag :product_id, @product.id  %>
         <%= submit_tag "Add to Cart!" %>
-      </div>
+      </div> -->
 
       <p class="inventory"> <%= "#{@product.inventory} in stock!" %></p>
 
@@ -38,8 +43,8 @@
     <% if @product.reviews.count > 0 %>
     <h2> Reviews </h2>
     <strong class="review">Average Rating = </strong><%= "#{@product.average_rating.round(2)}" %>
-    <hr>
-    <hr>
+    <hr/>
+    <hr/>
 
       <% @product.reviews.each do |review| %>
       <div class="review-details text-center large-centered columns">
@@ -66,7 +71,7 @@
           <%= image_tag("luke-skywalker.png", :alt => "darth vader icon") %>
         <% end %>
     </div>
-      <hr>
+      <hr />
         <%end%>
     <%end%>
   </section>

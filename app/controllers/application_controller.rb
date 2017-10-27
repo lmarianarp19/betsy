@@ -11,6 +11,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def flash_unathorized
+    flash[:status] = :failure
+    flash[:message] = "You must be authorized to do that"
+  end
+
   def save_and_flash(model)
     result = model.save
     if result
@@ -21,7 +26,6 @@ class ApplicationController < ActionController::Base
       flash.now[:message] = "Failed to save #{model.class}"
       flash.now[:details] = model.errors.messages
     end
-
     return result
   end
 

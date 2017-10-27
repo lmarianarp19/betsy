@@ -1,23 +1,25 @@
-<h2>Shipping Information </h2>
-<hr />
+<main>
+  <h2>Shipping Information </h2>
+  <hr />
 
-<table align="center" class="hover">
-  <tbody>
-    <tr class="row large-up-1">
-      <th>Name</td>
-      <th>Email</td>
-      <th>Mailing Address</th>
-      <th>Last four of Credit Card</th>
-      <th>Credit Card Expiration</th>
-    </tr>
-    <% @payment.each do |detail| %>
+  <table align="center" class="hover">
+    <tbody>
       <tr class="row large-up-1">
-        <td><%= detail.name %></td>
-        <td><%= detail.email %></td>
-        <td><%= detail.mailing_address %></td>
-        <td><%= detail.cc_number.split(//).last(4).join %></td>
-        <td><%= detail.cc_expiration %></td>
+        <th>Name</td>
+        <th>Email</td>
+        <th>Mailing Address</th>
+        <th>Last four of Credit Card</th>
+        <th>Credit Card Expiration</th>
       </tr>
-      <% end %>
-  </tbody>
-</table>
+      <% @payment.each do |detail| %>
+        <tr class="row large-up-1">
+          <td><%= detail.name %></td>
+          <td><%= detail.email %></td>
+          <td><%= detail.mailing_address %></td>
+          <td><%= detail.cc_number.split(//).last(4).join %></td>
+          <td><%= detail.cc_expiration %></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+</main>
