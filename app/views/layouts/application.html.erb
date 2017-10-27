@@ -16,21 +16,35 @@
 
   <%###############  CATEGORIES NAVIGATION #################### %>
 
-    <% @products %> <%# Need to utilize %>
+  <%# Need to utilize %>
     <header>
       <div class="top-bar" id="responsive-menu">
         <div class="top-bar-left">
           <ul class="menu">
-            <% category = Category.all %>
+            <% category = Category.where(id: 1..7) %>
             <% if category %>
               <% category.each do |category| %>
                 <li class="padding">
                   <%= link_to products_categories_path(category) do %>
-                  <%= category.name %> &nbsp;<%= image_tag'yoda.png', class: "navimg" %>
+                  <%= category.name %>
                   <% end %>
                 </li>
               <% end %>
             <% end %>
+
+            <div class="dropdown">
+              <li class="padding"><a>Misc</a></li>
+              <div class="dropdown-content">
+                <% misc = Category.where(id: 6..Category.last.id) %>
+                <% if misc %>
+                  <% misc.each do |cat| %>
+                    <%= link_to cat.name, products_categories_path(cat) %>
+                  <% end %>
+                <% end %>
+              </div>
+              </li>
+            </div>
+
           </ul>
         </div>
 
@@ -41,7 +55,7 @@
             <% if @login_merchant %>
 
             <div class="dropdown">
-              <li class="padding"><a><%= @login_merchant.username %></a></li>
+              <li class="padding"><a><%= @login_merchant.username %>&nbsp;<%= image_tag 'red-five.png', class: "navimg" %></a></li>
               <div class="dropdown-content">
                 <%= link_to "Dashboard", merchant_path(@login_merchant)%>
                 <%= link_to "Manage Orders", merchant_orders_path(@login_merchant) %>
