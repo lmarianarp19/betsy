@@ -6,13 +6,17 @@ class OrdersController < ApplicationController
   end
 
   def index
-    if @login_merchant # TODO: USE INSTANCE VARIABLE OF @LOGIN_MERCHANT
-      @merchant = Merchant.find_by(id: params[:merchant_id])
+    if @login_merchant
+      # @merchant = Merchant.find_by(id: params[:merchant_id])
       @orders = @merchant.distinct_orders
       @paid_orders_hash = @merchant.orders_hash_by_status("paid")
       # @paid_total = @merchant.sum_ord_hash("paid")
       @complete_orders_hash = @merchant.orders_hash_by_status("complete")
       # @complete_total = @merchant.sum_ord_hash("complete")
+    else
+      flash[:status] = :failure
+      flash[:message] = "You must be authorized to do that"
+      redirect_to root_path
     end
   end
 
@@ -25,7 +29,7 @@ class OrdersController < ApplicationController
   end
 
 
-  def create
+  # def create
     # @order = current_order # Check to see if the order already is in the session
     #
     # if @order.product_ids.empty? # If the order has no products
@@ -44,18 +48,17 @@ class OrdersController < ApplicationController
     #   session[:order_id] = @order.id
     # end
     # redirect_to cart_path
-  end
-
-  def destroy # CANCEL
-    if @order.destroy
-      flash[:status] = :success
-      flash[:message] = "Your order was canceled! May the force be with you!"
-    else
-      flash[:status] = :failure
-      flash[:message] = "Whoops! Your order could not be canceled!"
-      #flash[:errors] = @order.errors.messages
-    end
-  end
+  # end
+  #
+  # def destroy # CANCEL
+  #   if @order.destroy
+  #     flash[:status] = :success
+  #     flash[:message] = "Your order was canceled! May the force be with you!"
+  #   else
+  #     flash[:status] = :failure
+  #     flash[:message] = "Whoops! Your order could not be canceled!"
+  #   end
+  # end
 
   private
 

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
   resources :payments, only: [:show]
 
-  resources :orders, only: [:show, :create, :update] do
+  resources :orders, only: [:show, :index] do
     resources :payments, only: [:index, :new, :create]
   end
   get '/merchants/:merchant_id/orders', to: 'orders#index', as: 'merchant_orders'
