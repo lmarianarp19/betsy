@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # Add resource not resources because a customer will only have one shopping cart and doesn't create an index route
   resource :cart, only: :show
 
-  # resources :payments, only: [:index, :show]
+  resources :payments, only: [:show]
 
   resources :orders, only: [:show, :create, :update] do
     resources :payments, only: [:index, :new, :create]
