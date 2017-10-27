@@ -15,7 +15,6 @@ class SessionsController < ApplicationController
       end
       session[:merchant_id] = merchant.id
       session[:merchant_username] = merchant.username
-      #will log in the user
     else
       flash[:status] = :failure
       flash[:message] = "Failed to create a new user"
