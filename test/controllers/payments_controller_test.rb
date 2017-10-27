@@ -7,7 +7,7 @@ describe PaymentsController do
       must_respond_with :success
     end
 
-    it "returns failure when making a new payment the order doesn't exists" do
+    it "returns failure when the order doesn't exists" do
       get new_order_payment_path(Order.last.id + 1)
       must_respond_with :not_found
     end
@@ -26,7 +26,8 @@ describe PaymentsController do
           cc_number: 1234567898765432,
           cc_ccv: 123,
           billing_zip: 12345,
-          order_id: Order.first.id
+          order_id: Order.first.id,
+          name: "Kylo Ren"
         }
       }
 
@@ -61,7 +62,6 @@ describe PaymentsController do
       post order_payments_path(payment.order_id), params: wrong_payment_data
       must_respond_with :bad_request
       Payment.count.must_equal before_count
-
     end
   end #describe create
 end#last
