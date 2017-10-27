@@ -1,44 +1,46 @@
-<h3>Your Dashboard <%= @login_merchant.username %></h3>
-<h4>Member Since <%= @login_merchant.created_at.strftime("%e %b %Y")%></h4>
+<main>
+  <header class="bg align-center row force-index more-padding">
+    <h3>Your Dashboard <%= @login_merchant.username %></h3>
+    <h4>Member Since <%= @login_merchant.created_at.strftime("%e %b %Y")%></h4>
+    <%= link_to "Manage Orders", merchant_orders_path(@login_merchant), class: "button" %>
+    <%= link_to "Manage Products", merchant_products_path(@login_merchant), class: "button"%>
+  </header>
 
-<%= link_to "Manage Orders", merchant_orders_path(@login_merchant), class: "button" %>
+  <% if @merchant.products.empty? %>
+    <h3>Please add products!</h3>
+  <% end %>
 
-<%= link_to "Manage Products", merchant_products_path(@login_merchant), class: "button"%>
+  <table align="center">
+    <thead align="center">
+      <tr>
+        <th align="center", colspan="100%">
+          Summary
+        </th>
 
-<% if @merchant.products.empty? %>
-  <h3>Please add products!</h3>
-<% end %>
+      </tr>
+    </thead>
+    <tbody align="center">
+      <tr>
 
-<table align="center">
-  <thead align="center">
-    <tr>
-      <th align="center", colspan="100%">
-        Summary
-      </th>
-
-    </tr>
-  </thead>
-  <tbody align="center">
-    <tr>
-
-      <td align="left">&nbsp</td>
-      <td >Revenue</td>
-      <td >Orders</td>
-    </tr>
-    <tr>
-      <td align="left">Unfulfilled Orders</td>
-      <td ><%= number_to_currency(@unfufilled_revenue)%></td>
-      <td ><%= @unfufilled%></td>
-    </tr>
-    <tr >
-      <td align="left">Completed Orders</td>
-      <td ><%= number_to_currency(@complete_revenue)%></td>
-      <td ><%= @complete%></td>
-    </tr>
-    <tr>
-      <td align="left">Total</td>
-      <td><%=number_to_currency(@total_revenue)%></td>
-      <td><%= @total%></td>
-    </tr>
-  </tbody>
-</table>
+        <td align="left">&nbsp</td>
+        <td >Revenue</td>
+        <td >Orders</td>
+      </tr>
+      <tr>
+        <td align="left">Unfulfilled Orders</td>
+        <td ><%= number_to_currency(@unfufilled_revenue)%></td>
+        <td ><%= @unfufilled%></td>
+      </tr>
+      <tr >
+        <td align="left">Completed Orders</td>
+        <td ><%= number_to_currency(@complete_revenue)%></td>
+        <td ><%= @complete%></td>
+      </tr>
+      <tr>
+        <td align="left">Total</td>
+        <td><%=number_to_currency(@total_revenue)%></td>
+        <td><%= @total%></td>
+      </tr>
+    </tbody>
+  </table>
+</main>
