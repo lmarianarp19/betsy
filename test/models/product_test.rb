@@ -7,6 +7,7 @@ describe Product do
   let(:cat_att_hash_new) {{"0"=>{"name"=>"Ewok"}}}
   let(:cat_att_hash_old) {{"0"=>{"name"=>"jedi_category"}}}
   let(:new_product) {Product.new}
+  let(:category) {categories :fruit_category}
 
   describe "relations" do
     it "has a merchant" do
@@ -58,10 +59,10 @@ describe Product do
       end
       it "requires the name to be unique" do
         name = "NameMcNameFace"
-        product1 = Product.new(merchant: first_merchant, price: 1000, name: name, inventory: 10)
+        product1 = Product.new(merchant: first_merchant, price: 1000, name: name, inventory: 10, category: category)
         product1.save!
 
-        product2 = Product.new(merchant: first_merchant, price: 1000, name: name, inventory: 10)
+        product2 = Product.new(merchant: first_merchant, price: 1000, name: name, inventory: 10, category: category)
         product2.valid?.must_equal false
         product2.errors.messages.must_include :name
       end

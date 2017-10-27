@@ -9,7 +9,7 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0}
   validates :inventory, presence: true, numericality: { greater_than_or_equal_to: 0}
-  # validates :categories, presence: true
+  validates :categories, presence: true
 
   # TODO: Ask instructors if we need to state this validation b/c the relationship dictates that we need a merchant
   validates :merchant, presence: true
