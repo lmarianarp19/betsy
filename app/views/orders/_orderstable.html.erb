@@ -2,7 +2,7 @@
 <table align="center" class="unstriped hover">
   <tbody>
     <tr>
-      <th class='<%=order.status%>' rowspan="100%">
+      <th class='<%=order.status%>' rowspan="100%" width="10%">
         Order ID: <%= order.id %><br />
         <% if order.status == 'paid' %>
           <%= image_tag 'darth-maul.png', class: "orderindex" %>
@@ -19,15 +19,15 @@
     </tr>
     <% orders_hash[order].each do |oi| %>
     <tr align="center" class="subtable">
-      <td><%= link_to oi.product.name, product_path(oi.product)%></td>
-      <td><%= oi.quantity %></td>
-      <td><%= number_to_currency(oi.line_item_total) %></td>
+      <td width="30%"><%= link_to oi.product.name, product_path(oi.product)%></td>
+      <td width="20%"><%= oi.quantity %></td>
+      <td width="20%"><%= number_to_currency(oi.line_item_total) %></td>
       <% if oi.shipped == false %>
-      <td>
+      <td width="20%">
         <%= link_to "Ship", ship_order_item_path(oi), method: :patch %>
       </td>
       <% else %>
-      <td>
+      <td width="20%">
         Item Sent!
       </td>
       <% end %>

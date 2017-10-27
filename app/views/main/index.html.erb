@@ -3,15 +3,17 @@
     <header class="bg align-center row force-index">
       <h2 class="more-padding">The Force's Pick </h2>
     </header>
+
       <% if Product.any? %>
         <% product = Product.first %>
-          <div class="thumbnail small-thumb small-12 large-3 small-centered large-centered columns padding more-margin">
+          <div class="thumbnail small-thumb small-12 large-3 small-centered large-centered columns padding more-margin bg-white">
             <%= link_to image_tag(product.photo_url), product_path(product), class:"padding", alt:"#{product.name}" %>
-            <p><strong><%= product.name %></strong></p>
-            <p><%= number_to_currency product.price %></p>
           </div>
+          <p><strong><%= product.name %></strong></p>
+          <p><%= number_to_currency product.price %></p>
       <% else %>
           <h2>Products coming soon!</h2>
       <% end %>
+      
     </section>
 </main>
