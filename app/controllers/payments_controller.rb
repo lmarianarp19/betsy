@@ -13,7 +13,7 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = Payment.new(payment_params)
-    @payment.order_id = params[:order_id]
+    @payment.order_id = params[:order_id] #TODO: May have to change this to @order instead of using the session
 
 
     if @payment.save
@@ -36,6 +36,7 @@ class PaymentsController < ApplicationController
       redirect_to order_path(params[:order_id])
       #redirect_to order_path(@payment.order_id)
       #TODO redirect to page with the order view
+      #TODO: Move session reset to the orders show controller after the redirect. @order view is not showing due to the reset
     else
       flash[:status] = :failure
       flash[:message] = "Whoops! Something was wrong when placing your order!"

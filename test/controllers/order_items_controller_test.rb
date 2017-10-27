@@ -60,7 +60,7 @@ describe OrderItemsController do
       OrderItem.first.quantity.must_equal 1
     end
 
-    it "returns a redirect if the order_item quantity was updated with no valid data" do
+    it "returns a redirect if the order_item quantity was updated with invalid data" do
       invalid_qty = {
         order_item: {
           quantity: -1000

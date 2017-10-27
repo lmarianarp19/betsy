@@ -59,8 +59,7 @@ class ProductsController < ApplicationController
         head :not_found
       end
     else
-      flash[:status] = :failure
-      flash[:message] = "You must be authorized to do that"
+      flash_unathorized
       redirect_to root_path
     end
   end
