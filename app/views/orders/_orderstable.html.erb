@@ -10,16 +10,9 @@
           <%= image_tag 'qui-gon-jinn.png', class: "orderindex" %>
         <% end %>
       </th>
-
-
-
-
-
-
-
     </tr>
     <tr>
-      <th>PRODUCTS</td>
+      <th>PRODUCTS</th>
       <th>QUANTITY</th>
       <th>TOTAL</th>
       <th>SHIPPED</th>
@@ -41,15 +34,16 @@
     </tr>
     <% end %>
     <tr>
-      <th align="center", colspan="100%">
-           ORDER DETAILS
-      </th>
-
+      <td align="center", colspan="100%">
+        ORDER DETAILS
+      </td>
+    </tr>
+    <tr>
+      <th>Order Placed: <%= order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
+      <th>Order Status: <%= order.status %></th>
+      <th>Order Total: <%= number_to_currency(orders_hash[order].inject(0) {|sum, oi| sum + oi.line_item_total})%></th>
+      <th><%= link_to "Shipping Info", payment_path(order.payment) %></th>
     </tr>
 
-    <th>Order Placed: <%= order.payment.created_at.strftime("%e %b %Y %H:%M:%S%p") %></th>
-    <th>Order Status: <%= order.status %></th>
-    <th>Order Total: <%= number_to_currency(orders_hash[order].inject(0) {|sum, oi| sum + oi.line_item_total})%></th>
-    <th><%# link_to "Shipping Info", payment_path(order.payment) %></th>
   </table>
   <% end %>
