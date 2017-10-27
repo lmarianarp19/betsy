@@ -4,6 +4,7 @@
     <h4>Member Since <%= @login_merchant.created_at.strftime("%e %b %Y")%></h4>
     <%= link_to "Manage Orders", merchant_orders_path(@login_merchant), class: "button" %>
     <%= link_to "Manage Products", merchant_products_path(@login_merchant), class: "button"%>
+    <%# payment_path(payment_id) %>
   </header>
 
   <% if @merchant.products.empty? %>

@@ -11,15 +11,13 @@
         <th>Last four of Credit Card</th>
         <th>Credit Card Expiration</th>
       </tr>
-      <% @payment.each do |detail| %>
         <tr class="row large-up-1">
-          <td><%= detail.name %></td>
-          <td><%= detail.email %></td>
-          <td><%= detail.mailing_address %></td>
-          <td><%= detail.cc_number.split(//).last(4).join %></td>
-          <td><%= detail.cc_expiration %></td>
+          <td><%= @payment.name %></td>
+          <td><%= @payment.email %></td>
+          <td><%= @payment.mailing_address %></td>
+          <td><%= @payment.cc_number.split(//).last(4).join %></td>
+          <td><%= @payment.cc_expiration %></td>
         </tr>
-        <% end %>
     </tbody>
   </table>
 </main>

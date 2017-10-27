@@ -47,15 +47,19 @@ class PaymentsController < ApplicationController
 
 
   def show
-    @payment = Payment.where(id: params[:id])
-    # @order =  @payment.order_id
+    if @login_merchant
+      @payment = Payment.find_by(id: params[:id])
+      if @login_merchant.orders.ids.include? @payment.order_id
+        return @payment
+      end
+    end
+      flash_unathorized
+      redirect_to root_path
   end
-
 
   private
 
   def payment_params
     params.require(:payment).permit(:name, :email, :mailing_address, :cc_name, :cc_expiration, :cc_number, :cc_ccv, :billing_zip)
   end
-
 end
