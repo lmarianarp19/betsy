@@ -4,9 +4,7 @@ describe SessionsController do
   describe "#login" do
     it "logs in an existing user and redirects to the root path" do
       merchant = merchants(:grace)
-
       login(merchant)
-
       session[:merchant_id].must_equal merchant.id
       must_respond_with :redirect
       must_redirect_to root_path
@@ -17,16 +15,16 @@ describe SessionsController do
       #TODO: merchant is not getting the username - FIX
 
       start_count = Merchant.count
+      merchant = Merchant.new(provider: "github", uid: 77777777, username: "MasterYoda", email: "MasterYoda@gmail.com")
 
-      merchant = {
-        username: "John",
-        email: "johndoe@gmail.com",
-        uid: 77777777,
-        provider: "github"
-      }
-
+      # merchant = {
+      #   username: "John",
+      #   email: "MasterYoda@gmail.com",
+      #   uid: 77777777,
+      #   provider: "github"
+      # }
       login(merchant)
-
+      binding.pry
       session[:merchant_id].must_equal Merchant.last.id
       Merchant.count.must_equal start_count + 1
       # must_respond_with :redirect
