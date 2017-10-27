@@ -1,5 +1,5 @@
-<h2>Merchant: <%= @login_merchant.username %></h2>
-<h2>Member Since: <%= @login_merchant.created_at.strftime("%e %b %Y")%></h2>
+<h3>Your Dashboard <%= @login_merchant.username %></h3>
+<h4>Member Since <%= @login_merchant.created_at.strftime("%e %b %Y")%></h4>
 
 <%= link_to "Manage Orders", merchant_orders_path(@login_merchant), class: "button" %>
 
@@ -10,26 +10,33 @@
 <% end %>
 
 <table align="center">
-  <thead>
+  <thead align="center">
     <tr>
-      <th>Summary</th>
-      <th>Revenue</th>
-      <th>Orders</th>
+      <th align="center", colspan="100%">
+        Summary
+      </th>
+
     </tr>
   </thead>
-  <tbody>
+  <tbody align="center">
     <tr>
-      <td>Unfulfilled Orders</td>
-      <td><%= number_to_currency(@unfufilled_revenue)%></td>
-      <td><%= @unfufilled%></td>
+
+      <td align="left">&nbsp</td>
+      <td >Revenue</td>
+      <td >Orders</td>
     </tr>
     <tr>
-      <td>Completed Orders</td>
-      <td><%= number_to_currency(@complete_revenue)%></td>
-      <td><%= @complete%></td>
+      <td align="left">Unfulfilled Orders</td>
+      <td ><%= number_to_currency(@unfufilled_revenue)%></td>
+      <td ><%= @unfufilled%></td>
+    </tr>
+    <tr >
+      <td align="left">Completed Orders</td>
+      <td ><%= number_to_currency(@complete_revenue)%></td>
+      <td ><%= @complete%></td>
     </tr>
     <tr>
-      <td>Total</td>
+      <td align="left">Total</td>
       <td><%=number_to_currency(@total_revenue)%></td>
       <td><%= @total%></td>
     </tr>
