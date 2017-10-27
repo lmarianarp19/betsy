@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
 
+  # TODO: TAKE ALOOK AT THIS. WHAT IS THE MERCHANT ID COMING FROM? SESSIONS? ALREADY A @LOGIN_MERCHANT
   before_action only:[:index] do
     restrict_merchant(params[:merchant_id])
   end
