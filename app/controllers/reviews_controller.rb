@@ -7,7 +7,6 @@ class ReviewsController < ApplicationController
       @review.product_id = params[:product_id]
     else
       render :new, status: :not_found
-      # head :not_found
     end
   end
 

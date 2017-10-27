@@ -9,6 +9,7 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0}
   validates :inventory, presence: true, numericality: { greater_than_or_equal_to: 0}
+
   # TODO: Ask instructors if we need to state this validation b/c the relationship dictates that we need a merchant
   validates :merchant, presence: true
   accepts_nested_attributes_for :categories
@@ -16,7 +17,6 @@ class Product < ApplicationRecord
   def categories_attributes=(category_attributes)
   category_attributes.values.each do |category_attribute|
       category = Category.find_or_create_by(category_attribute)
-       # TODO: Fix this to raise a flash if blank
       if !self.categories.include? category
         self.categories << category
       end
@@ -32,5 +32,6 @@ class Product < ApplicationRecord
        total /= self.reviews.count
        return total
     end
-  end#def
-end#class
+  end #def
+
+end #class

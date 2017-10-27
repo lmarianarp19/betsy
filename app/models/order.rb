@@ -6,9 +6,10 @@ class Order < ApplicationRecord
 
   validates :status, presence: true
 
-  #TODO test calculate total
+  #TODO Test calculate total
 
-  #TODO can we use line_item_total here?
+  #TODO Can we use line_item_total here?
+
   def calculate_total
     self.order_items.collect { |item| item.product.price * item.quantity}.sum
   end
