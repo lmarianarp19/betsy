@@ -6,7 +6,6 @@ class PaymentsController < ApplicationController
       @payment = Payment.new
       @payment.order_id = params[:order_id]
     else
-      # render new, status: not_found
       head :not_found
     end
   end
@@ -28,11 +27,12 @@ class PaymentsController < ApplicationController
       order.status = "paid"
       order.save
 
-      session.clear
+      session[:order_id] = nil
 
       flash[:status] = :success
       flash[:message] = "success payment"
       redirect_to order_path(@payment.order_id)
+
     else
       flash[:status] = :failure
       flash[:message] = "Whoops! Something was wrong when placing your order!"

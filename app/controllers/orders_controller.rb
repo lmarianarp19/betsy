@@ -27,38 +27,6 @@ class OrdersController < ApplicationController
     end
   end
 
-
-  # def create
-    # @order = current_order # Check to see if the order already is in the session
-    #
-    # if @order.product_ids.empty? # If the order has no products
-    #   order_item = OrderItem.new(order_items_params)
-    #   @order.order_items << order_item
-    # elsif @order.product_ids.include? params[:product_id].to_i # IF THE PRODUCT IS ALREADY IN THE CART
-    #   order_item = @order.order_items.find_by(product_id: params[:product_id])
-    #   order_item.quantity += params[:quantity].to_i
-    #   order_item.save
-    # else
-    #   order_item = OrderItem.new(order_items_params)
-    #   @order.order_items << order_item
-    # end
-    #
-    # if save_and_flash(@order)
-    #   session[:order_id] = @order.id
-    # end
-    # redirect_to cart_path
-  # end
-  #
-  # def destroy # CANCEL
-  #   if @order.destroy
-  #     flash[:status] = :success
-  #     flash[:message] = "Your order was canceled! May the force be with you!"
-  #   else
-  #     flash[:status] = :failure
-  #     flash[:message] = "Whoops! Your order could not be canceled!"
-  #   end
-  # end
-
   private
 
   def order_items_params
