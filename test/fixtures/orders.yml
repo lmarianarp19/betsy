@@ -9,3 +9,6 @@ first_order:
 
 second_order:
   status: paid
+
+third_order:
+  status: paid

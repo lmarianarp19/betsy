@@ -25,7 +25,6 @@ class PaymentsController < ApplicationController
           item.save
         end
       end
-
       order.status = "paid"
       order.save
 
@@ -33,10 +32,7 @@ class PaymentsController < ApplicationController
 
       flash[:status] = :success
       flash[:message] = "success payment"
-      redirect_to order_path(params[:order_id])
-      #redirect_to order_path(@payment.order_id)
-      #TODO redirect to page with the order view
-      #TODO: Move session reset to the orders show controller after the redirect. @order view is not showing due to the reset
+      redirect_to order_path(@payment.order_id)
     else
       flash[:status] = :failure
       flash[:message] = "Whoops! Something was wrong when placing your order!"
@@ -47,14 +43,15 @@ class PaymentsController < ApplicationController
 
 
   def show
-    if @login_merchant
-      @payment = Payment.find_by(id: params[:id])
+    @payment = Payment.find_by(id: params[:id])
+    if @login_merchant && @payment
       if @login_merchant.orders.ids.include? @payment.order_id
+        # flash[:status] = :success
         return @payment
       end
     end
-      flash_unathorized
-      redirect_to root_path
+    flash_unathorized
+    redirect_to root_path
   end
 
   private

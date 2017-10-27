@@ -21,3 +21,14 @@ payment_two:
   cc_ccv: 345
   billing_zip: 56789
   order_id: second_order
+
+payment_three:
+  name: Yoda
+  email: Yoda@jedi.com
+  mailing_address: Yoda's hut
+  cc_name: Yoda
+  cc_expiration: 2020-09-01
+  cc_number: 09876543210981
+  cc_ccv: 345
+  billing_zip: 56789
+  order_id: third_order

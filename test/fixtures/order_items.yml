@@ -17,3 +17,9 @@ order_item_three:
   order: first_order
   product: second_product
   shipped: true
+
+order_item_four:
+  quantity: 1
+  order: third_order
+  product: fourth_product
+  shipped: false

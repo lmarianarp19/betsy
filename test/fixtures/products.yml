@@ -26,3 +26,12 @@ third_product:
   photo_url: http://placecage.com
   current: true
   merchant: second_merchant
+
+fourth_product:
+  name: CHOCOLATE
+  price: 5
+  description: $LABEL
+  inventory: 3
+  photo_url: http://placecage.com
+  current: true
+  merchant: grace
