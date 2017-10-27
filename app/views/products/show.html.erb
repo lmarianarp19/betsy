@@ -10,9 +10,9 @@
     </div>
 
     <section>
-      <p>Price: <%= number_to_currency(@product.price) %>
+      <p> <%= number_to_currency(@product.price) %>
       <br>
-      <p>Sold by: <%= link_to  @product.merchant.username, merchant_products_path(@product.merchant.id) %></p>
+      <p>Sold by:    <%= link_to  @product.merchant.username, merchant_products_path(@product.merchant.id) %></p>
 
       <!--DESCRIPTION  -->
       <div class="row text-center">

@@ -31,8 +31,9 @@
 
 body, html {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1em;
+  // font-family: 'Open Sans', sans-serif;
+  font-family: "Arial black";
+  font-size: 1.2em;
 }
 
 body {
@@ -65,16 +66,27 @@ header a {
 }
 
 a.button {
-  background-color: #FEDD32;
-  color: black;
-  font-family: "STARWARS"
+  background-color: #020b56;
+  color: #ffdf00;;
+  font-family: 'Bungee Inline', cursive;
+
 }
 
 input {
-  background-color: #FEDD32;
-  color: black;
-  font-family: "STARWARS"
+  // background-color: #FEDD32;
+  background-color: #020b56;
+  // color: black;
+  // font-family: "STARWARS"
+  color: #ffdf00;
+  font-family: 'Bungee Inline', cursive;
+  padding: 12px;
+  border: none;
 }
+input:hover {
+  background-color: #14679e;
+  color: #fefefe;
+}
+
 
 /* *****************************************************
                             NAV

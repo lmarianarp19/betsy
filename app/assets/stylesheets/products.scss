@@ -3,9 +3,10 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .show-product img {
-  height: 200px;
-  width: 200px;
+  height: 400px;
+  width: 400px;
   border: 1px solid;
+  margin-bottom: 30px;
 }
 
 .show-box {
@@ -14,15 +15,19 @@
 
 .description {
   display: block;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-family: sans-serif;
 }
 
 .inventory {
-  font-size: 1.3em;
+  font-size: 1.2em;
+  padding: 30px;
 }
 
-
+h1 {
+  color: white;
+  font-family: 'Bungee Inline', cursive;
+}
 /* *****************************************************
                             INDEX
 ****************************************************** */
@@ -55,6 +60,10 @@ header.bottom-margin {
 
 p.product-name {
   padding-top: 10px;
+}
+
+#available {
+  font-family: sans-serif;
 }
 
 
