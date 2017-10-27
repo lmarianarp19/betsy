@@ -17,6 +17,7 @@ describe SessionsController do
       login(merchant)
       session[:merchant_id].must_equal Merchant.last.id
       Merchant.count.must_equal start_count + 1
+      binding.pry
       must_respond_with :redirect
       must_redirect_to root_path
     end
