@@ -1,3 +1,19 @@
 // Place all the styles related to the Reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#review_body {
+  padding: 40px;
+  text-align: center;
+}
+
+
+// select {
+//     width:auto;
+//     border: 1px solid #cccccc;
+//     background-color: #ffffff;
+// }
+#review_rating {
+  width: 100px;
+  margin: 0;
+
+}
