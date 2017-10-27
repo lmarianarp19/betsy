@@ -9,6 +9,7 @@ orders_failures = []
 CSV.foreach(ORDERS_FILE, :headers => true) do |row|
   order = Order.new
   order.status = row['status']
+  order.payment_id = row['payment_id']
   puts "Created order: #{order.inspect}"
   successful = order.save
   if !successful
