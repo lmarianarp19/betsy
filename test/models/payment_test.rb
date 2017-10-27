@@ -2,6 +2,14 @@ require "test_helper"
 
 describe Payment do
 
+  describe "has one relationship with order" do
+    let(:example_payment) { payments(:payment_one) }
+
+    it "has an association with order" do
+      example_payment.must_respond_to :order
+    end
+  end
+
   describe "validations" do
     let(:example_payment) { payments(:payment_one) }
     describe "presence" do
@@ -68,6 +76,17 @@ describe Payment do
         example_payment.cc_number = thirteen
         example_payment.valid?.must_equal true
       end
+    end
+  end
+
+  describe "#expiration_date_cannot_be_in_the_past" do
+    let(:example_payment) { payments(:payment_one) }
+
+    it "will return an error message for a date in the past" do
+      today = Date.today
+      cc_expiration = today - 1
+      example_payment.cc_expiration = cc_expiration
+      example_payment.save.must_equal false
     end
   end
 
