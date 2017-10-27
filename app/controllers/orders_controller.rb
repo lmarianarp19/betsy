@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   end
 
   def index
-    if params[:merchant_id] # TODO: USE INSTANCE VARIABLE OF @LOGIN_MERCHANT
+    if @login_merchant # TODO: USE INSTANCE VARIABLE OF @LOGIN_MERCHANT
       @merchant = Merchant.find_by(id: params[:merchant_id])
       @orders = @merchant.distinct_orders
       @paid_orders_hash = @merchant.orders_hash_by_status("paid")

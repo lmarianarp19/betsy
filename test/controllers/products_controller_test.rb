@@ -6,7 +6,6 @@ describe ProductsController do
   let(:category) { Category.first}
   let(:merchant) { merchants(:grace) }
 
-
   describe "#index" do
     it "returns success when showing all products with a category" do
       get products_categories_path(category)
@@ -78,7 +77,7 @@ describe ProductsController do
 
       valid_product_data = {
         product: {
-          name: "New Produt For the Win!",
+          name: "New Product For the Win!",
           price: 2,
           description: "This is a test description of some item",
           inventory: 1000,
@@ -173,35 +172,37 @@ describe ProductsController do
 
   # TODO: Write a test to validate a nil form in views prior to create action  ActionView::Template::Error: First argument in form cannot contain nil or be empty
 
-  # it "returns bad_request when the category data is invalid" do
-  #   before_pc_count = ProductCategory.count
-  #   before_product_count = Product.count
-  #   before_category_count = Category.count
-  #
-  #   merchant = merchants(:grace)
-  #
-  #   login(merchant)
-  #
-  #   invalid_product_data = {
-  #     product: {
-  #       name: "hat",
-  #       price: 2,
-  #       description: "Who doesn't love chocolate?",
-  #       inventory: 1000,
-  #       photo_url: "http://placecage.com",
-  #       categories: "",
-  #       merchant_id: session[:merchant_id]
-  #     }
-  #   }
-  #
-  #   post products_path, params: invalid_product_data
-  #
-  #   Product.count.must_equal before_product_count
-  #   ProductCategory.count.must_equal before_pc_count
-  #   Category.count.must_equal before_category_count
-  #
-  #   render :new
-  # end
+  it "returns bad_request when the category data is invalid" do
+    before_pc_count = ProductCategory.count
+    before_product_count = Product.count
+    before_category_count = Category.count
+
+    merchant = merchants(:grace)
+
+    login(merchant)
+
+    invalid_product_data = {
+      product: {
+        name: "hat",
+        price: 2,
+        description: "Who doesn't love chocolate?",
+        inventory: 1000,
+        photo_url: "http://placecage.com",
+        categories: "",
+        merchant_id: session[:merchant_id]
+      }
+    }
+
+    post products_path, params: invalid_product_data
+
+    Product.count.must_equal before_product_count
+    ProductCategory.count.must_equal before_pc_count
+    Category.count.must_equal before_category_count
+
+    assert_template :new
+    must_respond_with :bad_request
+    flash[:status].must_equal :failure
+  end
 
   describe "#edit" do
     it "must return success if the product is found" do
@@ -209,7 +210,7 @@ describe ProductsController do
 
       get edit_product_path(product)
 
-      must_respond_with :success
+      must_respond_with :found
     end
 
     it "must return not_found if the product is not found" do
@@ -232,33 +233,8 @@ describe ProductsController do
   end
 
   describe "#update" do
-    it "must return success if the product is found and updated" do
-      # book = Book.first
-      #     book_data = {
-      #       book: {
-      #         title: "changed title",
-      #         author_id: book.author_id
-      #       }
-      #     }
-      #     book.update_attributes(book_data[:book])
-      #     book.must_be :valid?, "Test is invalid because the provided data will produce an invalid book"
-      #
-      #     patch book_path(book), params: book_data
-      #
-      #     must_respond_with :redirect
-      #     must_redirect_to book_path(book)
-      #
-      #     # Check that the change went through
-      #     book.reload
-      #     book.title.must_equal book_data[:book][:title]
-
-
-      # TODO: Figure out a way to use existing yml data and pass a changed attribute as a hash
-      before_count = Product.count
-
+    it "must return redirect to product path if the product is found and updated" do
       login(merchant)
-
-      product = Product.first
 
       valid_product_data = {
         product: {
@@ -276,18 +252,19 @@ describe ProductsController do
         }
       }
 
+      product.update_attributes(valid_product_data[:product])
+      product.must_be :valid?
+
       patch product_path(product), params: valid_product_data
 
       product.reload
       product.description.must_equal valid_product_data[:product][:description]
-
+      flash[:status].must_equal :success
       must_respond_with :redirect
       must_redirect_to product_path(product)
-      Product.count.must_equal before_count
     end
 
     it "must return success and created a new category if the product is updated with a new category" do
-      # TODO: Figure out a way to use existing yml data and pass a changed attribute as a hash
       before_count = Category.count
 
       login(merchant)
@@ -302,11 +279,14 @@ describe ProductsController do
           merchant_id: session[:merchant_id],
           categories_attributes: {
             "0": {
-              name: "This Category does not exist"
+              name: "This Category does not exist YET"
             }
           }
         }
       }
+
+      product.update_attributes(valid_product_data[:product])
+      product.must_be :valid?
 
       patch product_path(product), params: valid_product_data
 
@@ -332,29 +312,31 @@ describe ProductsController do
 
       put product_path(product), params: valid_product_data
 
-      # must_respond_with :bad_request
+      must_respond_with :redirect
+      must_redirect_to root_path
       flash[:status].must_equal :failure
     end
   end
 
-  describe "#destroy" do
-    it "returns redirect to root_path if the product status was retired to false" do
-      login(merchant)
-      # NOTE: Shallow copy vs Deep copy. Product.last in this case is a shallow copy not a deep copy. the first product call is the local version which makes a copy of the Active Record in the DB. After you save it, you need to call it again to make another local copy of the updated changes
-      product = Product.last
-      delete product_path(product)
-      #binding.pry
-      product = Product.last
-      product.current.must_equal false
-      must_respond_with :redirect
-      must_redirect_to root_path
-    end
-
-    it "returns a flash message if the merchant is not logged in" do
-      delete product_path(product)
-      flash[:status].must_equal :failure
-      must_respond_with :redirect
-      must_redirect_to root_path
-    end
-  end
 end
+
+  # describe "#destroy" do
+  #   it "returns redirect to root_path if the product status was retired to false" do
+  #     login(merchant)
+  #     # NOTE: Shallow copy vs Deep copy. Product.last in this case is a shallow copy not a deep copy. the first product call is the local version which makes a copy of the Active Record in the DB. After you save it, you need to call it again to make another local copy of the updated changes
+  #     product = Product.last
+  #     delete product_path(product)
+  #     #binding.pry
+  #     product = Product.last
+  #     product.current.must_equal false
+  #     must_respond_with :redirect
+  #     must_redirect_to root_path
+  #   end
+  #
+  #   it "returns a flash message if the merchant is not logged in" do
+  #     delete product_path(product)
+  #     flash[:status].must_equal :failure
+  #     must_respond_with :redirect
+  #     must_redirect_to root_path
+  #   end
+  # end

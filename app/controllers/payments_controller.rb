@@ -48,8 +48,6 @@ class PaymentsController < ApplicationController
   def show
     @payment = Payment.where(id: params[:id])
     # @order =  @payment.order_id
-
-
   end
 
 

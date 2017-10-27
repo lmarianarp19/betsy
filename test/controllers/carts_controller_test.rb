@@ -3,6 +3,7 @@ require "test_helper"
 describe CartsController do
   describe "#show" do
     it "should return success if all the order_items in the order are valid" do
+      
       # Create a new category and add it to the cart
       valid_data = {
         quantity: 1,
