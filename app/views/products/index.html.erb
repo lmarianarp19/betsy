@@ -8,24 +8,24 @@
     <% if @products.any? %>
 
       <% @products.each do |product| %>
+
         <div class="small-12 large-4 columns thumbnail end">
           <%= link_to image_tag(product.photo_url), product_path(product) %>
           <p><strong><%= product.name %></strong></p>
           <p><%= number_to_currency product.price %></p>
-             <%= form_for @order_item do |f| %>
-                <%# f.hidden_field :product_id, value: product.id %>
-                <% if product.inventory < 1 %>
-                  <%= "Product no avaliable" %>
-                <% else %>
-                  <%= f.select :quantity, 1..product.inventory %>
-                  <%= f.submit "Add to cart" %>
-                <% end %></p>
-                <% end %>
-                <%# f.number_field :quantity %>
 
+          <%= form_for @order_item do |f| %>
+            <%# f.hidden_field :product_id, value: product.id %>
+            <% if product.inventory < 1 %>
+              <%= "Product no avaliable" %>
+            <% else %>
+              <%= f.select :quantity, 1..product.inventory %>
+              <%= f.submit "Add to cart" %>
+            <% end %></p>
+          <% end %>
         </div>
-      <% end %>
 
+      <% end %>
 
     <% else %>
 

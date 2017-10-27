@@ -1,54 +1,48 @@
 <main class="row">
   <div class="text-center">
-
-<!-- Name, URL, price and merchant  -->
+    <!-- Name, URL, price and merchant  -->
     <header>
       <h1><%= "#{@product.name}" %></h1>
     </header>
+
     <div class="show-product">
       <img src=<%= "#{@product.photo_url}"%> />
     </div>
+
     <section>
-      <p>Price: <%= number_to_currency(@product.price) %><br />Sold by: <%= link_to  @product.merchant.username, merchant_products_path(@product.merchant.id) %></p>
+      <p>Price: <%= number_to_currency(@product.price) %>
+      <br>
+      <p>Sold by: <%= link_to  @product.merchant.username, merchant_products_path(@product.merchant.id) %></p>
 
       <!--DESCRIPTION  -->
       <% if @product.description %>
         <p class='description '><%= "#{@product.description}" %></p>
       <%end %>
 
-
-<!-- form_tag('/posts/1', method: :put) -->
+      <!-- form_tag('/posts/1', method: :put) -->
+      <%# TODO: Change this back to the form_for tag from product index page %>
       <div>
-        <%= form_tag('/orders', method: :post) %>
-        <!-- Tags::Select.new(object, method, self, choices, options, html_options, &block).render
-         -->
-          <%= select_tag :quantity, options_for_select(1..@product.inventory) %>
-          <%= hidden_field_tag :product_id, @product.id  %>
-          <%= submit_tag "Add to Cart!" %>
-        </div>
-
-
-
-
+        <%= form_tag('/order_items', method: :post) %>
+        <%= select_tag :quantity, options_for_select(1..@product.inventory) %>
+        <%= hidden_field_tag :product_id, @product.id  %>
+        <%= submit_tag "Add to Cart!" %>
+      </div>
 
       <p class="inventory"> <%= "#{@product.inventory} in stock!" %></p>
       <%= link_to "Write a Review!!", new_product_review_path(@product.id), class: "button" %>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <% if @product.reviews.count > 0 %>
-    <h3> Reviews </h3>
-    <%= "Average Rating = #{@product.average_rating}" %>
-      <% @product.reviews.each do |review| %>
-      <div>
-        <%= review.review %> </div>
-      <div>  <%= review.rating %>
-      </div><hr>
-
+    <section>
+      <% if @product.reviews.count > 0 %>
+        <h3> Reviews </h3>
+        <p><%= "Average Rating = #{@product.average_rating}" %></p>
+        <% @product.reviews.each do |review| %>
+          <div><%= review.review %></div>
+          <div><%= review.rating %></div>
+          <hr>
+        <%end%>
       <%end%>
-    <%end%>
-  </section>
-  </section>
-    </div>
+    </section>
+
+  </div>
 </main>

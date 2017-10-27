@@ -9,6 +9,7 @@ payment_one:
   cc_number: 123456789012345
   cc_ccv: 876
   billing_zip: 12345
+  order_id: first_order
 
 payment_two:
   name: chewie
@@ -19,3 +20,4 @@ payment_two:
   cc_number: 09876543210987
   cc_ccv: 345
   billing_zip: 56789
+  order_id: second_order

@@ -1,33 +1,41 @@
 <main class="row">
+
   <section>
     <header class="align-center">
       <h2>Your Order</h2>
-      <h4 class="text-center" > Your Total: <%= number_to_currency @order.calculate_total %></h4>
-      <h4 class="text-center"> Order placed: <%= @order.payment.created_at.strftime("%B %d,%Y")%>
+      <h4 class="text-center"> Your Total: <%= number_to_currency @order.calculate_total %></h4>
+      <h4 class="text-center"> Order placed: <%= @order.payment.created_at.strftime("%B %d,%Y") %>
     </header>
 
   </section>
 
     <% if @order.products.any? %>
       <% @order.products.each do |product| %>
+
       <div class='small-12 medium-6 large-6 column cart-image'>
         <img src=<%="#{product.photo_url}"%> />
-     </div>
+      </div>
 
-     <div class="small-12 medium-6 large-5 column text-block">
-       <% item = OrderItem.find_by(product_id: product.id, order_id: @order.id) %>
-     <p> Unit Price: <%= number_to_currency product.price %> </p>
-     <p> Quantity: <%= item.quantity %> </p>
-     <p> Total Price: <%= number_to_currency (product.price * item.quantity) %></p>
-     <% if item.shipped %>
-      <p> Item has been shipped </p>
-     <% else %>
-      <p> Item not yet shipped </p>
-     <% end %>
-   </div>
-   <hr />
-   <% end %>
-   <% else %>
-   <p>Your order is empty.</p>
-   <% end %>
+      <div class="small-12 medium-6 large-5 column text-block">
+        <% item = OrderItem.find_by(product_id: product.id, order_id: @order.id) %>
+        <p> Unit Price: <%= number_to_currency product.price %> </p>
+        <p> Quantity: <%= item.quantity %> </p>
+        <p> Total Price: <%= number_to_currency (product.price * item.quantity) %></p>
+
+        <% if item.shipped %>
+          <p> Item has been shipped </p>
+        <% else %>
+          <p> Item not yet shipped </p>
+        <% end %>
+      </div>
+      <hr />
+
+    <% end %>
+
+  <% else %>
+
+    <p>Your order is empty.</p>
+
+  <% end %>
+
 </main>

@@ -2,12 +2,12 @@ require "test_helper"
 
 describe OrdersController do
   describe "index" do
-    
+
   end
 
   describe "show" do
     it "succeeds for an order that exists" do
-        order_id = Order.first.id
+        order_id = Order.second.id
         get order_path(order_id)
         must_respond_with :success
       end

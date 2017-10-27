@@ -2,7 +2,9 @@ class ProductsController < ApplicationController
 
   before_action only:[:edit] do
     @product = Product.find_by(id: params[:id])
-    restrict_merchant(@product.merchant.id)
+    if @product
+      restrict_merchant(@product.merchant.id)
+    end
   end
 
   def index
@@ -76,9 +78,12 @@ class ProductsController < ApplicationController
         flash[:details] = @product.errors.messages
         render :edit, status: :bad_request
       end
+    else
+      flash[:status] = :failure
+      flash[:message] = "You must be authorized to do that"
+      redirect_to root_path
     end
   end
-
 
   # def destroy # RETIRE
   #   if @login_merchant
