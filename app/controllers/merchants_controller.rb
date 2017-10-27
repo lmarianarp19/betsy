@@ -21,7 +21,7 @@ class MerchantsController < ApplicationController
 
   def products
     # find_merchant
-    @merchant = Merchant.find(params[:id])
+    @merchant = Merchant.find(params[:merchant_id])
     if @login_merchant && @login_merchant.id == @merchant.id
       @access = true
     end
