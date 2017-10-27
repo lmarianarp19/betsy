@@ -235,16 +235,18 @@ HERO
 
 
 .row.status.success {
+  font-family: "arial-black";
   border-radius: 5px;
-  background-color: lightblue;
+  background-color: #202b82;
   padding: 20px 25px;
   font-size: 1em;
   min-width: 100%;
 }
 
 .row.status.failure {
+  font-family: "arial-black";
   border-radius: 5px;
-  background-color: pink;
+  background-color: #a80609;
   padding: 20px 25px;
   font-size: 1em;
   min-width: 100%;
@@ -363,15 +365,15 @@ table {
   width: 80%;
 }
 
-.complete {
-    background-color:  #47020a;
-  }
+// .complete {
+//     background-color:  #47020a;
+//   }
+//
+// .paid {
+//     background-color: #202b82;
+//   }
 
-  .paid {
-    background-color: #202b82;
-  }
-
-  .mini{
+.mini{
     width: 100px;
   }
 
