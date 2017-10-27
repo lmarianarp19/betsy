@@ -62,5 +62,4 @@ class PaymentsController < ApplicationController
   def payment_params
     params.require(:payment).permit(:name, :email, :mailing_address, :cc_name, :cc_expiration, :cc_number, :cc_ccv, :billing_zip)
   end
-
 end
