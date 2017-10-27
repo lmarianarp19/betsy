@@ -14,8 +14,7 @@ class OrdersController < ApplicationController
       @complete_orders_hash = @merchant.orders_hash_by_status("complete")
       # @complete_total = @merchant.sum_ord_hash("complete")
     else
-      flash[:status] = :failure
-      flash[:message] = "You must be authorized to do that"
+      flash_unathorized
       redirect_to root_path
     end
   end

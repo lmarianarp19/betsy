@@ -31,8 +31,7 @@ class ProductsController < ApplicationController
     if @login_merchant
       @product = Product.new
     else
-      flash[:status] = :failure
-      flash[:message] = "You must be authorized to do that"
+      flash_unathorized
       redirect_to root_path
     end
   end
@@ -48,8 +47,7 @@ class ProductsController < ApplicationController
         render :new, status: :bad_request
       end
     else
-      flash[:status] = :failure
-      flash[:message] = "You must be authorized to do that"
+      flash_unathorized
       redirect_to root_path
     end
   end
@@ -82,8 +80,7 @@ class ProductsController < ApplicationController
         render :edit, status: :bad_request
       end
     else
-      flash[:status] = :failure
-      flash[:message] = "You must be authorized to do that"
+      flash_unathorized
       redirect_to root_path
     end
   end

@@ -36,8 +36,7 @@ class OrderItemsController < ApplicationController
       @item.destroy
       @order.save
     else
-      flash[:status] = :failure
-      flash[:message] = "You must be authorized to do that"
+      flash_unathorized
     end
     redirect_to cart_path
   end

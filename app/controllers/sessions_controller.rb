@@ -30,8 +30,7 @@ class SessionsController < ApplicationController
       flash[:status] = :success
       flash[:message] = "Successfully logged out!"
     else
-      flash[:status] = :failure
-      flash[:message] = "You must be authorized to do that"
+    flash_unathorized
     end
     redirect_to root_path
   end
